@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 4.1 - Fundamentos de Banco de Dados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .code-example { background: #2d3748; border-radius: 8px; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-emerald-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <header class="text-center mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                <h1 class="text-4xl font-bold text-emerald-800 mb-4">Aula 4.1: Fundamentos de Banco de Dados</h1>
+                <p class="text-xl text-gray-600 mb-4">Módulo 4 - Banco de Dados | Duração: 2 horas</p>
+            </div>
+        </header>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Objetivos</h2>
+            <ul class="list-disc pl-6 text-gray-700">
+                <li>Compreender conceitos básicos: tabelas, registros, campos, chaves primárias e estrangeiras</li>
+                <li>Conhecer tipos de dados: texto, numéricos, data/hora, booleanos</li>
+                <li>Dominar SQL básico: CREATE TABLE, INSERT, SELECT, WHERE</li>
+                <li>Entender relacionamentos: one-to-one, one-to-many, many-to-many</li>
+                <li>Praticar com SQLite para criar database simples</li>
+            </ul>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">1. Conceitos Básicos</h2>
+            <p class="text-gray-700 mb-4">Um banco de dados é um sistema organizado para armazenar, gerenciar e recuperar informações de forma eficiente.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-emerald-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-emerald-800 mb-2">Tabela</h3>
+                    <p class="text-gray-700">Estrutura que organiza dados em linhas e colunas, como uma planilha.</p>
+                </div>
+                <div class="bg-emerald-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-emerald-800 mb-2">Registro (Linha)</h3>
+                    <p class="text-gray-700">Uma entrada completa de dados na tabela.</p>
+                </div>
+                <div class="bg-emerald-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-emerald-800 mb-2">Campo (Coluna)</h3>
+                    <p class="text-gray-700">Um atributo específico dos dados armazenados.</p>
+                </div>
+                <div class="bg-emerald-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-emerald-800 mb-2">Chave Primária</h3>
+                    <p class="text-gray-700">Campo único que identifica cada registro.</p>
+                </div>
+            </div>
+
+            <h3 class="text-lg font-semibold mb-3">Exemplo Visual de Tabela</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-300">
+                    <thead class="bg-emerald-100">
+                        <tr>
+                            <th class="border border-gray-300 px-4 py-2">ID (PK)</th>
+                            <th class="border border-gray-300 px-4 py-2">Nome</th>
+                            <th class="border border-gray-300 px-4 py-2">Email</th>
+                            <th class="border border-gray-300 px-4 py-2">Idade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">1</td>
+                            <td class="border border-gray-300 px-4 py-2">Ana Silva</td>
+                            <td class="border border-gray-300 px-4 py-2">ana@email.com</td>
+                            <td class="border border-gray-300 px-4 py-2">28</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">2</td>
+                            <td class="border border-gray-300 px-4 py-2">João Santos</td>
+                            <td class="border border-gray-300 px-4 py-2">joao@email.com</td>
+                            <td class="border border-gray-300 px-4 py-2">35</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">2. Tipos de Dados</h2>
+            <p class="text-gray-700 mb-4">Cada campo em uma tabela deve ter um tipo de dado específico:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-blue-800 mb-2">Texto</h3>
+                    <ul class="text-gray-700 text-sm">
+                        <li><code>VARCHAR(n)</code> - Texto variável até n caracteres</li>
+                        <li><code>TEXT</code> - Texto longo</li>
+                        <li><code>CHAR(n)</code> - Texto fixo de n caracteres</li>
+                    </ul>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-blue-800 mb-2">Numéricos</h3>
+                    <ul class="text-gray-700 text-sm">
+                        <li><code>INTEGER</code> - Números inteiros</li>
+                        <li><code>DECIMAL(p,s)</code> - Números decimais</li>
+                        <li><code>FLOAT</code> - Números com ponto flutuante</li>
+                    </ul>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-blue-800 mb-2">Data/Hora</h3>
+                    <ul class="text-gray-700 text-sm">
+                        <li><code>DATE</code> - Data (YYYY-MM-DD)</li>
+                        <li><code>TIME</code> - Hora (HH:MM:SS)</li>
+                        <li><code>DATETIME</code> - Data e hora</li>
+                    </ul>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-blue-800 mb-2">Outros</h3>
+                    <ul class="text-gray-700 text-sm">
+                        <li><code>BOOLEAN</code> - Verdadeiro/Falso</li>
+                        <li><code>BLOB</code> - Dados binários</li>
+                        <li><code>JSON</code> - Dados em formato JSON</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">3. SQL Básico - CREATE TABLE</h2>
+            <p class="text-gray-700 mb-4">SQL (Structured Query Language) é a linguagem padrão para trabalhar com bancos de dados relacionais.</p>
+            
+            <div class="code-example p-4 mb-4">
+                <pre><code class="language-sql">-- Criando uma tabela de usuários
+CREATE TABLE usuarios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    idade INTEGER,
+    ativo BOOLEAN DEFAULT TRUE,
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Criando uma tabela de produtos
+CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(200) NOT NULL,
+    descricao TEXT,
+    preco DECIMAL(10,2) NOT NULL,
+    estoque INTEGER DEFAULT 0,
+    categoria_id INTEGER,
+    criado_em DATETIME DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+            </div>
+
+            <div class="bg-yellow-50 p-4 rounded-lg">
+                <h3 class="font-semibold text-yellow-800 mb-2">Restrições Importantes:</h3>
+                <ul class="list-disc pl-6 text-yellow-700">
+                    <li><code>PRIMARY KEY</code> - Identifica unicamente cada registro</li>
+                    <li><code>NOT NULL</code> - Campo obrigatório</li>
+                    <li><code>UNIQUE</code> - Valor deve ser único na tabela</li>
+                    <li><code>DEFAULT</code> - Valor padrão se não especificado</li>
+                    <li><code>AUTOINCREMENT</code> - Incrementa automaticamente</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">4. SQL Básico - INSERT</h2>
+            <p class="text-gray-700 mb-4">Para adicionar dados às tabelas:</p>
+            
+            <div class="code-example p-4">
+                <pre><code class="language-sql">-- Inserir um registro completo
+INSERT INTO usuarios (nome, email, idade) 
+VALUES ('Ana Silva', 'ana@email.com', 28);
+
+-- Inserir múltiplos registros
+INSERT INTO usuarios (nome, email, idade) VALUES 
+    ('João Santos', 'joao@email.com', 35),
+    ('Maria Oliveira', 'maria@email.com', 42),
+    ('Pedro Costa', 'pedro@email.com', 29);
+
+-- Inserir produtos
+INSERT INTO produtos (nome, descricao, preco, estoque) VALUES 
+    ('Notebook Dell', 'Notebook para desenvolvimento', 2500.00, 10),
+    ('Mouse Wireless', 'Mouse sem fio ergonômico', 89.90, 50),
+    ('Teclado Mecânico', 'Teclado mecânico RGB', 299.99, 25);
+
+-- Inserir apenas alguns campos (outros usarão DEFAULT)
+INSERT INTO usuarios (nome, email) 
+VALUES ('Carlos Lima', 'carlos@email.com');</code></pre>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">5. SQL Básico - SELECT</h2>
+            <p class="text-gray-700 mb-4">Para consultar dados das tabelas:</p>
+            
+            <div class="code-example p-4">
+                <pre><code class="language-sql">-- Selecionar todos os registros
+SELECT * FROM usuarios;
+
+-- Selecionar campos específicos
+SELECT nome, email FROM usuarios;
+
+-- Filtrar com WHERE
+SELECT * FROM usuarios WHERE idade > 30;
+
+-- Múltiplas condições
+SELECT * FROM usuarios 
+WHERE idade >= 25 AND ativo = TRUE;
+
+-- Busca por texto
+SELECT * FROM usuarios 
+WHERE nome LIKE '%Silva%';
+
+-- Ordenar resultados
+SELECT * FROM produtos 
+ORDER BY preco DESC;
+
+-- Limitar resultados
+SELECT * FROM produtos 
+ORDER BY preco ASC 
+LIMIT 5;
+
+-- Contar registros
+SELECT COUNT(*) FROM usuarios;
+
+-- Agrupar e contar
+SELECT ativo, COUNT(*) as total 
+FROM usuarios 
+GROUP BY ativo;</code></pre>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">6. Relacionamentos</h2>
+            <p class="text-gray-700 mb-4">Bancos relacionais permitem conectar tabelas através de chaves estrangeiras:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-purple-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-purple-800 mb-2">One-to-One (1:1)</h3>
+                    <p class="text-gray-700 text-sm">Um registro se relaciona com apenas um registro de outra tabela.</p>
+                    <p class="text-gray-600 text-xs mt-2">Ex: Usuário → Perfil</p>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-purple-800 mb-2">One-to-Many (1:N)</h3>
+                    <p class="text-gray-700 text-sm">Um registro se relaciona com vários registros de outra tabela.</p>
+                    <p class="text-gray-600 text-xs mt-2">Ex: Categoria → Produtos</p>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-purple-800 mb-2">Many-to-Many (N:N)</h3>
+                    <p class="text-gray-700 text-sm">Vários registros se relacionam com vários registros.</p>
+                    <p class="text-gray-600 text-xs mt-2">Ex: Produtos ↔ Pedidos</p>
+                </div>
+            </div>
+
+            <div class="code-example p-4">
+                <pre><code class="language-sql">-- Exemplo de relacionamento 1:N
+CREATE TABLE categorias (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL
+);
+
+-- Tabela produtos com chave estrangeira
+CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(200) NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
+    categoria_id INTEGER,
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+);
+
+-- Inserir categorias
+INSERT INTO categorias (nome) VALUES 
+    ('Eletrônicos'),
+    ('Livros'),
+    ('Roupas');
+
+-- Inserir produtos relacionados
+INSERT INTO produtos (nome, preco, categoria_id) VALUES 
+    ('Smartphone', 899.99, 1),
+    ('Livro de JavaScript', 59.90, 2),
+    ('Camiseta', 39.99, 3);</code></pre>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">7. Prática com SQLite</h2>
+            <p class="text-gray-700 mb-4">SQLite é um banco de dados leve, perfeito para aprender e prototipar:</p>
+            
+            <div class="bg-green-50 p-4 rounded-lg mb-4">
+                <h3 class="font-semibold text-green-800 mb-2">Como usar SQLite:</h3>
+                <ol class="list-decimal pl-6 text-green-700">
+                    <li>Instale SQLite ou use online em <a href="https://sqliteonline.com" class="underline" target="_blank">sqliteonline.com</a></li>
+                    <li>Crie um novo database</li>
+                    <li>Execute os comandos SQL</li>
+                    <li>Visualize os resultados</li>
+                </ol>
+            </div>
+
+            <div class="code-example p-4">
+                <pre><code class="language-sql">-- Exemplo completo: Sistema de E-commerce Simples
+
+-- 1. Criar tabelas
+CREATE TABLE categorias (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT
+);
+
+CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(200) NOT NULL,
+    descricao TEXT,
+    preco DECIMAL(10,2) NOT NULL,
+    estoque INTEGER DEFAULT 0,
+    categoria_id INTEGER,
+    ativo BOOLEAN DEFAULT TRUE,
+    criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+);
+
+CREATE TABLE clientes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    telefone VARCHAR(20),
+    endereco TEXT,
+    criado_em DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 2. Inserir dados de teste
+INSERT INTO categorias (nome, descricao) VALUES 
+    ('Eletrônicos', 'Produtos eletrônicos e gadgets'),
+    ('Livros', 'Livros técnicos e literatura'),
+    ('Casa', 'Produtos para casa e decoração');
+
+INSERT INTO produtos (nome, descricao, preco, estoque, categoria_id) VALUES 
+    ('Smartphone Samsung', 'Smartphone Android 128GB', 1299.99, 15, 1),
+    ('Livro Clean Code', 'Livro sobre código limpo', 89.90, 30, 2),
+    ('Luminária LED', 'Luminária de mesa LED ajustável', 159.99, 8, 3),
+    ('Tablet iPad', 'Tablet Apple 64GB', 2199.99, 5, 1),
+    ('JavaScript: O Guia Definitivo', 'Livro completo sobre JS', 129.90, 20, 2);
+
+INSERT INTO clientes (nome, email, telefone, endereco) VALUES 
+    ('Ana Silva', 'ana@email.com', '(11) 99999-1111', 'Rua A, 123'),
+    ('João Santos', 'joao@email.com', '(11) 99999-2222', 'Rua B, 456'),
+    ('Maria Oliveira', 'maria@email.com', '(11) 99999-3333', 'Rua C, 789');
+
+-- 3. Consultas úteis
+-- Produtos por categoria
+SELECT p.nome, p.preco, c.nome as categoria 
+FROM produtos p 
+JOIN categorias c ON p.categoria_id = c.id;
+
+-- Produtos em estoque baixo
+SELECT nome, estoque 
+FROM produtos 
+WHERE estoque < 10 AND ativo = TRUE;
+
+-- Produtos mais caros por categoria
+SELECT c.nome as categoria, MAX(p.preco) as preco_maximo
+FROM produtos p 
+JOIN categorias c ON p.categoria_id = c.id 
+GROUP BY c.nome;</code></pre>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">8. Exercícios Práticos</h2>
+            <div class="bg-blue-50 p-6 rounded-lg">
+                <h3 class="font-semibold text-blue-800 mb-4">Exercício 1: Biblioteca</h3>
+                <p class="text-gray-700 mb-3">Crie um sistema de biblioteca com as seguintes tabelas:</p>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-1">
+                    <li>Crie tabela <code>autores</code> (id, nome, nacionalidade)</li>
+                    <li>Crie tabela <code>livros</code> (id, titulo, ano_publicacao, autor_id, disponivel)</li>
+                    <li>Insira 3 autores e 5 livros</li>
+                    <li>Consulte todos os livros disponíveis com nome do autor</li>
+                    <li>Conte quantos livros cada autor tem</li>
+                </ol>
+            </div>
+
+            <div class="bg-green-50 p-6 rounded-lg mt-6">
+                <h3 class="font-semibold text-green-800 mb-4">Exercício 2: Loja Online</h3>
+                <p class="text-gray-700 mb-3">Expanda o exemplo do e-commerce:</p>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-1">
+                    <li>Adicione tabela <code>pedidos</code> (id, cliente_id, data_pedido, total)</li>
+                    <li>Adicione tabela <code>itens_pedido</code> (id, pedido_id, produto_id, quantidade, preco_unitario)</li>
+                    <li>Crie alguns pedidos com múltiplos produtos</li>
+                    <li>Consulte o total de vendas por produto</li>
+                    <li>Liste os clientes que mais compraram</li>
+                </ol>
+            </div>
+
+            <div class="bg-yellow-50 p-6 rounded-lg mt-6">
+                <h3 class="font-semibold text-yellow-800 mb-4">Desafio Extra</h3>
+                <p class="text-gray-700 mb-3">Crie um sistema de blog com:</p>
+                <ul class="list-disc pl-6 text-gray-700 space-y-1">
+                    <li>Tabelas: usuarios, posts, comentarios, categorias</li>
+                    <li>Relacionamentos apropriados</li>
+                    <li>Consultas para listar posts por categoria</li>
+                    <li>Consulta para contar comentários por post</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer class="text-sm text-gray-600 mb-8">
+            Aula 4.1: Fundamentos de Banco de Dados — Base sólida para desenvolvimento web com dados.
+        </footer>
+    </div>
+</body>
+</html>

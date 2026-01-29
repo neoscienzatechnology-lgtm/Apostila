@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Aula 3.5 - JavaScript Assíncrono</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    body{font-family:'Poppins',sans-serif}
+    .code-example{background:#2d3748;border-radius:8px}
+  </style>
+</head>
+<body class="bg-yellow-50 min-h-screen py-8">
+  <div class="container mx-auto max-w-4xl px-4">
+    <header class="mb-6">
+      <div class="bg-white rounded-2xl shadow p-6">
+        <h1 class="text-3xl font-bold text-yellow-800">Aula 3.5: JavaScript Assíncrono</h1>
+        <p class="text-gray-600 mt-2">Callbacks, Promises, async/await, fetch e padrões para lidar com requisições e concorrência.</p>
+      </div>
+    </header>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">1. Callbacks e problemas clássicos</h2>
+      <p class="text-gray-700">Callbacks são a forma original de tratar assincronismo em JS, mas podem gerar callback hell. Preferir Promises e async/await para clareza.</p>
+      <div class="code-example p-4"><pre><code class="language-js">// Exemplo com callback
+function lerArquivo(callback) {
+  setTimeout(() =&gt; callback(null, 'conteúdo'), 1000);
+}
+lerArquivo((err, data) =&gt; { if (err) console.error(err); else console.log(data); });</code></pre></div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">2. Promises</h2>
+      <p class="text-gray-700">Promises representam uma operação que será resolvida no futuro — permitem encadeamento e melhor tratamento de erros.</p>
+      <div class="code-example p-4"><pre><code class="language-js">const p = new Promise((resolve, reject) =&gt; {
+  // operação assíncrona
+  setTimeout(() =&gt; resolve(42), 500);
+});
+
+p.then(v =&gt; console.log('valor', v))
+ .catch(err =&gt; console.error('erro', err));
+</code></pre></div>
+      <p class="text-gray-700 mt-2">API: Promise.resolve, Promise.reject, Promise.all, Promise.race, Promise.allSettled.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">3. async / await</h2>
+      <p class="text-gray-700">async/await é sintaxe sobre Promises que deixa código assíncrono mais parecido com o síncrono; sempre trate erros com try/catch.</p>
+      <div class="code-example p-4"><pre><code class="language-js">async function fetchUsers(){
+  const res = await fetch('https://jsonplaceholder.typicode.com/users');
+  if (!res.ok) throw new Error('Erro na requisição');
+  return res.json();
+}
+
+async function run() {
+  try {
+    const users = await fetchUsers();
+    console.log(users);
+  } catch (err) {
+    console.error(err);
+  }
+}
+run();</code></pre></div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">4. Padrões de concorrência</h2>
+      <div class="code-example p-4"><pre><code class="language-js">// rodar várias requisições em paralelo
+const urls = ['/u1','/u2','/u3'];
+const promises = urls.map(u =&gt; fetch(u).then(r =&gt; r.json()));
+const all = await Promise.all(promises); // falha se qualquer uma falhar
+
+// Promise.allSettled para capturar todos os resultados
+const settled = await Promise.allSettled(promises);
+</code></pre></div>
+      <p class="text-gray-700 mt-2">Escolha o padrão certo: paralelismo (all), corrida (race), ou tolerância a falhas (allSettled).</p>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">5. Fetch API — práticas e tratamento de erros</h2>
+      <div class="code-example p-4"><pre><code class="language-js">// fetch básico
+fetch('/api/data')
+  .then(res =&gt; {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+  })
+  .then(data =&gt; console.log(data))
+  .catch(err =&gt; console.error('Falhou', err));
+
+// cancelar usando AbortController
+const ac = new AbortController();
+fetch('/api/long', { signal: ac.signal }).catch(err =&gt; {
+  if (err.name === 'AbortError') console.log('cancelado');
+});
+ac.abort();</code></pre></div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">6. Retry, backoff e política de erro</h2>
+      <p class="text-gray-700">Requisições de rede podem falhar; implemente padrões de retry com exponencial backoff e limite máximo de tentativas.</p>
+      <div class="code-example p-4"><pre><code class="language-js">async function retry(fn, attempts = 3, delay = 500) {
+  let i = 0;
+  while (i &lt; attempts) {
+    try {
+      return await fn();
+    } catch (err) {
+      i++;
+      if (i === attempts) throw err;
+      await new Promise(r =&gt; setTimeout(r, delay * Math.pow(2, i)));
+    }
+  }
+}
+</code></pre></div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">7. Streams e leitura progressiva (visão geral)</h2>
+      <p class="text-gray-700">Fetch suporta streams via res.body.getReader() para processar dados progressivamente (útil para grandes downloads ou processamento em tempo real).</p>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">8. Exercícios (sem soluções comentadas)</h2>
+      <ol class="list-decimal pl-6 text-gray-700">
+        <li>Implemente uma função que busca dados paginados de uma API (parâmetro page) e agrega resultados até um limite de páginas.</li>
+        <li>Implemente um wrapper de fetch que aplica retry com exponencial backoff (use a função retry apresentada).</li>
+        <li>Crie uma página que faz múltiplas requisições em paralelo (Promise.all) e trata falhas sem quebrar a UI (use allSettled e exiba erros parcial/total).</li>
+      </ol>
+      <p class="text-gray-600 mt-3">Critérios: manuseio correto de Promises, tratamento de erros, cancelamento de requisições e documentação mínima do comportamento esperado.</p>
+    </section>
+
+    <footer class="text-sm text-gray-600 mb-8">Aula aprofundada de JavaScript Assíncrono — sem soluções comentadas.</footer>
+  </div>
+</body>
+</html>

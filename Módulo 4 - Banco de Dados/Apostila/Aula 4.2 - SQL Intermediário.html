@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 4.2 - SQL Intermediário</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .code-example { background: #2d3748; border-radius: 8px; }
+        .highlight { background: linear-gradient(120deg, #a78bfa 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-emerald-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Cabeçalho -->
+        <header class="text-center mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                <h1 class="text-4xl font-bold text-emerald-800 mb-4">Aula 4.2: SQL Intermediário</h1>
+                <p class="text-xl text-gray-600 mb-4">Módulo 4 - Banco de Dados | Duração: 2 horas</p>
+                <div class="flex justify-center items-center space-x-6">
+                    <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">Joins</span>
+                    <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Agregações</span>
+                    <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-medium">Subconsultas</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Objetivos -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-blue-100 text-blue-800 rounded-lg p-2 mr-3">🎯</span>
+                Objetivos da Aula
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-gray-700 mb-3">Ao final desta aula, você será capaz de:</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Realizar JOINs entre múltiplas tabelas (INNER, LEFT, RIGHT)
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Usar funções de agregação (SUM, COUNT, AVG, MIN, MAX)
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Agrupar dados com GROUP BY e filtrar com HAVING
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Criar subconsultas para consultas complexas
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg">
+                    <h3 class="font-semibold text-gray-700 mb-3">Pré-requisitos:</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Aula 4.1 - Fundamentos de BD</li>
+                        <li>• Conhecimento de SELECT básico</li>
+                        <li>• Compreensão de chaves primárias/estrangeiras</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOINs -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-purple-100 text-purple-800 rounded-lg p-2 mr-3">🔗</span>
+                1. JOINs - Relacionando Tabelas
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    <span class="highlight font-semibold">JOINs</span> permitem combinar dados de múltiplas tabelas 
+                    baseado em relacionamentos entre elas usando chaves primárias e estrangeiras.
+                </p>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+                    <h3 class="font-semibold text-blue-800 mb-3">💡 Tipos de JOIN:</h3>
+                    <ul class="space-y-2 text-blue-700">
+                        <li>• <strong>INNER JOIN:</strong> Retorna registros que têm correspondência em ambas as tabelas</li>
+                        <li>• <strong>LEFT JOIN:</strong> Retorna todos da tabela esquerda + correspondências da direita</li>
+                        <li>• <strong>RIGHT JOIN:</strong> Retorna todos da tabela direita + correspondências da esquerda</li>
+                        <li>• <strong>FULL OUTER JOIN:</strong> Retorna todos os registros de ambas as tabelas</li>
+                    </ul>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">INNER JOIN</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-sql">-- Listar pedidos com informações do cliente
+SELECT 
+    pedidos.id,
+    pedidos.data_pedido,
+    pedidos.total,
+    clientes.nome,
+    clientes.email
+FROM pedidos
+INNER JOIN clientes ON pedidos.cliente_id = clientes.id;
+
+-- JOIN com múltiplas tabelas
+SELECT 
+    pedidos.id,
+    clientes.nome AS cliente,
+    produtos.nome AS produto,
+    itens_pedido.quantidade,
+    itens_pedido.preco_unitario
+FROM pedidos
+INNER JOIN clientes ON pedidos.cliente_id = clientes.id
+INNER JOIN itens_pedido ON pedidos.id = itens_pedido.pedido_id
+INNER JOIN produtos ON itens_pedido.produto_id = produtos.id;</code></pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">LEFT JOIN</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-sql">-- Listar todos os clientes e seus pedidos (incluindo clientes sem pedidos)
+SELECT 
+    clientes.nome,
+    clientes.email,
+    pedidos.id AS pedido_id,
+    pedidos.total
+FROM clientes
+LEFT JOIN pedidos ON clientes.id = pedidos.cliente_id;
+
+-- Encontrar clientes que nunca fizeram pedidos
+SELECT 
+    clientes.nome,
+    clientes.email
+FROM clientes
+LEFT JOIN pedidos ON clientes.id = pedidos.cliente_id
+WHERE pedidos.id IS NULL;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Funções de Agregação -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-green-100 text-green-800 rounded-lg p-2 mr-3">📊</span>
+                2. Funções de Agregação
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    Funções de <span class="highlight font-semibold">agregação</span> realizam cálculos em conjuntos de valores 
+                    e retornam um único resultado.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-purple-50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-purple-800 mb-3">Funções Principais:</h3>
+                        <ul class="space-y-2 text-purple-700 text-sm">
+                            <li>• <strong>COUNT():</strong> Conta registros</li>
+                            <li>• <strong>SUM():</strong> Soma valores</li>
+                            <li>• <strong>AVG():</strong> Calcula média</li>
+                            <li>• <strong>MIN():</strong> Valor mínimo</li>
+                            <li>• <strong>MAX():</strong> Valor máximo</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-green-800 mb-3">Características:</h3>
+                        <ul class="space-y-2 text-green-700 text-sm">
+                            <li>• Ignoram valores NULL (exceto COUNT(*))</li>
+                            <li>• Podem ser usadas com GROUP BY</li>
+                            <li>• Retornam um único valor por grupo</li>
+                            <li>• Úteis para relatórios e estatísticas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Exemplos Práticos:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-sql">-- COUNT: Contar total de registros
+SELECT COUNT(*) AS total_clientes FROM clientes;
+SELECT COUNT(email) AS clientes_com_email FROM clientes;
+
+-- SUM: Somar valores
+SELECT SUM(total) AS receita_total FROM pedidos;
+SELECT SUM(quantidade) AS total_vendido FROM itens_pedido;
+
+-- AVG: Calcular média
+SELECT AVG(total) AS ticket_medio FROM pedidos;
+SELECT AVG(preco) AS preco_medio FROM produtos;
+
+-- MIN e MAX: Valores extremos
+SELECT 
+    MIN(preco) AS preco_minimo,
+    MAX(preco) AS preco_maximo,
+    AVG(preco) AS preco_medio
+FROM produtos;
+
+-- Múltiplas agregações
+SELECT 
+    COUNT(*) AS total_pedidos,
+    SUM(total) AS receita_total,
+    AVG(total) AS ticket_medio,
+    MIN(total) AS menor_pedido,
+    MAX(total) AS maior_pedido
+FROM pedidos;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- GROUP BY e HAVING -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-blue-100 text-blue-800 rounded-lg p-2 mr-3">📈</span>
+                3. GROUP BY e HAVING
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    <span class="highlight font-semibold">GROUP BY</span> agrupa linhas que têm valores iguais em colunas específicas. 
+                    <span class="highlight font-semibold">HAVING</span> filtra grupos (similar ao WHERE, mas para grupos).
+                </p>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">GROUP BY:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-sql">-- Total de pedidos por cliente
+SELECT 
+    cliente_id,
+    COUNT(*) AS total_pedidos,
+    SUM(total) AS valor_total
+FROM pedidos
+GROUP BY cliente_id;
+
+-- Vendas por categoria de produto
+SELECT 
+    produtos.categoria,
+    COUNT(*) AS quantidade_produtos,
+    AVG(produtos.preco) AS preco_medio
+FROM produtos
+GROUP BY produtos.categoria;
+
+-- Pedidos por mês
+SELECT 
+    YEAR(data_pedido) AS ano,
+    MONTH(data_pedido) AS mes,
+    COUNT(*) AS total_pedidos,
+    SUM(total) AS receita
+FROM pedidos
+GROUP BY YEAR(data_pedido), MONTH(data_pedido)
+ORDER BY ano DESC, mes DESC;</code></pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">HAVING (Filtrar Grupos):</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-sql">-- Clientes com mais de 5 pedidos
+SELECT 
+    cliente_id,
+    COUNT(*) AS total_pedidos
+FROM pedidos
+GROUP BY cliente_id
+HAVING COUNT(*) > 5;
+
+-- Categorias com preço médio acima de 100
+SELECT 
+    categoria,
+    AVG(preco) AS preco_medio
+FROM produtos
+GROUP BY categoria
+HAVING AVG(preco) > 100;
+
+-- Combinando WHERE e HAVING
+SELECT 
+    cliente_id,
+    COUNT(*) AS total_pedidos,
+    SUM(total) AS valor_total
+FROM pedidos
+WHERE data_pedido >= '2023-01-01'  -- WHERE filtra linhas antes do agrupamento
+GROUP BY cliente_id
+HAVING SUM(total) > 1000;           -- HAVING filtra grupos após agrupamento</code></pre>
+                </div>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6">
+                    <h3 class="font-semibold text-yellow-800 mb-3">⚠️ WHERE vs HAVING:</h3>
+                    <ul class="space-y-2 text-yellow-700">
+                        <li>• <strong>WHERE:</strong> Filtra linhas ANTES do agrupamento</li>
+                        <li>• <strong>HAVING:</strong> Filtra grupos DEPOIS do agrupamento</li>
+                        <li>• WHERE não pode usar funções de agregação</li>
+                        <li>• HAVING é usado com funções de agregação</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subconsultas -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-indigo-100 text-indigo-800 rounded-lg p-2 mr-3">🔍</span>
+                4. Subconsultas (Subqueries)
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    <span class="highlight font-semibold">Subconsultas</span> são queries dentro de outras queries, 
+                    permitindo consultas complexas e condições dinâmicas.
+                </p>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Subconsulta no WHERE:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-sql">-- Produtos com preço acima da média
+SELECT nome, preco
+FROM produtos
+WHERE preco > (SELECT AVG(preco) FROM produtos);
+
+-- Clientes que fizeram pedidos em 2023
+SELECT nome, email
+FROM clientes
+WHERE id IN (
+    SELECT DISTINCT cliente_id 
+    FROM pedidos 
+    WHERE YEAR(data_pedido) = 2023
+);
+
+-- Produtos que nunca foram vendidos
+SELECT nome, preco
+FROM produtos
+WHERE id NOT IN (
+    SELECT DISTINCT produto_id FROM itens_pedido
+);</code></pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Subconsulta no FROM:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-sql">-- Categorias com vendas totais
+SELECT 
+    cat.categoria,
+    cat.total_produtos,
+    COALESCE(vendas.total_vendido, 0) AS total_vendido
+FROM (
+    SELECT categoria, COUNT(*) AS total_produtos
+    FROM produtos
+    GROUP BY categoria
+) AS cat
+LEFT JOIN (
+    SELECT 
+        p.categoria,
+        SUM(ip.quantidade) AS total_vendido
+    FROM itens_pedido ip
+    INNER JOIN produtos p ON ip.produto_id = p.id
+    GROUP BY p.categoria
+) AS vendas ON cat.categoria = vendas.categoria;</code></pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Subconsulta Correlacionada:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-sql">-- Produtos mais caros em cada categoria
+SELECT p1.categoria, p1.nome, p1.preco
+FROM produtos p1
+WHERE p1.preco = (
+    SELECT MAX(p2.preco)
+    FROM produtos p2
+    WHERE p2.categoria = p1.categoria
+);
+
+-- Clientes com pedido acima da média dos seus próprios pedidos
+SELECT c.nome, p.total
+FROM clientes c
+INNER JOIN pedidos p ON c.id = p.cliente_id
+WHERE p.total > (
+    SELECT AVG(p2.total)
+    FROM pedidos p2
+    WHERE p2.cliente_id = c.id
+);</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercício Prático -->
+        <section class="bg-gradient-to-r from-emerald-500 to-green-600 rounded-2xl shadow-lg p-8 mb-8 text-white">
+            <h2 class="text-3xl font-bold mb-6 flex items-center">
+                <span class="bg-white text-emerald-600 rounded-lg p-3 mr-4">💪</span>
+                Exercício Prático
+            </h2>
+            
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-6">
+                <h3 class="text-2xl font-semibold mb-4">🎯 Desafio: Relatório de Vendas Completo</h3>
+                <p class="text-lg mb-4">
+                    Crie queries SQL para gerar um relatório completo de vendas:
+                </p>
+                
+                <div class="space-y-3 ml-4">
+                    <div class="flex items-start">
+                        <span class="bg-yellow-400 text-gray-900 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-xl">Top 5 Clientes:</strong>
+                            <p class="text-white/90 mt-1">Liste os 5 clientes que mais gastaram (total de todos os pedidos)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <span class="bg-yellow-400 text-gray-900 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-xl">Produtos Mais Vendidos:</strong>
+                            <p class="text-white/90 mt-1">Mostre os 10 produtos mais vendidos (quantidade) com receita total</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <span class="bg-yellow-400 text-gray-900 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-xl">Vendas Mensais:</strong>
+                            <p class="text-white/90 mt-1">Agrupe vendas por mês com total de pedidos e receita</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <span class="bg-yellow-400 text-gray-900 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-xl">Categorias Populares:</strong>
+                            <p class="text-white/90 mt-1">Use subconsulta para encontrar categorias com vendas acima da média</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-yellow-400 text-gray-900 rounded-xl p-4">
+                <p class="font-semibold">💡 Dica:</p>
+                <p>Combine JOINs, GROUP BY, HAVING e ORDER BY. Use aliases para tornar as queries mais legíveis!</p>
+            </div>
+        </section>
+
+        <!-- Rodapé -->
+        <footer class="text-center mt-12 pb-8">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <p class="text-gray-600 mb-2">📚 Aula 4.2 - SQL Intermediário</p>
+                <p class="text-gray-500 text-sm">Próxima aula: <strong>Aula 4.3 - Integração com JavaScript</strong></p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aula 3.3 - Fetch API, Promises e Async/Await</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    body{font-family:'Poppins',sans-serif}
+    .code-example{background:#2d3748;border-radius:8px}
+  </style>
+</head>
+<body class="bg-yellow-50 min-h-screen py-8">
+  <div class="container mx-auto max-w-4xl px-4">
+    <header class="mb-6">
+      <div class="bg-white rounded-2xl shadow p-6">
+        <h1 class="text-3xl font-bold text-yellow-800">Aula 3.3: Fetch API, Promises e Async/Await</h1>
+        <p class="text-gray-600 mt-2">Programação assíncrona em JavaScript: callbacks, promises, async/await e consumo de APIs REST.</p>
+      </div>
+    </header>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">1. Callbacks</h2>
+      <p class="text-gray-700 mb-3">Funções callback são a base da programação assíncrona em JavaScript.</p>
+      <div class="code-example p-4"><pre><code class="language-js">// Callback básico
+function processarDados(dados, callback) {
+  setTimeout(() => {
+    const resultado = dados.map(d => d * 2);
+    callback(resultado);
+  }, 1000);
+}
+
+processarDados([1, 2, 3], (resultado) => {
+  console.log('Resultado:', resultado);
+});
+
+// Problema: Callback Hell
+getUser(id, (user) => {
+  getPosts(user.id, (posts) => {
+    getComments(posts[0].id, (comments) => {
+      // Código aninhado difícil de manter
+    });
+  });
+});</code></pre></div>
+      <p class="text-gray-700 mt-3">Callbacks podem levar ao "callback hell" quando há muitas operações assíncronas aninhadas.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">2. Promises</h2>
+      <p class="text-gray-700 mb-3">Promises representam um valor que pode estar disponível agora, no futuro, ou nunca.</p>
+      <div class="code-example p-4"><pre><code class="language-js">// Criando uma Promise
+const minhaPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    const sucesso = Math.random() > 0.5;
+    if (sucesso) {
+      resolve('Operação bem-sucedida!');
+    } else {
+      reject('Algo deu errado!');
+    }
+  }, 1000);
+});
+
+// Consumindo a Promise
+minhaPromise
+  .then(resultado => {
+    console.log(resultado);
+    return 'Próximo valor';
+  })
+  .then(proximoValor => {
+    console.log(proximoValor);
+  })
+  .catch(erro => {
+    console.error('Erro:', erro);
+  })
+  .finally(() => {
+    console.log('Operação finalizada');
+  });</code></pre></div>
+      <p class="text-gray-700 mt-3">Promises resolvem o problema do callback hell através de encadeamento.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">3. Promise.all, Promise.race e Promise.allSettled</h2>
+      <p class="text-gray-700 mb-3">Métodos utilitários para trabalhar com múltiplas promises.</p>
+      <div class="code-example p-4"><pre><code class="language-js">const promise1 = fetch('/api/users');
+const promise2 = fetch('/api/posts');
+const promise3 = fetch('/api/comments');
+
+// Promise.all - todas devem resolver
+Promise.all([promise1, promise2, promise3])
+  .then(responses => {
+    console.log('Todas as requisições completaram');
+    return Promise.all(responses.map(r => r.json()));
+  })
+  .then(data => {
+    const [users, posts, comments] = data;
+    console.log({ users, posts, comments });
+  })
+  .catch(error => {
+    console.error('Uma das requisições falhou:', error);
+  });
+
+// Promise.race - primeira a resolver
+Promise.race([promise1, promise2, promise3])
+  .then(firstResponse => {
+    console.log('Primeira resposta:', firstResponse);
+  });
+
+// Promise.allSettled - aguarda todas, independente do resultado
+Promise.allSettled([promise1, promise2, promise3])
+  .then(results => {
+    results.forEach((result, index) => {
+      if (result.status === 'fulfilled') {
+        console.log(`Promise ${index} resolvida:`, result.value);
+      } else {
+        console.log(`Promise ${index} rejeitada:`, result.reason);
+      }
+    });
+  });</code></pre></div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">4. Async/Await</h2>
+      <p class="text-gray-700 mb-3">Sintaxe mais limpa para trabalhar com código assíncrono, baseada em promises.</p>
+      <div class="code-example p-4"><pre><code class="language-js">// Função assíncrona básica
+async function buscarDados() {
+  try {
+    const response = await fetch('/api/dados');
+    const dados = await response.json();
+    return dados;
+  } catch (error) {
+    console.error('Erro ao buscar dados:', error);
+    throw error;
+  }
+}
+
+// Usando a função
+async function main() {
+  try {
+    const dados = await buscarDados();
+    console.log('Dados recebidos:', dados);
+  } catch (error) {
+    console.error('Erro na aplicação:', error);
+  }
+}
+
+// Aguardando múltiplas operações
+async function buscarTodosDados() {
+  try {
+    const [users, posts, comments] = await Promise.all([
+      fetch('/api/users').then(r => r.json()),
+      fetch('/api/posts').then(r => r.json()),
+      fetch('/api/comments').then(r => r.json())
+    ]);
+    
+    return { users, posts, comments };
+  } catch (error) {
+    console.error('Erro ao buscar dados:', error);
+  }
+}</code></pre></div>
+      <p class="text-gray-700 mt-3">Async/await torna o código assíncrono mais legível e fácil de debugar.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">5. Fetch API</h2>
+      <p class="text-gray-700 mb-3">Interface moderna para fazer requisições HTTP, baseada em promises.</p>
+      <div class="code-example p-4"><pre><code class="language-js">// GET request
+async function buscarUsuarios() {
+  try {
+    const response = await fetch('/api/usuarios');
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const usuarios = await response.json();
+    return usuarios;
+  } catch (error) {
+    console.error('Erro ao buscar usuários:', error);
+  }
+}
+
+// POST request
+async function criarUsuario(dadosUsuario) {
+  try {
+    const response = await fetch('/api/usuarios', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(dadosUsuario)
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Erro ao criar usuário: ${response.status}`);
+    }
+    
+    const novoUsuario = await response.json();
+    return novoUsuario;
+  } catch (error) {
+    console.error('Erro:', error);
+  }
+}
+
+// PUT/PATCH request
+async function atualizarUsuario(id, dados) {
+  const response = await fetch(`/api/usuarios/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dados)
+  });
+  
+  return response.json();
+}
+
+// DELETE request
+async function deletarUsuario(id) {
+  const response = await fetch(`/api/usuarios/${id}`, {
+    method: 'DELETE'
+  });
+  
+  return response.ok;
+}</code></pre></div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">6. Tratamento de Erros</h2>
+      <p class="text-gray-700 mb-3">Estratégias para lidar com erros em código assíncrono.</p>
+      <div class="code-example p-4"><pre><code class="language-js">// Try/catch com async/await
+async function operacaoComErro() {
+  try {
+    const response = await fetch('/api/dados');
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    const dados = await response.json();
+    return dados;
+  } catch (error) {
+    if (error instanceof TypeError) {
+      console.error('Erro de rede:', error.message);
+    } else {
+      console.error('Erro da API:', error.message);
+    }
+    
+    // Re-throw se necessário
+    throw error;
+  }
+}
+
+// Retry pattern
+async function fetchComRetry(url, maxTentativas = 3) {
+  for (let tentativa = 1; tentativa <= maxTentativas; tentativa++) {
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        return response;
+      }
+      throw new Error(`HTTP ${response.status}`);
+    } catch (error) {
+      console.log(`Tentativa ${tentativa} falhou:`, error.message);
+      
+      if (tentativa === maxTentativas) {
+        throw error;
+      }
+      
+      // Aguarda antes da próxima tentativa
+      await new Promise(resolve => setTimeout(resolve, 1000 * tentativa));
+    }
+  }
+}</code></pre></div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">7. Padrões Avançados</h2>
+      <div class="code-example p-4"><pre><code class="language-js">// Timeout para requisições
+function fetchComTimeout(url, timeout = 5000) {
+  return Promise.race([
+    fetch(url),
+    new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Timeout')), timeout)
+    )
+  ]);
+}
+
+// Cache simples
+const cache = new Map();
+
+async function fetchComCache(url) {
+  if (cache.has(url)) {
+    return cache.get(url);
+  }
+  
+  const response = await fetch(url);
+  const data = await response.json();
+  cache.set(url, data);
+  
+  return data;
+}
+
+// Debounce para requisições
+function debounce(func, delay) {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func.apply(this, args), delay);
+  };
+}
+
+const buscarComDebounce = debounce(async (termo) => {
+  const response = await fetch(`/api/buscar?q=${termo}`);
+  return response.json();
+}, 300);</code></pre></div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">8. Exemplo Prático: Sistema de Busca</h2>
+      <div class="code-example p-4"><pre><code class="language-js">class BuscadorAPI {
+  constructor(baseURL) {
+    this.baseURL = baseURL;
+    this.cache = new Map();
+  }
+  
+  async buscar(termo, filtros = {}) {
+    const cacheKey = `${termo}-${JSON.stringify(filtros)}`;
+    
+    if (this.cache.has(cacheKey)) {
+      return this.cache.get(cacheKey);
+    }
+    
+    try {
+      const params = new URLSearchParams({
+        q: termo,
+        ...filtros
+      });
+      
+      const response = await fetch(`${this.baseURL}/buscar?${params}`);
+      
+      if (!response.ok) {
+        throw new Error(`Erro na busca: ${response.status}`);
+      }
+      
+      const resultados = await response.json();
+      this.cache.set(cacheKey, resultados);
+      
+      return resultados;
+    } catch (error) {
+      console.error('Erro ao buscar:', error);
+      return { resultados: [], erro: error.message };
+    }
+  }
+  
+  limparCache() {
+    this.cache.clear();
+  }
+}
+
+// Uso
+const buscador = new BuscadorAPI('/api');
+
+async function realizarBusca() {
+  const loading = document.getElementById('loading');
+  const resultados = document.getElementById('resultados');
+  
+  loading.style.display = 'block';
+  
+  try {
+    const dados = await buscador.buscar('javascript', {
+      categoria: 'programacao',
+      limite: 10
+    });
+    
+    exibirResultados(dados.resultados);
+  } catch (error) {
+    exibirErro(error.message);
+  } finally {
+    loading.style.display = 'none';
+  }
+}</code></pre></div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">9. Exercícios Práticos</h2>
+      <ol class="list-decimal pl-6 text-gray-700 space-y-2">
+        <li><strong>Sistema de Login:</strong> Crie uma função que faz login via API usando async/await, com tratamento de erros e loading state.</li>
+        <li><strong>Busca com Debounce:</strong> Implemente uma busca que consulta uma API conforme o usuário digita, usando debounce para evitar muitas requisições.</li>
+        <li><strong>Upload de Arquivo:</strong> Crie uma função que faz upload de arquivo com progress bar usando fetch e FormData.</li>
+        <li><strong>Cache Inteligente:</strong> Implemente um sistema de cache que expira após um tempo determinado e se atualiza automaticamente.</li>
+      </ol>
+      
+      <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+        <h4 class="font-semibold text-yellow-800 mb-2">Desafio Extra:</h4>
+        <p class="text-gray-700">Crie uma aplicação que consome a API do GitHub para buscar repositórios, implementando:</p>
+        <ul class="list-disc pl-6 mt-2 text-gray-700">
+          <li>Busca com debounce</li>
+          <li>Paginação infinita</li>
+          <li>Cache de resultados</li>
+          <li>Tratamento de erros de rede</li>
+          <li>Loading states</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="text-sm text-gray-600 mb-8">Aula 3.3: Fetch API, Promises e Async/Await — Programação assíncrona moderna em JavaScript.</footer>
+  </div>
+</body>
+</html>

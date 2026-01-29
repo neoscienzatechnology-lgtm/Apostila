@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aula 3.2 - Trabalhando com Arrays e Objetos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    body{font-family:'Poppins',sans-serif}
+    .code-example{background:#2d3748;border-radius:8px}
+  </style>
+</head>
+<body class="bg-yellow-50 min-h-screen py-8">
+  <div class="container mx-auto max-w-4xl px-4">
+    <header class="mb-6">
+      <div class="bg-white rounded-2xl shadow p-6">
+        <h1 class="text-3xl font-bold text-yellow-800">Aula 3.2: Trabalhando com Arrays e Objetos</h1>
+        <p class="text-gray-600 mt-2">Entender manipulação, métodos comuns, imutabilidade, e padrões ao trabalhar com coleções e objetos em JavaScript.</p>
+      </div>
+    </header>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">1. Arrays — criação e acesso</h2>
+      <p class="text-gray-700 mb-3">Arrays são listas ordenadas de valores. Podem conter tipos primitivos e referências.</p>
+      <div class="code-example p-4">
+        <pre><code class="language-js">// criação
+const vazio = [];
+const nums = [1, 2, 3, 4];
+const misto = ['texto', 10, {id:1}, [1,2]];
+
+// acesso
+console.log(nums[0]); // 1
+console.log(nums.length); // 4
+console.log(nums[nums.length - 1]); // último elemento</code></pre>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">2. Métodos essenciais de Array</h2>
+      <p class="text-gray-700 mb-3">Aprenda os métodos que você usará com mais frequência: iteração, transformação e agregação.</p>
+
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-semibold">forEach</h3>
+          <div class="code-example p-4 mt-2"><pre><code class="language-js">nums.forEach((n, i) =&gt; console.log(i, n));</code></pre></div>
+        </div>
+
+        <div>
+          <h3 class="font-semibold">map / filter / reduce</h3>
+          <div class="code-example p-4 mt-2"><pre><code class="language-js">const doubles = nums.map(n =&gt; n * 2);
+const pares = nums.filter(n =&gt; n % 2 === 0);
+const soma = nums.reduce((acc, n) =&gt; acc + n, 0);</code></pre></div>
+        </div>
+
+        <div>
+          <h3 class="font-semibold">find / some / every</h3>
+          <div class="code-example p-4 mt-2"><pre><code class="language-js">const primeiroPar = nums.find(n =&gt; n % 2 === 0);
+const temPar = nums.some(n =&gt; n % 2 === 0);
+const todosPositivos = nums.every(n =&gt; n &gt; 0);</code></pre></div>
+        </div>
+
+        <div>
+          <h3 class="font-semibold">slice / splice / concat / includes</h3>
+          <div class="code-example p-4 mt-2"><pre><code class="language-js">const sub = nums.slice(1, 3); // NÃO muta o array
+          nums.splice(2, 1); // remove a partir do índice 2 -&gt; MUTA o array
+          const novo = nums.concat([5,6]);
+          console.log(nums.includes(3));</code></pre></div>
+        </div>
+      </div>
+      <p class="text-gray-700 mt-3">Prefira métodos não mutáveis (map/filter/slice/concat) quando possível para evitar efeitos colaterais.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">3. Imutabilidade e operador spread</h2>
+      <p class="text-gray-700 mb-3">Criar cópias sem mutar o original é uma prática importante em aplicações modernas.</p>
+      <div class="code-example p-4">
+        <pre><code class="language-js">// copiar array (shallow copy)
+const copia = [...nums];
+
+// adicionar/remover sem mutar
+const adicionado = [...nums, 5];
+const removido = nums.filter(n =&gt; n !== 3);
+
+// arrays de objetos: atenção, spread faz cópia rasa
+const arrObjs = [{id:1, v:10}, {id:2, v:20}];
+const nova = arrObjs.map(o =&gt; o.id === 1 ? {...o, v: 15} : o);</code></pre></div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">4. Objetos — criação, propriedades e padrões</h2>
+      <p class="text-gray-700 mb-3">Objetos são coleções chave/valor. Veja padrões modernos e utilitários úteis.</p>
+      <div class="code-example p-4">
+        <pre><code class="language-js">// criação
+const usuario = { nome: 'João', idade: 30 };
+
+// shorthand e propriedades computadas
+const chave = 'email';
+const u2 = { nome, [chave]: 'joao@example.com' };
+
+// destructuring
+const { nome: primeiroNome, idade } = usuario;
+
+// percorrer
+Object.keys(usuario).forEach(k =&gt; console.log(k, usuario[k]));
+
+// copiar/mesclar
+const copiado = {...usuario};
+const combinado = Object.assign({}, usuario, { ativo: true });</code></pre></div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">5. Cópia rasa vs profunda e performance</h2>
+      <p class="text-gray-700 mb-3">Spread e Object.assign fazem cópias rasas — referências internas permanecem. Para cópia profunda, use utilitários (structuredClone, lodash.cloneDeep) ou serialize/deserialize quando apropriado, lembrando dos limites.</p>
+      <div class="code-example p-4">
+        <pre><code class="language-js">const obj = { a: { b: 1 } };
+const shallow = {...obj};
+shallow.a.b = 2; // altera obj.a.b também
+
+// cópia profunda (quando aplicável)
+const deep = structuredClone ? structuredClone(obj) : JSON.parse(JSON.stringify(obj));</code></pre></div>
+      <p class="text-gray-700 mt-3">Performance: evitar cópias profundas desnecessárias em loops; prefira transformações pontuais e use memoização quando necessário.</p>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">6. Métodos úteis de Object</h2>
+      <div class="code-example p-4">
+        <pre><code class="language-js">Object.keys(obj); // chaves
+Object.values(obj); // valores
+Object.entries(obj); // [ [k,v], ... ]
+Object.freeze(obj); // impede alterações no nível superior
+Object.hasOwn(obj, 'prop'); // (ou obj.hasOwnProperty)
+</code></pre></div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">7. Padrões e boas práticas</h2>
+      <ul class="list-disc pl-6 text-gray-700">
+        <li>Prefira const para referências que não serão reassinaladas.</li>
+        <li>Evite mutações diretas de arrays/objetos compartilhados entre componentes.</li>
+        <li>Use funções puras nas transformações de arrays quando possível.</li>
+        <li>Documente formatos esperados para arrays de objetos (shape).</li>
+      </ul>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">8. Exemplos práticos</h2>
+      <div class="code-example p-4">
+        <pre><code class="language-js">// agrupar por chave
+const items = [
+  {categoria: 'A', valor: 10},
+  {categoria: 'B', valor: 20},
+  {categoria: 'A', valor: 5}
+];
+const agrupado = items.reduce((acc, it) =&gt; {
+  acc[it.categoria] = (acc[it.categoria] || 0) + it.valor;
+  return acc;
+}, {});
+
+// atualizar item específico em array de objetos (imutável)
+const atualizado = items.map(it =&gt; it.categoria === 'A' ? {...it, valor: it.valor * 2} : it);
+</code></pre></div>
+    </section>
+
+    <section class="bg-white rounded-2xl shadow p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-3">9. Exercícios (sem soluções comentadas)</h2>
+      <ol class="list-decimal pl-6 text-gray-700">
+        <li>Escreva uma função que recebe um array de números e retorna um objeto com {min, max, média}.</li>
+        <li>Dado um array de objetos {categoria, valor}, retorne um objeto com soma por categoria (use reduce).</li>
+        <li>Implemente uma função que atualiza um item por id em um array de objetos sem mutar o array original.</li>
+        <li>Explique por escrito quando usar cópia rasa vs cópia profunda e dê um exemplo prático.</li>
+      </ol>
+      <p class="text-gray-600 mt-3">Critérios: clareza, uso correto de métodos de array, imutabilidade quando aplicável e tratamento básico de entradas.</p>
+    </section>
+
+    <footer class="text-sm text-gray-600 mb-8">Versão aprofundada da Aula 3.2 — sem soluções comentadas.</footer>
+  </div>
+</body>
+</html>

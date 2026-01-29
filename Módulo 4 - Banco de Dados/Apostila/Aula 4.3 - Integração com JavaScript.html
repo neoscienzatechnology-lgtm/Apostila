@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 4.3 - Integração com JavaScript</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        code { font-family: 'Fira Code', monospace; }
+        .code-example { background: #2d3748; border-radius: 8px; }
+        .highlight { background: linear-gradient(120deg, #10b981 0%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-emerald-50 to-teal-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Cabeçalho -->
+        <header class="text-center mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                <h1 class="text-4xl font-bold text-emerald-800 mb-4">Aula 4.3: Integração com JavaScript</h1>
+                <p class="text-xl text-gray-600 mb-4">Módulo 4 - Banco de Dados | Duração: 2.5 horas</p>
+                <div class="flex justify-center items-center space-x-6">
+                    <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">⏱️ 2h 30min</span>
+                    <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-medium">⚡ Intermediário</span>
+                    <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">🔌 Fetch API</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Objetivos -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-blue-100 text-blue-800 rounded-lg p-2 mr-3">🎯</span>
+                Objetivos da Aula
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-gray-700 mb-3">Ao final desta aula, você será capaz de:</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Conectar aplicações JavaScript a APIs REST
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Realizar operações CRUD com Fetch API
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Manipular dados JSON do backend no DOM
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Implementar tratamento de erros em requisições
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg">
+                    <h3 class="font-semibold text-gray-700 mb-3">Pré-requisitos:</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• JavaScript (Promises, Async/Await)</li>
+                        <li>• Manipulação do DOM</li>
+                        <li>• Conceitos de API REST</li>
+                        <li>• SQL básico e intermediário</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fetch API Básico -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-purple-100 text-purple-800 rounded-lg p-2 mr-3">🌐</span>
+                1. Fetch API - Conceitos Fundamentais
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    A <span class="highlight font-semibold">Fetch API</span> permite fazer requisições HTTP de forma assíncrona, 
+                    substituindo XMLHttpRequest com uma sintaxe mais moderna e baseada em Promises.
+                </p>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+                    <h3 class="font-semibold text-blue-800 mb-3">💡 Estrutura Básica do Fetch:</h3>
+                    <ul class="space-y-2 text-blue-700">
+                        <li>• <strong>URL:</strong> Endpoint da API a ser acessada</li>
+                        <li>• <strong>Options:</strong> Método (GET, POST, PUT, DELETE), headers, body</li>
+                        <li>• <strong>Response:</strong> Objeto retornado com status, headers e métodos (.json(), .text())</li>
+                        <li>• <strong>Promise:</strong> Assíncrono, usa .then()/.catch() ou async/await</li>
+                    </ul>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">GET - Buscar Dados:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-javascript">// GET básico com .then()
+fetch('https://api.exemplo.com/produtos')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Produtos:', data);
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+    });
+
+// GET com async/await (recomendado)
+async function buscarProdutos() {
+    try {
+        const response = await fetch('https://api.exemplo.com/produtos');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const produtos = await response.json();
+        console.log('Produtos:', produtos);
+        return produtos;
+    } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+    }
+}
+
+// GET com parâmetros na URL
+async function buscarProdutoPorId(id) {
+    const response = await fetch(`https://api.exemplo.com/produtos/${id}`);
+    const produto = await response.json();
+    return produto;
+}</code></pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">POST - Criar Dados:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-javascript">async function criarProduto(produto) {
+    try {
+        const response = await fetch('https://api.exemplo.com/produtos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(produto)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const novoProduto = await response.json();
+        console.log('Produto criado:', novoProduto);
+        return novoProduto;
+    } catch (error) {
+        console.error('Erro ao criar produto:', error);
+    }
+}
+
+// Exemplo de uso
+const novoProduto = {
+    nome: 'Notebook Dell',
+    preco: 3500.00,
+    categoria: 'Eletrônicos',
+    estoque: 15
+};
+
+criarProduto(novoProduto);</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Operações CRUD -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-green-100 text-green-800 rounded-lg p-2 mr-3">📝</span>
+                2. CRUD Completo com Fetch API
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    Implementação completa das 4 operações básicas: 
+                    <span class="highlight font-semibold">Create, Read, Update, Delete</span>.
+                </p>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Classe API Helper:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-javascript">class ProdutosAPI {
+    constructor(baseURL) {
+        this.baseURL = baseURL;
+    }
+
+    // CREATE - POST
+    async criar(produto) {
+        const response = await fetch(`${this.baseURL}/produtos`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(produto)
+        });
+        return this.handleResponse(response);
+    }
+
+    // READ - GET (todos)
+    async listar() {
+        const response = await fetch(`${this.baseURL}/produtos`);
+        return this.handleResponse(response);
+    }
+
+    // READ - GET (um específico)
+    async buscarPorId(id) {
+        const response = await fetch(`${this.baseURL}/produtos/${id}`);
+        return this.handleResponse(response);
+    }
+
+    // UPDATE - PUT
+    async atualizar(id, produto) {
+        const response = await fetch(`${this.baseURL}/produtos/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(produto)
+        });
+        return this.handleResponse(response);
+    }
+
+    // DELETE - DELETE
+    async deletar(id) {
+        const response = await fetch(`${this.baseURL}/produtos/${id}`, {
+            method: 'DELETE'
+        });
+        return this.handleResponse(response);
+    }
+
+    // Helper para tratamento de resposta
+    async handleResponse(response) {
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || `HTTP error! status: ${response.status}`);
+        }
+        
+        // Se resposta 204 (No Content), não tem JSON
+        if (response.status === 204) return null;
+        
+        return response.json();
+    }
+}
+
+// Uso da classe
+const api = new ProdutosAPI('https://api.exemplo.com');</code></pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Exemplos de Uso CRUD:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-javascript">// CREATE
+const novoProduto = await api.criar({
+    nome: 'Mouse Gamer',
+    preco: 150.00,
+    categoria: 'Periféricos'
+});
+
+// READ (todos)
+const produtos = await api.listar();
+console.log('Todos os produtos:', produtos);
+
+// READ (específico)
+const produto = await api.buscarPorId(1);
+console.log('Produto ID 1:', produto);
+
+// UPDATE
+const produtoAtualizado = await api.atualizar(1, {
+    nome: 'Mouse Gamer RGB',
+    preco: 180.00,
+    categoria: 'Periféricos'
+});
+
+// DELETE
+await api.deletar(1);
+console.log('Produto deletado com sucesso');</code></pre>
+                </div>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6">
+                    <h3 class="font-semibold text-yellow-800 mb-3">⚠️ Boas Práticas:</h3>
+                    <ul class="space-y-2 text-yellow-700">
+                        <li>• Sempre use <code>try/catch</code> para capturar erros</li>
+                        <li>• Valide <code>response.ok</code> antes de processar dados</li>
+                        <li>• Use <code>async/await</code> em vez de <code>.then()</code> para código mais limpo</li>
+                        <li>• Centralize tratamento de erros em funções helper</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integração com DOM -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-indigo-100 text-indigo-800 rounded-lg p-2 mr-3">🎨</span>
+                3. Exibindo Dados no DOM
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    Após buscar dados da API, é necessário <span class="highlight font-semibold">renderizar no HTML</span> 
+                    de forma dinâmica e interativa.
+                </p>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">HTML Base:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Gerenciador de Produtos&lt;/title&gt;
+    &lt;style&gt;
+        .produto-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+        }
+        .loading { color: #666; font-style: italic; }
+        .error { color: red; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Produtos&lt;/h1&gt;
+    &lt;div id="produtos-container"&gt;&lt;/div&gt;
+    &lt;button id="carregar-produtos"&gt;Carregar Produtos&lt;/button&gt;
+    
+    &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">JavaScript - Renderização:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-javascript">// Renderizar lista de produtos
+async function renderizarProdutos() {
+    const container = document.getElementById('produtos-container');
+    
+    try {
+        // Mostrar loading
+        container.innerHTML = '&lt;p class="loading"&gt;Carregando produtos...&lt;/p&gt;';
+        
+        // Buscar produtos da API
+        const produtos = await api.listar();
+        
+        // Limpar container
+        container.innerHTML = '';
+        
+        // Verificar se há produtos
+        if (produtos.length === 0) {
+            container.innerHTML = '&lt;p&gt;Nenhum produto encontrado.&lt;/p&gt;';
+            return;
+        }
+        
+        // Renderizar cada produto
+        produtos.forEach(produto => {
+            const card = criarCardProduto(produto);
+            container.appendChild(card);
+        });
+        
+    } catch (error) {
+        container.innerHTML = `&lt;p class="error"&gt;Erro: ${error.message}&lt;/p&gt;`;
+    }
+}
+
+// Criar card de produto
+function criarCardProduto(produto) {
+    const card = document.createElement('div');
+    card.className = 'produto-card';
+    card.innerHTML = `
+        &lt;h3&gt;${produto.nome}&lt;/h3&gt;
+        &lt;p&gt;&lt;strong&gt;Preço:&lt;/strong&gt; R$ ${produto.preco.toFixed(2)}&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;Categoria:&lt;/strong&gt; ${produto.categoria}&lt;/p&gt;
+        &lt;button onclick="editarProduto(${produto.id})"&gt;Editar&lt;/button&gt;
+        &lt;button onclick="deletarProduto(${produto.id})"&gt;Deletar&lt;/button&gt;
+    `;
+    return card;
+}
+
+// Event listener para botão
+document.getElementById('carregar-produtos').addEventListener('click', renderizarProdutos);
+
+// Carregar ao iniciar página
+renderizarProdutos();</code></pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Formulário para Criar/Editar:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-javascript">// HTML do formulário
+const formHTML = `
+    &lt;form id="form-produto"&gt;
+        &lt;input type="text" id="nome" placeholder="Nome" required&gt;
+        &lt;input type="number" id="preco" placeholder="Preço" step="0.01" required&gt;
+        &lt;input type="text" id="categoria" placeholder="Categoria" required&gt;
+        &lt;button type="submit"&gt;Salvar&lt;/button&gt;
+    &lt;/form&gt;
+`;
+
+// Handler do formulário
+document.getElementById('form-produto').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const produto = {
+        nome: document.getElementById('nome').value,
+        preco: parseFloat(document.getElementById('preco').value),
+        categoria: document.getElementById('categoria').value
+    };
+    
+    try {
+        await api.criar(produto);
+        alert('Produto criado com sucesso!');
+        renderizarProdutos(); // Atualizar lista
+        e.target.reset(); // Limpar formulário
+    } catch (error) {
+        alert(`Erro: ${error.message}`);
+    }
+});
+
+// Função para deletar produto
+async function deletarProduto(id) {
+    if (!confirm('Tem certeza que deseja deletar este produto?')) return;
+    
+    try {
+        await api.deletar(id);
+        alert('Produto deletado!');
+        renderizarProdutos();
+    } catch (error) {
+        alert(`Erro: ${error.message}`);
+    }
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tratamento de Erros -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-red-100 text-red-800 rounded-lg p-2 mr-3">⚠️</span>
+                4. Tratamento de Erros Avançado
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    Implementar <span class="highlight font-semibold">tratamento robusto de erros</span> 
+                    garante melhor experiência do usuário e facilita debugging.
+                </p>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Tipos de Erros:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-javascript">async function requisicaoComTratamento(url) {
+    try {
+        const response = await fetch(url);
+        
+        // Erro HTTP (404, 500, etc)
+        if (!response.ok) {
+            switch (response.status) {
+                case 400:
+                    throw new Error('Requisição inválida');
+                case 401:
+                    throw new Error('Não autorizado - Faça login');
+                case 404:
+                    throw new Error('Recurso não encontrado');
+                case 500:
+                    throw new Error('Erro no servidor');
+                default:
+                    throw new Error(`Erro HTTP: ${response.status}`);
+            }
+        }
+        
+        return await response.json();
+        
+    } catch (error) {
+        // Erro de rede (sem internet, timeout)
+        if (error instanceof TypeError && error.message.includes('fetch')) {
+            console.error('Erro de rede:', error);
+            throw new Error('Sem conexão com a internet');
+        }
+        
+        // Outros erros
+        console.error('Erro na requisição:', error);
+        throw error;
+    }
+}
+
+// Sistema de notificação
+function mostrarNotificacao(mensagem, tipo = 'info') {
+    const notificacao = document.createElement('div');
+    notificacao.className = `notificacao ${tipo}`;
+    notificacao.textContent = mensagem;
+    document.body.appendChild(notificacao);
+    
+    setTimeout(() => notificacao.remove(), 3000);
+}</code></pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Loading States:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-javascript">class LoadingManager {
+    constructor(elementId) {
+        this.element = document.getElementById(elementId);
+        this.originalContent = '';
+    }
+    
+    start() {
+        this.originalContent = this.element.innerHTML;
+        this.element.innerHTML = '&lt;div class="spinner"&gt;&lt;/div&gt; Carregando...';
+        this.element.style.opacity = '0.6';
+    }
+    
+    stop() {
+        this.element.innerHTML = this.originalContent;
+        this.element.style.opacity = '1';
+    }
+}
+
+// Uso
+const loader = new LoadingManager('produtos-container');
+
+async function carregarComLoading() {
+    loader.start();
+    try {
+        const produtos = await api.listar();
+        renderizarProdutos(produtos);
+    } catch (error) {
+        mostrarNotificacao(error.message, 'error');
+    } finally {
+        loader.stop();
+    }
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercício Prático -->
+        <section class="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl shadow-lg p-8 mb-8 text-white">
+            <h2 class="text-3xl font-bold mb-6 flex items-center">
+                <span class="bg-white text-emerald-600 rounded-lg p-3 mr-4">💪</span>
+                Exercício Prático
+            </h2>
+            
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-6">
+                <h3 class="text-2xl font-semibold mb-4">🎯 Desafio: Sistema de Gerenciamento Completo</h3>
+                <p class="text-lg mb-4">
+                    Crie uma aplicação completa de gerenciamento de produtos:
+                </p>
+                
+                <div class="space-y-3 ml-4">
+                    <div class="flex items-start">
+                        <span class="bg-yellow-400 text-gray-900 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-xl">API Class:</strong>
+                            <p class="text-white/90 mt-1">Implemente classe com todos os métodos CRUD</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <span class="bg-yellow-400 text-gray-900 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-xl">Listagem:</strong>
+                            <p class="text-white/90 mt-1">Exiba produtos em cards com loading state</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <span class="bg-yellow-400 text-gray-900 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-xl">Formulário:</strong>
+                            <p class="text-white/90 mt-1">Crie/edite produtos com validação</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <span class="bg-yellow-400 text-gray-900 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-xl">Delete:</strong>
+                            <p class="text-white/90 mt-1">Implemente exclusão com confirmação</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <span class="bg-yellow-400 text-gray-900 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-xl">Tratamento de Erros:</strong>
+                            <p class="text-white/90 mt-1">Exiba mensagens amigáveis para todos os erros</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-4">
+                <p class="font-semibold">🔌 API de Teste:</p>
+                <p class="font-mono text-sm">https://jsonplaceholder.typicode.com/posts</p>
+                <p class="text-sm mt-2">(Substitua 'produtos' por 'posts' nos exemplos)</p>
+            </div>
+
+            <div class="bg-yellow-400 text-gray-900 rounded-xl p-4">
+                <p class="font-semibold">💡 Dica:</p>
+                <p>Use async/await, destructuring e template literals. Teste cada operação CRUD antes de integrar no DOM!</p>
+            </div>
+        </section>
+
+        <!-- Rodapé -->
+        <footer class="text-center mt-12 pb-8">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <p class="text-gray-600 mb-2">📚 Aula 4.3 - Integração com JavaScript</p>
+                <p class="text-gray-500 text-sm">Próximo módulo: <strong>Módulo 5 - Projeto Integrador</strong></p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

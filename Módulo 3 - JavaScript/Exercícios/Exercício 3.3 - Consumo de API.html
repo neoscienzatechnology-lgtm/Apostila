@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 3.3 - Consumo de API</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</head>
+<body class="p-8 bg-yellow-50">
+  <div class="max-w-3xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-xl font-bold mb-3">Exercício 3.3 - DOM Manipulation</h1>
+    <p>Objetivo: implementar interações dinâmicas no DOM usando boas práticas (delegação, DocumentFragment e templates).</p>
+
+    <h2 class="font-semibold mt-4">Tarefas</h2>
+    <ol class="pl-6 list-decimal">
+      <li>Crie uma interface que renderize uma lista a partir de um array de objetos {id, nome}.</li>
+      <li>Implemente um campo para adicionar novos itens à lista (sem recarregar a página).</li>
+      <li>Implemente um botão de remover ao lado de cada item. Use delegação de eventos para gerenciar os cliques.</li>
+      <li>Use &lt;template&gt; para o markup de cada item e DocumentFragment ao inserir múltiplos itens.</li>
+      <li>Garanta que o foco seja gerenciado corretamente ao adicionar/remover itens (usabilidade).</li>
+    </ol>
+
+    <h2 class="font-semibold mt-4">Requisitos</h2>
+    <ul class="pl-6 list-disc">
+      <li>Não utilize frameworks; apenas DOM API nativa.</li>
+      <li>Não gere vazamentos de event listeners ao remover elementos.</li>
+      <li>Trate entradas vazias e IDs duplicados.</li>
+    </ul>
+
+    <p class="mt-4">Critérios: funcionamento correto, performance (uso de fragmentos), código limpo e acessibilidade básica (atributos ARIA e gerenciamento de foco).</p>
+  </div>
+</body>
+</html>
