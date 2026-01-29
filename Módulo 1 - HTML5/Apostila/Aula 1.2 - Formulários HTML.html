@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 1.2 - Formulários HTML</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .code-example { background: #2d3748; border-radius: 8px; }
+        .highlight { background: linear-gradient(120deg, #a78bfa 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .form-demo { background: #f8fafc; border: 2px dashed #cbd5e0; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Cabeçalho -->
+        <header class="text-center mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                <h1 class="text-4xl font-bold text-indigo-800 mb-4">Aula 1.2: Formulários HTML</h1>
+                <p class="text-xl text-gray-600 mb-4">Módulo 1 - HTML5 | Duração: 2 horas</p>
+                <div class="flex justify-center items-center space-x-6">
+                    <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">Inputs Básicos</span>
+                    <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Validação</span>
+                    <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-medium">Elementos Avançados</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Objetivos da Aula -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-blue-100 text-blue-800 rounded-lg p-2 mr-3">🎯</span>
+                Objetivos da Aula
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-gray-700 mb-3">Ao final desta aula, você será capaz de:</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Criar formulários HTML completos e funcionais
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Utilizar todos os tipos de input do HTML5
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Implementar validação nativa de formulários
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Usar elementos semânticos avançados
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg">
+                    <h3 class="font-semibold text-gray-700 mb-3">Pré-requisitos:</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Aula 1.1 - Fundamentos do HTML5</li>
+                        <li>• Conhecimento de tags básicas</li>
+                        <li>• Estrutura semântica HTML</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introdução aos Formulários -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-purple-100 text-purple-800 rounded-lg p-2 mr-3">📝</span>
+                1. Introdução aos Formulários HTML
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    <span class="highlight font-semibold">Formulários</span> são elementos essenciais para interação do usuário com páginas web. 
+                    Eles permitem coletar dados, fazer login, enviar mensagens e muito mais.
+                </p>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+                    <h3 class="font-semibold text-blue-800 mb-3">💡 Estrutura básica de um formulário:</h3>
+                    <div class="code-example p-4">
+                        <pre><code class="language-html">&lt;form action="/processar" method="POST"&gt;
+    &lt;label for="nome"&gt;Nome:&lt;/label&gt;
+    &lt;input type="text" id="nome" name="nome" required&gt;
+    
+    &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-gray-800 mb-4">Atributos importantes do &lt;form&gt;:</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li><code class="bg-gray-200 px-2 py-1 rounded">action</code> - URL para onde enviar os dados</li>
+                            <li><code class="bg-gray-200 px-2 py-1 rounded">method</code> - GET ou POST</li>
+                            <li><code class="bg-gray-200 px-2 py-1 rounded">enctype</code> - Tipo de codificação</li>
+                            <li><code class="bg-gray-200 px-2 py-1 rounded">novalidate</code> - Desabilita validação</li>
+                        </ul>
+                    </div>
+                    <div class="bg-yellow-50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-yellow-800 mb-4">🔗 Associação label + input:</h3>
+                        <p class="text-yellow-700 text-sm mb-3">Sempre associe labels aos inputs para acessibilidade:</p>
+                        <div class="code-example p-3">
+                            <pre><code class="language-html">&lt;!-- Método 1: for + id --&gt;
+&lt;label for="email"&gt;Email:&lt;/label&gt;
+&lt;input type="email" id="email"&gt;
+
+&lt;!-- Método 2: aninhado --&gt;
+&lt;label&gt;
+    Nome:
+    &lt;input type="text" name="nome"&gt;
+&lt;/label&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tipos de Input Básicos -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-green-100 text-green-800 rounded-lg p-2 mr-3">⌨️</span>
+                2. Tipos de Input Básicos
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Inputs de texto:</h3>
+                    <div class="space-y-4">
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-medium text-gray-700 mb-2">Text (texto simples)</h4>
+                            <div class="code-example p-3 mb-2">
+                                <pre><code class="language-html">&lt;input type="text" name="nome" placeholder="Digite seu nome"&gt;</code></pre>
+                            </div>
+                            <div class="form-demo p-3 rounded">
+                                <input type="text" placeholder="Digite seu nome" class="w-full p-2 border rounded">
+                            </div>
+                        </div>
+
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-medium text-gray-700 mb-2">Email (validação automática)</h4>
+                            <div class="code-example p-3 mb-2">
+                                <pre><code class="language-html">&lt;input type="email" name="email" placeholder="seu@email.com"&gt;</code></pre>
+                            </div>
+                            <div class="form-demo p-3 rounded">
+                                <input type="email" placeholder="seu@email.com" class="w-full p-2 border rounded">
+                            </div>
+                        </div>
+
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-medium text-gray-700 mb-2">Password (texto oculto)</h4>
+                            <div class="code-example p-3 mb-2">
+                                <pre><code class="language-html">&lt;input type="password" name="senha" placeholder="Sua senha"&gt;</code></pre>
+                            </div>
+                            <div class="form-demo p-3 rounded">
+                                <input type="password" placeholder="Sua senha" class="w-full p-2 border rounded">
+                            </div>
+                        </div>
+
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-medium text-gray-700 mb-2">Number (apenas números)</h4>
+                            <div class="code-example p-3 mb-2">
+                                <pre><code class="language-html">&lt;input type="number" name="idade" min="0" max="120"&gt;</code></pre>
+                            </div>
+                            <div class="form-demo p-3 rounded">
+                                <input type="number" min="0" max="120" placeholder="Sua idade" class="w-full p-2 border rounded">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Outros elementos:</h3>
+                    <div class="space-y-4">
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-medium text-gray-700 mb-2">Textarea (texto longo)</h4>
+                            <div class="code-example p-3 mb-2">
+                                <pre><code class="language-html">&lt;textarea name="mensagem" rows="4" cols="50"&gt;&lt;/textarea&gt;</code></pre>
+                            </div>
+                            <div class="form-demo p-3 rounded">
+                                <textarea rows="4" placeholder="Sua mensagem..." class="w-full p-2 border rounded"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-medium text-gray-700 mb-2">Select (lista suspensa)</h4>
+                            <div class="code-example p-3 mb-2">
+                                <pre><code class="language-html">&lt;select name="cidade"&gt;
+    &lt;option value=""&gt;Escolha uma cidade&lt;/option&gt;
+    &lt;option value="sp"&gt;São Paulo&lt;/option&gt;
+    &lt;option value="rj"&gt;Rio de Janeiro&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+                            </div>
+                            <div class="form-demo p-3 rounded">
+                                <select class="w-full p-2 border rounded">
+                                    <option>Escolha uma cidade</option>
+                                    <option>São Paulo</option>
+                                    <option>Rio de Janeiro</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-medium text-gray-700 mb-2">Checkbox e Radio</h4>
+                            <div class="code-example p-3 mb-2">
+                                <pre><code class="language-html">&lt;input type="checkbox" id="newsletter" name="newsletter"&gt;
+&lt;label for="newsletter"&gt;Receber newsletter&lt;/label&gt;
+
+&lt;input type="radio" id="masculino" name="genero" value="M"&gt;
+&lt;label for="masculino"&gt;Masculino&lt;/label&gt;</code></pre>
+                            </div>
+                            <div class="form-demo p-3 rounded space-y-2">
+                                <div>
+                                    <input type="checkbox" id="demo-newsletter" class="mr-2">
+                                    <label for="demo-newsletter">Receber newsletter</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="demo-m" name="demo-genero" class="mr-2">
+                                    <label for="demo-m" class="mr-4">Masculino</label>
+                                    <input type="radio" id="demo-f" name="demo-genero" class="mr-2">
+                                    <label for="demo-f">Feminino</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inputs Avançados HTML5 -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-indigo-100 text-indigo-800 rounded-lg p-2 mr-3">🚀</span>
+                3. Inputs Avançados do HTML5
+            </h2>
+
+            <p class="text-gray-700 mb-6">O HTML5 introduziu novos tipos de input que facilitam a entrada de dados específicos:</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <div class="border rounded-lg p-4">
+                        <h4 class="font-medium text-gray-700 mb-2">📅 Date (seletor de data)</h4>
+                        <div class="code-example p-3 mb-2">
+                            <pre><code class="language-html">&lt;input type="date" name="nascimento"&gt;</code></pre>
+                        </div>
+                        <div class="form-demo p-3 rounded">
+                            <input type="date" class="w-full p-2 border rounded">
+                        </div>
+                    </div>
+
+                    <div class="border rounded-lg p-4">
+                        <h4 class="font-medium text-gray-700 mb-2">⏰ Time (seletor de hora)</h4>
+                        <div class="code-example p-3 mb-2">
+                            <pre><code class="language-html">&lt;input type="time" name="horario"&gt;</code></pre>
+                        </div>
+                        <div class="form-demo p-3 rounded">
+                            <input type="time" class="w-full p-2 border rounded">
+                        </div>
+                    </div>
+
+                    <div class="border rounded-lg p-4">
+                        <h4 class="font-medium text-gray-700 mb-2">🎨 Color (seletor de cor)</h4>
+                        <div class="code-example p-3 mb-2">
+                            <pre><code class="language-html">&lt;input type="color" name="cor-favorita"&gt;</code></pre>
+                        </div>
+                        <div class="form-demo p-3 rounded">
+                            <input type="color" class="w-full p-2 border rounded h-12">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="border rounded-lg p-4">
+                        <h4 class="font-medium text-gray-700 mb-2">📊 Range (controle deslizante)</h4>
+                        <div class="code-example p-3 mb-2">
+                            <pre><code class="language-html">&lt;input type="range" name="volume" min="0" max="100"&gt;</code></pre>
+                        </div>
+                        <div class="form-demo p-3 rounded">
+                            <input type="range" min="0" max="100" class="w-full">
+                        </div>
+                    </div>
+
+                    <div class="border rounded-lg p-4">
+                        <h4 class="font-medium text-gray-700 mb-2">📁 File (upload de arquivo)</h4>
+                        <div class="code-example p-3 mb-2">
+                            <pre><code class="language-html">&lt;input type="file" name="documento" accept=".pdf,.doc"&gt;</code></pre>
+                        </div>
+                        <div class="form-demo p-3 rounded">
+                            <input type="file" class="w-full p-2 border rounded">
+                        </div>
+                    </div>
+
+                    <div class="border rounded-lg p-4">
+                        <h4 class="font-medium text-gray-700 mb-2">🔍 Search (campo de busca)</h4>
+                        <div class="code-example p-3 mb-2">
+                            <pre><code class="language-html">&lt;input type="search" name="busca" placeholder="Buscar..."&gt;</code></pre>
+                        </div>
+                        <div class="form-demo p-3 rounded">
+                            <input type="search" placeholder="Buscar..." class="w-full p-2 border rounded">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Validação Nativa -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-red-100 text-red-800 rounded-lg p-2 mr-3">✅</span>
+                4. Validação Nativa de Formulários
+            </h2>
+
+            <p class="text-gray-700 mb-6">O HTML5 oferece validação automática sem necessidade de JavaScript:</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Atributos de validação:</h3>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-blue-800 mb-2">required</h4>
+                            <p class="text-blue-700 text-sm mb-2">Campo obrigatório</p>
+                            <div class="code-example p-3">
+                                <pre><code class="language-html">&lt;input type="text" name="nome" required&gt;</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-green-800 mb-2">minlength / maxlength</h4>
+                            <p class="text-green-700 text-sm mb-2">Tamanho mínimo e máximo</p>
+                            <div class="code-example p-3">
+                                <pre><code class="language-html">&lt;input type="text" minlength="3" maxlength="20"&gt;</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-purple-800 mb-2">min / max</h4>
+                            <p class="text-purple-700 text-sm mb-2">Valores mínimo e máximo</p>
+                            <div class="code-example p-3">
+                                <pre><code class="language-html">&lt;input type="number" min="18" max="65"&gt;</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-800 mb-2">pattern</h4>
+                            <p class="text-yellow-700 text-sm mb-2">Expressão regular personalizada</p>
+                            <div class="code-example p-3">
+                                <pre><code class="language-html">&lt;input type="text" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Exemplo prático:</h3>
+                    <div class="code-example p-4 mb-4">
+                        <pre><code class="language-html">&lt;form&gt;
+    &lt;label for="nome"&gt;Nome completo:&lt;/label&gt;
+    &lt;input type="text" 
+           id="nome" 
+           name="nome" 
+           required 
+           minlength="2" 
+           maxlength="50"
+           placeholder="Digite seu nome completo"&gt;
+    
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="email" 
+           id="email" 
+           name="email" 
+           required
+           placeholder="seu@email.com"&gt;
+    
+    &lt;label for="idade"&gt;Idade:&lt;/label&gt;
+    &lt;input type="number" 
+           id="idade" 
+           name="idade" 
+           required 
+           min="18" 
+           max="120"&gt;
+    
+    &lt;label for="telefone"&gt;Telefone:&lt;/label&gt;
+    &lt;input type="tel" 
+           id="telefone" 
+           name="telefone" 
+           pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}"
+           placeholder="11-99999-9999"&gt;
+    
+    &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                    </div>
+
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                        <h4 class="font-semibold text-green-800 mb-2">💡 Dica:</h4>
+                        <p class="text-green-700 text-sm">
+                            Use o atributo <code>title</code> para fornecer dicas sobre o formato esperado:
+                        </p>
+                        <div class="code-example p-3 mt-2">
+                            <pre><code class="language-html">&lt;input type="tel" 
+       pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}"
+       title="Formato: 11-99999-9999"&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Elementos Semânticos Avançados -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-yellow-100 text-yellow-800 rounded-lg p-2 mr-3">🎨</span>
+                5. Elementos Semânticos Avançados
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Datalist (autocompletar):</h3>
+                    <div class="code-example p-4 mb-4">
+                        <pre><code class="language-html">&lt;label for="navegador"&gt;Escolha um navegador:&lt;/label&gt;
+&lt;input list="navegadores" id="navegador" name="navegador"&gt;
+
+&lt;datalist id="navegadores"&gt;
+    &lt;option value="Chrome"&gt;
+    &lt;option value="Firefox"&gt;
+    &lt;option value="Safari"&gt;
+    &lt;option value="Edge"&gt;
+&lt;/datalist&gt;</code></pre>
+                    </div>
+                    <div class="form-demo p-4 rounded">
+                        <label class="block mb-2 font-medium">Escolha um navegador:</label>
+                        <input list="demo-navegadores" class="w-full p-2 border rounded" placeholder="Digite ou escolha...">
+                        <datalist id="demo-navegadores">
+                            <option value="Chrome">
+                            <option value="Firefox">
+                            <option value="Safari">
+                            <option value="Edge">
+                        </datalist>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Progress (barra de progresso):</h3>
+                    <div class="code-example p-4 mb-4">
+                        <pre><code class="language-html">&lt;label for="progresso"&gt;Progresso do curso:&lt;/label&gt;
+&lt;progress id="progresso" value="32" max="100"&gt;32%&lt;/progress&gt;
+
+&lt;label for="carregamento"&gt;Carregando...&lt;/label&gt;
+&lt;progress id="carregamento"&gt;&lt;/progress&gt;</code></pre>
+                    </div>
+                    <div class="form-demo p-4 rounded space-y-3">
+                        <div>
+                            <label class="block mb-2 font-medium">Progresso do curso:</label>
+                            <progress value="32" max="100" class="w-full">32%</progress>
+                            <span class="text-sm text-gray-600">32%</span>
+                        </div>
+                        <div>
+                            <label class="block mb-2 font-medium">Carregando...</label>
+                            <progress class="w-full"></progress>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Meter (medidor):</h3>
+                    <div class="code-example p-4 mb-4">
+                        <pre><code class="language-html">&lt;label for="disk"&gt;Uso do disco:&lt;/label&gt;
+&lt;meter id="disk" value="6" min="0" max="10"&gt;6 de 10&lt;/meter&gt;
+
+&lt;label for="score"&gt;Pontuação:&lt;/label&gt;
+&lt;meter id="score" value="0.6" optimum="1"&gt;60%&lt;/meter&gt;</code></pre>
+                    </div>
+                    <div class="form-demo p-4 rounded space-y-3">
+                        <div>
+                            <label class="block mb-2 font-medium">Uso do disco:</label>
+                            <meter value="6" min="0" max="10" class="w-full">6 de 10</meter>
+                            <span class="text-sm text-gray-600">6 de 10</span>
+                        </div>
+                        <div>
+                            <label class="block mb-2 font-medium">Pontuação:</label>
+                            <meter value="0.6" optimum="1" class="w-full">60%</meter>
+                            <span class="text-sm text-gray-600">60%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Output (resultado):</h3>
+                    <div class="code-example p-4 mb-4">
+                        <pre><code class="language-html">&lt;form oninput="result.value=parseInt(a.value)+parseInt(b.value)"&gt;
+    &lt;input type="range" id="a" value="50"&gt; +
+    &lt;input type="number" id="b" value="50"&gt; =
+    &lt;output name="result" for="a b"&gt;100&lt;/output&gt;
+&lt;/form&gt;</code></pre>
+                    </div>
+                    <div class="form-demo p-4 rounded">
+                        <form oninput="demoResult.value=parseInt(demoA.value)+parseInt(demoB.value)">
+                            <input type="range" id="demoA" value="50" class="mr-2"> +
+                            <input type="number" id="demoB" value="50" class="w-20 p-1 border rounded mx-2"> =
+                            <output name="demoResult" for="demoA demoB" class="font-bold text-blue-600">100</output>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercício Prático -->
+        <section class="bg-gradient-to-r from-green-500 to-blue-600 rounded-2xl shadow-lg p-8 text-white mb-8">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <span class="bg-white bg-opacity-20 rounded-lg p-2 mr-3">💻</span>
+                Exercício Prático: Formulário de Cadastro Completo
+            </h2>
+
+            <div class="bg-white bg-opacity-10 rounded-lg p-6 mb-6">
+                <h3 class="font-semibold mb-4">🎯 Objetivo:</h3>
+                <p class="mb-4">Criar um formulário de cadastro de usuário completo com validação nativa.</p>
+                
+                <h3 class="font-semibold mb-4">📋 Requisitos:</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <ul class="space-y-2">
+                        <li>• Dados pessoais (nome, email, telefone)</li>
+                        <li>• Data de nascimento</li>
+                        <li>• Seleção de gênero (radio buttons)</li>
+                        <li>• Lista de cidades (select)</li>
+                        <li>• Upload de foto de perfil</li>
+                    </ul>
+                    <ul class="space-y-2">
+                        <li>• Senha com confirmação</li>
+                        <li>• Interesses (checkboxes)</li>
+                        <li>• Biografia (textarea)</li>
+                        <li>• Validação nativa em todos os campos</li>
+                        <li>• Elementos semânticos avançados</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white bg-opacity-10 rounded-lg p-6">
+                <h3 class="font-semibold mb-4">⏱️ Tempo estimado: 45 minutos</h3>
+                <p class="text-sm opacity-90">
+                    Salve como "formulario-cadastro.html" e teste todas as validações no navegador.
+                </p>
+            </div>
+        </section>
+
+        <!-- Resumo da Aula -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-purple-100 text-purple-800 rounded-lg p-2 mr-3">📚</span>
+                Resumo da Aula
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">✅ O que aprendemos:</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Estrutura básica de formulários HTML</li>
+                        <li>• Tipos de input básicos e avançados</li>
+                        <li>• Validação nativa com atributos HTML5</li>
+                        <li>• Elementos semânticos: datalist, progress, meter</li>
+                        <li>• Associação correta de labels e inputs</li>
+                        <li>• Boas práticas de acessibilidade</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">🚀 Próximos passos:</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Pratique criando diferentes tipos de formulários</li>
+                        <li>• Experimente com todos os tipos de input</li>
+                        <li>• Teste a validação em diferentes navegadores</li>
+                        <li>• Prepare-se para: Multimídia e Tabelas</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Links Úteis -->
+        <section class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-blue-100 text-blue-800 rounded-lg p-2 mr-3">🔗</span>
+                Links Úteis
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-blue-800 mb-3">📖 Documentação</h3>
+                    <ul class="space-y-2 text-blue-700 text-sm">
+                        <li>• <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/form" class="hover:underline">MDN - Formulários</a></li>
+                        <li>• <a href="https://www.w3schools.com/html/html_forms.asp" class="hover:underline">W3Schools - Forms</a></li>
+                    </ul>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-green-800 mb-3">🛠️ Ferramentas</h3>
+                    <ul class="space-y-2 text-green-700 text-sm">
+                        <li>• <a href="https://regex101.com/" class="hover:underline">Regex101 - Testar patterns</a></li>
+                        <li>• <a href="https://caniuse.com/" class="hover:underline">Can I Use - Compatibilidade</a></li>
+                    </ul>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-purple-800 mb-3">🎮 Prática</h3>
+                    <ul class="space-y-2 text-purple-700 text-sm">
+                        <li>• <a href="https://codepen.io/collection/DgYaMj/" class="hover:underline">CodePen - Form Examples</a></li>
+                        <li>• <a href="https://formspree.io/" class="hover:underline">Formspree - Testar envios</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

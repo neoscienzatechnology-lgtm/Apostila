@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 1.2 - Formulário de Cadastro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .form-section { border-left: 4px solid #3b82f6; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Cabeçalho do Exercício -->
+        <header class="text-center mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                <h1 class="text-4xl font-bold text-indigo-800 mb-4">Exercício 1.2: Formulário de Cadastro</h1>
+                <p class="text-xl text-gray-600 mb-4">Criando um formulário completo com validação nativa</p>
+                <div class="flex justify-center items-center space-x-6">
+                    <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">⏱️ 45 minutos</span>
+                    <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">🎯 Intermediário</span>
+                    <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-medium">💻 Prático</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Instruções Detalhadas -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-blue-100 text-blue-800 rounded-lg p-2 mr-3">📋</span>
+                Instruções Detalhadas
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">🎯 Objetivo:</h3>
+                    <p class="text-gray-700 mb-6">
+                        Desenvolver um formulário de cadastro de usuário completo, aplicando todos os conceitos 
+                        de formulários HTML5 aprendidos na aula 1.2.
+                    </p>
+
+                    <h3 class="font-semibold text-gray-800 mb-4">📝 Campos obrigatórios:</h3>
+                    <div class="space-y-2 text-gray-700">
+                        <div class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✓</span>
+                            <span><strong>Dados pessoais:</strong> Nome completo, email, telefone</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✓</span>
+                            <span><strong>Data de nascimento:</strong> Input type="date"</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✓</span>
+                            <span><strong>Gênero:</strong> Radio buttons (Masculino, Feminino, Outro)</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✓</span>
+                            <span><strong>Localização:</strong> Select com cidades brasileiras</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✓</span>
+                            <span><strong>Senha:</strong> Password com confirmação</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✓</span>
+                            <span><strong>Interesses:</strong> Checkboxes múltiplos</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✓</span>
+                            <span><strong>Biografia:</strong> Textarea com limite de caracteres</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✓</span>
+                            <span><strong>Foto de perfil:</strong> Input type="file"</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">🔧 Requisitos técnicos:</h3>
+                    <div class="space-y-2 text-gray-700">
+                        <div class="flex items-start">
+                            <span class="text-blue-500 mr-2 mt-1">•</span>
+                            <span>Validação nativa em todos os campos apropriados</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-blue-500 mr-2 mt-1">•</span>
+                            <span>Labels associadas corretamente aos inputs</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-blue-500 mr-2 mt-1">•</span>
+                            <span>Placeholders informativos</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-blue-500 mr-2 mt-1">•</span>
+                            <span>Uso de fieldset para agrupar campos relacionados</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-blue-500 mr-2 mt-1">•</span>
+                            <span>Elementos semânticos avançados (datalist, progress)</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-blue-500 mr-2 mt-1">•</span>
+                            <span>Botões de submit e reset</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-6">
+                        <h4 class="font-semibold text-yellow-800 mb-2">⚠️ Atenção:</h4>
+                        <p class="text-yellow-700 text-sm">
+                            Use atributos de validação como required, minlength, maxlength, pattern, 
+                            min, max conforme apropriado para cada campo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estrutura Sugerida -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-green-100 text-green-800 rounded-lg p-2 mr-3">🏗️</span>
+                Estrutura Sugerida do Formulário
+            </h2>
+
+            <div class="bg-gray-900 rounded-lg p-6 overflow-x-auto">
+                <pre class="text-green-400 text-sm"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Cadastro de Usuário&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Cadastro de Usuário&lt;/h1&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        &lt;form action="#" method="POST" enctype="multipart/form-data"&gt;
+            &lt;!-- Seção 1: Dados Pessoais --&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt;Dados Pessoais&lt;/legend&gt;
+                
+                &lt;!-- Nome completo --&gt;
+                &lt;label for="nome"&gt;Nome Completo:&lt;/label&gt;
+                &lt;input type="text" id="nome" name="nome" required 
+                       minlength="2" maxlength="100" 
+                       placeholder="Digite seu nome completo"&gt;
+                
+                &lt;!-- Email --&gt;
+                &lt;label for="email"&gt;Email:&lt;/label&gt;
+                &lt;input type="email" id="email" name="email" required 
+                       placeholder="seu@email.com"&gt;
+                
+                &lt;!-- Telefone --&gt;
+                &lt;label for="telefone"&gt;Telefone:&lt;/label&gt;
+                &lt;input type="tel" id="telefone" name="telefone" required 
+                       pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}" 
+                       placeholder="11-99999-9999"
+                       title="Formato: 11-99999-9999"&gt;
+                
+                &lt;!-- Data de nascimento --&gt;
+                &lt;label for="nascimento"&gt;Data de Nascimento:&lt;/label&gt;
+                &lt;input type="date" id="nascimento" name="nascimento" required&gt;
+            &lt;/fieldset&gt;
+
+            &lt;!-- Seção 2: Informações Adicionais --&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt;Informações Adicionais&lt;/legend&gt;
+                
+                &lt;!-- Gênero --&gt;
+                &lt;fieldset&gt;
+                    &lt;legend&gt;Gênero:&lt;/legend&gt;
+                    &lt;input type="radio" id="masculino" name="genero" value="M" required&gt;
+                    &lt;label for="masculino"&gt;Masculino&lt;/label&gt;
+                    
+                    &lt;input type="radio" id="feminino" name="genero" value="F" required&gt;
+                    &lt;label for="feminino"&gt;Feminino&lt;/label&gt;
+                    
+                    &lt;input type="radio" id="outro" name="genero" value="O" required&gt;
+                    &lt;label for="outro"&gt;Outro&lt;/label&gt;
+                &lt;/fieldset&gt;
+                
+                &lt;!-- Cidade --&gt;
+                &lt;label for="cidade"&gt;Cidade:&lt;/label&gt;
+                &lt;select id="cidade" name="cidade" required&gt;
+                    &lt;option value=""&gt;Selecione sua cidade&lt;/option&gt;
+                    &lt;option value="sp"&gt;São Paulo&lt;/option&gt;
+                    &lt;option value="rj"&gt;Rio de Janeiro&lt;/option&gt;
+                    &lt;option value="bh"&gt;Belo Horizonte&lt;/option&gt;
+                    &lt;!-- Adicione mais cidades --&gt;
+                &lt;/select&gt;
+            &lt;/fieldset&gt;
+
+            &lt;!-- Continue com as outras seções... --&gt;
+            
+            &lt;button type="submit"&gt;Cadastrar&lt;/button&gt;
+            &lt;button type="reset"&gt;Limpar Formulário&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Passo a Passo Detalhado -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-purple-100 text-purple-800 rounded-lg p-2 mr-3">👣</span>
+                Passo a Passo Detalhado
+            </h2>
+
+            <div class="space-y-6">
+                <div class="form-section pl-6">
+                    <h3 class="font-semibold text-blue-800 mb-3">Passo 1: Estrutura inicial (5 min)</h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li>• Crie o arquivo "formulario-cadastro.html"</li>
+                        <li>• Configure a estrutura HTML5 básica</li>
+                        <li>• Adicione título descritivo</li>
+                        <li>• Crie header com h1 "Cadastro de Usuário"</li>
+                        <li>• Inicie o formulário com action="#" e method="POST"</li>
+                    </ul>
+                </div>
+
+                <div class="form-section pl-6">
+                    <h3 class="font-semibold text-green-800 mb-3">Passo 2: Dados pessoais (10 min)</h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li>• Crie fieldset com legend "Dados Pessoais"</li>
+                        <li>• Nome: input text, required, minlength="2", maxlength="100"</li>
+                        <li>• Email: input email, required</li>
+                        <li>• Telefone: input tel, pattern para formato brasileiro</li>
+                        <li>• Data nascimento: input date, required</li>
+                        <li>• Associe todas as labels corretamente</li>
+                    </ul>
+                </div>
+
+                <div class="form-section pl-6">
+                    <h3 class="font-semibold text-purple-800 mb-3">Passo 3: Informações adicionais (10 min)</h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li>• Fieldset "Informações Adicionais"</li>
+                        <li>• Gênero: radio buttons (Masculino, Feminino, Outro)</li>
+                        <li>• Cidade: select com pelo menos 5 cidades brasileiras</li>
+                        <li>• Foto perfil: input file, accept="image/*"</li>
+                        <li>• Todos os campos required onde apropriado</li>
+                    </ul>
+                </div>
+
+                <div class="form-section pl-6">
+                    <h3 class="font-semibold text-yellow-800 mb-3">Passo 4: Senha e segurança (8 min)</h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li>• Fieldset "Segurança"</li>
+                        <li>• Senha: input password, required, minlength="8"</li>
+                        <li>• Confirmar senha: input password, required</li>
+                        <li>• Dica: use pattern para exigir pelo menos 1 número</li>
+                        <li>• Adicione title com instruções da senha</li>
+                    </ul>
+                </div>
+
+                <div class="form-section pl-6">
+                    <h3 class="font-semibold text-red-800 mb-3">Passo 5: Interesses e biografia (8 min)</h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li>• Fieldset "Interesses"</li>
+                        <li>• Checkboxes: Tecnologia, Esportes, Música, Arte, Viagens</li>
+                        <li>• Biografia: textarea, maxlength="500"</li>
+                        <li>• Adicione contador de caracteres com output</li>
+                        <li>• Newsletter: checkbox para aceitar emails</li>
+                    </ul>
+                </div>
+
+                <div class="form-section pl-6">
+                    <h3 class="font-semibold text-indigo-800 mb-3">Passo 6: Elementos avançados e finalização (4 min)</h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        <li>• Adicione datalist para sugestões de profissão</li>
+                        <li>• Progress bar mostrando "completude" do perfil</li>
+                        <li>• Botões: submit "Cadastrar" e reset "Limpar"</li>
+                        <li>• Teste todas as validações</li>
+                        <li>• Verifique acessibilidade (labels, fieldsets)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exemplo Completo -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-yellow-100 text-yellow-800 rounded-lg p-2 mr-3">💡</span>
+                Exemplo de Implementação Completa
+            </h2>
+
+            <div class="bg-gray-900 rounded-lg p-6 overflow-x-auto max-h-96 overflow-y-auto">
+                <pre class="text-green-400 text-sm"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Cadastro de Usuário - Exemplo Completo&lt;/title&gt;
+    &lt;style&gt;
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        fieldset { margin: 20px 0; padding: 15px; border: 2px solid #ddd; border-radius: 8px; }
+        legend { font-weight: bold; color: #333; }
+        label { display: block; margin: 10px 0 5px; font-weight: bold; }
+        input, select, textarea { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        input[type="radio"], input[type="checkbox"] { width: auto; margin-right: 5px; }
+        button { padding: 12px 24px; margin: 10px 5px; border: none; border-radius: 4px; cursor: pointer; }
+        button[type="submit"] { background: #007bff; color: white; }
+        button[type="reset"] { background: #6c757d; color: white; }
+        .radio-group, .checkbox-group { display: flex; flex-wrap: wrap; gap: 15px; }
+        .char-counter { font-size: 12px; color: #666; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Cadastro de Usuário&lt;/h1&gt;
+        &lt;p&gt;Preencha todos os campos obrigatórios para criar sua conta.&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        &lt;form action="#" method="POST" enctype="multipart/form-data"&gt;
+            &lt;!-- Dados Pessoais --&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt;📋 Dados Pessoais&lt;/legend&gt;
+                
+                &lt;label for="nome"&gt;Nome Completo: *&lt;/label&gt;
+                &lt;input type="text" id="nome" name="nome" required 
+                       minlength="2" maxlength="100" 
+                       placeholder="Digite seu nome completo"&gt;
+                
+                &lt;label for="email"&gt;Email: *&lt;/label&gt;
+                &lt;input type="email" id="email" name="email" required 
+                       placeholder="seu@email.com"&gt;
+                
+                &lt;label for="telefone"&gt;Telefone: *&lt;/label&gt;
+                &lt;input type="tel" id="telefone" name="telefone" required 
+                       pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}" 
+                       placeholder="11-99999-9999"
+                       title="Formato: 11-99999-9999"&gt;
+                
+                &lt;label for="nascimento"&gt;Data de Nascimento: *&lt;/label&gt;
+                &lt;input type="date" id="nascimento" name="nascimento" required 
+                       min="1900-01-01" max="2010-12-31"&gt;
+            &lt;/fieldset&gt;
+
+            &lt;!-- Informações Adicionais --&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt;ℹ️ Informações Adicionais&lt;/legend&gt;
+                
+                &lt;fieldset&gt;
+                    &lt;legend&gt;Gênero: *&lt;/legend&gt;
+                    &lt;div class="radio-group"&gt;
+                        &lt;label&gt;&lt;input type="radio" name="genero" value="M" required&gt; Masculino&lt;/label&gt;
+                        &lt;label&gt;&lt;input type="radio" name="genero" value="F" required&gt; Feminino&lt;/label&gt;
+                        &lt;label&gt;&lt;input type="radio" name="genero" value="O" required&gt; Outro&lt;/label&gt;
+                        &lt;label&gt;&lt;input type="radio" name="genero" value="N" required&gt; Prefiro não informar&lt;/label&gt;
+                    &lt;/div&gt;
+                &lt;/fieldset&gt;
+                
+                &lt;label for="cidade"&gt;Cidade: *&lt;/label&gt;
+                &lt;select id="cidade" name="cidade" required&gt;
+                    &lt;option value=""&gt;Selecione sua cidade&lt;/option&gt;
+                    &lt;option value="sp"&gt;São Paulo - SP&lt;/option&gt;
+                    &lt;option value="rj"&gt;Rio de Janeiro - RJ&lt;/option&gt;
+                    &lt;option value="bh"&gt;Belo Horizonte - MG&lt;/option&gt;
+                    &lt;option value="salvador"&gt;Salvador - BA&lt;/option&gt;
+                    &lt;option value="fortaleza"&gt;Fortaleza - CE&lt;/option&gt;
+                    &lt;option value="brasilia"&gt;Brasília - DF&lt;/option&gt;
+                    &lt;option value="curitiba"&gt;Curitiba - PR&lt;/option&gt;
+                    &lt;option value="recife"&gt;Recife - PE&lt;/option&gt;
+                &lt;/select&gt;
+                
+                &lt;label for="profissao"&gt;Profissão:&lt;/label&gt;
+                &lt;input list="profissoes" id="profissao" name="profissao" 
+                       placeholder="Digite ou escolha sua profissão"&gt;
+                &lt;datalist id="profissoes"&gt;
+                    &lt;option value="Desenvolvedor"&gt;
+                    &lt;option value="Designer"&gt;
+                    &lt;option value="Analista"&gt;
+                    &lt;option value="Gerente"&gt;
+                    &lt;option value="Estudante"&gt;
+                    &lt;option value="Professor"&gt;
+                    &lt;option value="Médico"&gt;
+                    &lt;option value="Engenheiro"&gt;
+                &lt;/datalist&gt;
+                
+                &lt;label for="foto"&gt;Foto de Perfil:&lt;/label&gt;
+                &lt;input type="file" id="foto" name="foto" accept="image/*"&gt;
+            &lt;/fieldset&gt;
+
+            &lt;!-- Segurança --&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt;🔒 Segurança&lt;/legend&gt;
+                
+                &lt;label for="senha"&gt;Senha: *&lt;/label&gt;
+                &lt;input type="password" id="senha" name="senha" required 
+                       minlength="8" maxlength="50"
+                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                       title="Deve conter pelo menos 8 caracteres, incluindo maiúscula, minúscula e número"
+                       placeholder="Mínimo 8 caracteres"&gt;
+                
+                &lt;label for="confirmar-senha"&gt;Confirmar Senha: *&lt;/label&gt;
+                &lt;input type="password" id="confirmar-senha" name="confirmar-senha" required 
+                       minlength="8" maxlength="50"
+                       placeholder="Repita sua senha"&gt;
+            &lt;/fieldset&gt;
+
+            &lt;!-- Interesses --&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt;🎯 Interesses&lt;/legend&gt;
+                
+                &lt;p&gt;Selecione seus interesses (opcional):&lt;/p&gt;
+                &lt;div class="checkbox-group"&gt;
+                    &lt;label&gt;&lt;input type="checkbox" name="interesses[]" value="tecnologia"&gt; Tecnologia&lt;/label&gt;
+                    &lt;label&gt;&lt;input type="checkbox" name="interesses[]" value="esportes"&gt; Esportes&lt;/label&gt;
+                    &lt;label&gt;&lt;input type="checkbox" name="interesses[]" value="musica"&gt; Música&lt;/label&gt;
+                    &lt;label&gt;&lt;input type="checkbox" name="interesses[]" value="arte"&gt; Arte&lt;/label&gt;
+                    &lt;label&gt;&lt;input type="checkbox" name="interesses[]" value="viagens"&gt; Viagens&lt;/label&gt;
+                    &lt;label&gt;&lt;input type="checkbox" name="interesses[]" value="culinaria"&gt; Culinária&lt;/label&gt;
+                    &lt;label&gt;&lt;input type="checkbox" name="interesses[]" value="leitura"&gt; Leitura&lt;/label&gt;
+                    &lt;label&gt;&lt;input type="checkbox" name="interesses[]" value="games"&gt; Games&lt;/label&gt;
+                &lt;/div&gt;
+                
+                &lt;label for="biografia"&gt;Biografia (opcional):&lt;/label&gt;
+                &lt;textarea id="biografia" name="biografia" rows="4" maxlength="500" 
+                          placeholder="Conte um pouco sobre você..." 
+                          oninput="updateCharCount()"&gt;&lt;/textarea&gt;
+                &lt;div class="char-counter"&gt;
+                    &lt;span id="char-count"&gt;0&lt;/span&gt;/500 caracteres
+                &lt;/div&gt;
+                
+                &lt;label for="experiencia"&gt;Nível de experiência em tecnologia:&lt;/label&gt;
+                &lt;input type="range" id="experiencia" name="experiencia" 
+                       min="1" max="10" value="5" 
+                       oninput="updateExperienceValue()"&gt;
+                &lt;output id="exp-value"&gt;5&lt;/output&gt; / 10
+            &lt;/fieldset&gt;
+
+            &lt;!-- Preferências --&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt;⚙️ Preferências&lt;/legend&gt;
+                
+                &lt;label&gt;
+                    &lt;input type="checkbox" name="newsletter" value="sim"&gt;
+                    Desejo receber newsletter com novidades
+                &lt;/label&gt;
+                
+                &lt;label&gt;
+                    &lt;input type="checkbox" name="termos" value="aceito" required&gt;
+                    Aceito os termos de uso e política de privacidade *
+                &lt;/label&gt;
+                
+                &lt;label for="progresso"&gt;Progresso do perfil:&lt;/label&gt;
+                &lt;progress id="progresso" value="75" max="100"&gt;75%&lt;/progress&gt;
+                &lt;span&gt;75% completo&lt;/span&gt;
+            &lt;/fieldset&gt;
+
+            &lt;!-- Botões --&gt;
+            &lt;div style="text-align: center; margin-top: 30px;"&gt;
+                &lt;button type="submit"&gt;✅ Cadastrar&lt;/button&gt;
+                &lt;button type="reset"&gt;🔄 Limpar Formulário&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/form&gt;
+    &lt;/main&gt;
+
+    &lt;script&gt;
+        function updateCharCount() {
+            const textarea = document.getElementById('biografia');
+            const charCount = document.getElementById('char-count');
+            charCount.textContent = textarea.value.length;
+        }
+        
+        function updateExperienceValue() {
+            const range = document.getElementById('experiencia');
+            const output = document.getElementById('exp-value');
+            output.textContent = range.value;
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Critérios de Avaliação -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-purple-100 text-purple-800 rounded-lg p-2 mr-3">📊</span>
+                Critérios de Avaliação
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">✅ Checklist de Verificação:</h3>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="text-gray-700">Estrutura HTML5 correta</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="text-gray-700">Formulário com action e method</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="text-gray-700">Todos os tipos de input solicitados</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="text-gray-700">Labels associadas corretamente</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="text-gray-700">Validação nativa implementada</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="text-gray-700">Fieldsets para agrupamento</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="text-gray-700">Radio buttons para gênero</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="text-gray-700">Checkboxes para interesses</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="text-gray-700">Select com múltiplas opções</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="text-gray-700">Elementos semânticos avançados</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="text-gray-700">Botões submit e reset</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="text-gray-700">Placeholders informativos</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">🎯 Sistema de Pontuação:</h3>
+                    <div class="space-y-4">
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-green-800">Excelente (9-10 pontos)</h4>
+                            <p class="text-green-700 text-sm">Todos os requisitos + elementos extras + código bem organizado</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-blue-800">Bom (7-8 pontos)</h4>
+                            <p class="text-blue-700 text-sm">Maioria dos requisitos atendidos com validação funcionando</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-800">Regular (5-6 pontos)</h4>
+                            <p class="text-yellow-700 text-sm">Requisitos básicos atendidos, mas falta validação ou organização</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-red-800">Precisa melhorar (0-4 pontos)</h4>
+                            <p class="text-red-700 text-sm">Muitos requisitos não atendidos ou formulário não funcional</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-50 border-l-4 border-purple-500 p-4 mt-6">
+                        <h4 class="font-semibold text-purple-800 mb-2">🏆 Pontos extras:</h4>
+                        <ul class="text-purple-700 text-sm space-y-1">
+                            <li>• JavaScript para melhorar UX</li>
+                            <li>• CSS básico para estilização</li>
+                            <li>• Validação customizada adicional</li>
+                            <li>• Acessibilidade avançada</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dicas Finais -->
+        <section class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl shadow-lg p-8 text-white">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <span class="bg-white bg-opacity-20 rounded-lg p-2 mr-3">💡</span>
+                Dicas Finais e Testes
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white bg-opacity-10 rounded-lg p-6">
+                    <h3 class="font-semibold mb-4">🧪 Como testar seu formulário:</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>• Tente enviar o formulário vazio</li>
+                        <li>• Digite email inválido e veja a validação</li>
+                        <li>• Teste o pattern do telefone</li>
+                        <li>• Verifique se radio buttons funcionam</li>
+                        <li>• Teste o limite de caracteres do textarea</li>
+                        <li>• Verifique se o botão reset limpa tudo</li>
+                    </ul>
+                </div>
+                <div class="bg-white bg-opacity-10 rounded-lg p-6">
+                    <h3 class="font-semibold mb-4">🚀 Melhorias opcionais:</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>• Adicione CSS para melhor visual</li>
+                        <li>• Use JavaScript para validar senhas iguais</li>
+                        <li>• Implemente contador de caracteres dinâmico</li>
+                        <li>• Adicione tooltips explicativos</li>
+                        <li>• Crie indicador de força da senha</li>
+                        <li>• Adicione confirmação antes de limpar</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

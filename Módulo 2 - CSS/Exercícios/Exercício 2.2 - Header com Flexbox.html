@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 2.2 - Header com Flexbox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .code-example { background: #2d3748; border-radius: 8px; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-purple-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <header class="text-center mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                <h1 class="text-4xl font-bold text-purple-800 mb-4">Exercício 2.2: Header com Flexbox</h1>
+                <p class="text-xl text-gray-600 mb-4">Módulo 2 - CSS</p>
+            </div>
+        </header>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Descrição</h2>
+            <p class="text-gray-700 mb-6">Desenvolva um header responsivo completo utilizando Flexbox que inclua:</p>
+            
+            <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2">
+                <li>Logo à esquerda</li>
+                <li>Menu de navegação à direita com 4-5 itens</li>
+                <li>Botão de ação (ex: "Contato" ou "Login")</li>
+                <li>Menu móvel que se adapta em telas menores</li>
+            </ul>
+
+            <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                <h3 class="font-semibold text-gray-800 mb-4">Requisitos</h3>
+                <ul class="list-decimal pl-6 text-gray-700 space-y-3">
+                    <li>Use apenas Flexbox para o layout (não use Grid)</li>
+                    <li>O header deve ter altura fixa e background com cor ou gradiente</li>
+                    <li>Os itens do menu devem ter hover state</li>
+                    <li>O botão de ação deve ter estilo diferenciado</li>
+                    <li>Em mobile (&lt; 768px):
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Menu deve ficar abaixo do logo</li>
+                            <li>Itens do menu devem se organizar verticalmente</li>
+                            <li>Botão deve ocupar largura total</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-purple-50 p-6 rounded-lg mb-6">
+                <h3 class="font-semibold text-purple-800 mb-4">Desafios Extras</h3>
+                <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                    <li>Adicione um submenu dropdown em um dos itens do menu</li>
+                    <li>Implemente um menu burger para mobile com animação</li>
+                    <li>Adicione uma transição suave ao alternar entre desktop/mobile</li>
+                    <li>Faça o header mudar de cor ao rolar a página</li>
+                </ul>
+            </div>
+            
+            <div class="bg-yellow-50 p-6 rounded-lg">
+                <h3 class="font-semibold text-yellow-800 mb-4">Dicas</h3>
+                <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                    <li>Use unidades relativas (rem, em) para espaçamentos</li>
+                    <li>Aproveite a propriedade gap para espaçamento uniforme</li>
+                    <li>Considere usar z-index para dropdowns</li>
+                    <li>Teste em diferentes tamanhos de tela</li>
+                    <li>Garanta que o layout não quebre em resoluções intermediárias</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Estrutura Base</h2>
+            <p class="text-gray-700 mb-4">Você pode começar com esta estrutura HTML:</p>
+            
+            <div class="code-example p-4">
+                <pre><code class="language-html">&lt;header class="header"&gt;
+    &lt;div class="header-container"&gt;
+        &lt;div class="logo"&gt;
+            &lt;a href="/"&gt;Logo&lt;/a&gt;
+        &lt;/div&gt;
+        
+        &lt;nav class="nav-menu"&gt;
+            &lt;ul class="nav-list"&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Sobre&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Serviços&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+            
+            &lt;button class="cta-button"&gt;
+                Contato
+            &lt;/button&gt;
+        &lt;/nav&gt;
+    &lt;/div&gt;
+&lt;/header&gt;</code></pre>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

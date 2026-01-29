@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 1.4 - Projeto Prático HTML</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .code-example { background: #2d3748; border-radius: 8px; }
+        .highlight { background: linear-gradient(120deg, #a78bfa 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Cabeçalho -->
+        <header class="text-center mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                <h1 class="text-4xl font-bold text-indigo-800 mb-4">Aula 1.4: Projeto Prático HTML</h1>
+                <p class="text-xl text-gray-600 mb-4">Módulo 1 - HTML5 | Duração: 3 horas</p>
+                <div class="flex justify-center items-center space-x-6">
+                    <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">Projeto Completo</span>
+                    <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">SEO</span>
+                    <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-medium">Acessibilidade</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Objetivos da Aula -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-blue-100 text-blue-800 rounded-lg p-2 mr-3">🎯</span>
+                Objetivos da Aula
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-gray-700 mb-3">Ao final desta aula, você será capaz de:</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Desenvolver uma página de perfil pessoal completa
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Aplicar estruturação semântica com header, navegação, seções e footer
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Implementar formulário de contato com validação
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Criar galeria de projetos e tabela de habilidades
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Otimizar para SEO e acessibilidade
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg">
+                    <h3 class="font-semibold text-gray-700 mb-3">Pré-requisitos:</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Aula 1.1 - Fundamentos do HTML5</li>
+                        <li>• Aula 1.2 - Formulários HTML</li>
+                        <li>• Aula 1.3 - Multimídia e Tabelas</li>
+                        <li>• Conhecimento em tags semânticas</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. Estrutura Base do Projeto -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-purple-100 text-purple-800 rounded-lg p-2 mr-3">🏗️</span>
+                1. Estrutura Base do Projeto
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    Vamos criar uma <span class="highlight font-semibold">página de perfil profissional</span> completa 
+                    com estrutura semântica HTML5, aplicando todos os conceitos aprendidos nas aulas anteriores.
+                </p>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+                    <h3 class="font-semibold text-blue-800 mb-3">💡 Estrutura recomendada do documento:</h3>
+                    <div class="code-example p-4">
+                        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta name="description" content="Perfil profissional de [Seu Nome] - Desenvolvedor Web"&gt;
+    &lt;meta name="keywords" content="desenvolvedor, web, HTML, CSS, JavaScript"&gt;
+    &lt;meta name="author" content="[Seu Nome]"&gt;
+    &lt;title&gt;[Seu Nome] - Desenvolvedor Web&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#sobre"&gt;Sobre&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#projetos"&gt;Projetos&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#habilidades"&gt;Habilidades&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#contato"&gt;Contato&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        &lt;section id="hero"&gt;
+            &lt;!-- Seção de apresentação --&gt;
+        &lt;/section&gt;
+        
+        &lt;section id="sobre"&gt;
+            &lt;!-- Sobre você --&gt;
+        &lt;/section&gt;
+        
+        &lt;section id="projetos"&gt;
+            &lt;!-- Galeria de projetos --&gt;
+        &lt;/section&gt;
+        
+        &lt;section id="habilidades"&gt;
+            &lt;!-- Tabela de habilidades --&gt;
+        &lt;/section&gt;
+        
+        &lt;section id="contato"&gt;
+            &lt;!-- Formulário de contato --&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;!-- Informações de rodapé --&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <section class="bg-white p-6 rounded shadow mb-6">
+      <h3 class="text-lg font-semibold mb-4">2. Seção Hero e Sobre</h3>
+      <div class="code-example p-4">
+        <pre><code class="language-html"><!-- Seção Hero -->
+<section id="hero" class="hero">
+    <div class="hero-content">
+        <img src="perfil.jpg" alt="Foto de [Seu Nome]" class="profile-photo">
+        <h1>[Seu Nome]</h1>
+        <h2>Desenvolvedor Web Full Stack</h2>
+        <p>Criando experiências digitais incríveis com HTML, CSS e JavaScript</p>
+        <a href="#contato" class="cta-button">Entre em Contato</a>
+    </div>
+</section>
+
+<!-- Seção Sobre -->
+<section id="sobre">
+    <h2>Sobre Mim</h2>
+    <article>
+        <p>Sou um desenvolvedor web apaixonado por tecnologia e inovação. 
+           Com experiência em desenvolvimento front-end e back-end, 
+           busco sempre criar soluções eficientes e user-friendly.</p>
+        
+        <h3>Minha Jornada</h3>
+        <p>Iniciei minha carreira em desenvolvimento web em 2020, 
+           focando inicialmente em HTML, CSS e JavaScript. 
+           Desde então, venho expandindo meus conhecimentos...</p>
+        
+        <h3>Valores</h3>
+        <ul>
+            <li>Código limpo e bem documentado</li>
+            <li>Experiência do usuário em primeiro lugar</li>
+            <li>Aprendizado contínuo</li>
+            <li>Colaboração e trabalho em equipe</li>
+        </ul>
+    </article>
+</section></code></pre>
+      </div>
+    </section>
+
+    <section class="bg-white p-6 rounded shadow mb-6">
+      <h3 class="text-lg font-semibold mb-4">3. Galeria de Projetos</h3>
+      <div class="code-example p-4">
+        <pre><code class="language-html"><section id="projetos">
+    <h2>Meus Projetos</h2>
+    <div class="projetos-grid">
+        
+        <figure class="projeto-card">
+            <img src="projeto1.jpg" alt="Screenshot do E-commerce Responsivo">
+            <figcaption>
+                <h3>E-commerce Responsivo</h3>
+                <p>Loja virtual completa desenvolvida com HTML5, CSS3 e JavaScript. 
+                   Inclui carrinho de compras, filtros de produtos e design responsivo.</p>
+                <div class="tecnologias">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <div class="projeto-links">
+                    <a href="https://github.com/usuario/ecommerce" target="_blank" 
+                       rel="noopener noreferrer">Código</a>
+                    <a href="https://ecommerce-demo.com" target="_blank" 
+                       rel="noopener noreferrer">Demo</a>
+                </div>
+            </figcaption>
+        </figure>
+
+        <figure class="projeto-card">
+            <img src="projeto2.jpg" alt="Screenshot do Dashboard Analytics">
+            <figcaption>
+                <h3>Dashboard Analytics</h3>
+                <p>Painel administrativo com gráficos interativos e relatórios em tempo real. 
+                   Interface moderna e intuitiva.</p>
+                <div class="tecnologias">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS Grid</span>
+                    <span class="tech-tag">Chart.js</span>
+                </div>
+                <div class="projeto-links">
+                    <a href="https://github.com/usuario/dashboard" target="_blank" 
+                       rel="noopener noreferrer">Código</a>
+                    <a href="https://dashboard-demo.com" target="_blank" 
+                       rel="noopener noreferrer">Demo</a>
+                </div>
+            </figcaption>
+        </figure>
+
+        <figure class="projeto-card">
+            <img src="projeto3.jpg" alt="Screenshot do Blog Pessoal">
+            <figcaption>
+                <h3>Blog Pessoal</h3>
+                <p>Blog responsivo com sistema de comentários e busca. 
+                   Otimizado para SEO e performance.</p>
+                <div class="tecnologias">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <div class="projeto-links">
+                    <a href="https://github.com/usuario/blog" target="_blank" 
+                       rel="noopener noreferrer">Código</a>
+                    <a href="https://meu-blog.com" target="_blank" 
+                       rel="noopener noreferrer">Demo</a>
+                </div>
+            </figcaption>
+        </figure>
+
+        <figure class="projeto-card">
+            <img src="projeto4.jpg" alt="Screenshot da Landing Page">
+            <figcaption>
+                <h3>Landing Page Corporativa</h3>
+                <p>Página de conversão para empresa de tecnologia. 
+                   Design moderno com animações CSS e formulários otimizados.</p>
+                <div class="tecnologias">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS Animations</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <div class="projeto-links">
+                    <a href="https://github.com/usuario/landing" target="_blank" 
+                       rel="noopener noreferrer">Código</a>
+                    <a href="https://landing-demo.com" target="_blank" 
+                       rel="noopener noreferrer">Demo</a>
+                </div>
+            </figcaption>
+        </figure>
+        
+    </div>
+</section></code></pre>
+      </div>
+    </section>
+
+    <section class="bg-white p-6 rounded shadow mb-6">
+      <h3 class="text-lg font-semibold mb-4">4. Tabela de Habilidades</h3>
+      <div class="code-example p-4">
+        <pre><code class="language-html"><section id="habilidades">
+    <h2>Minhas Habilidades</h2>
+    
+    <table class="habilidades-table">
+        <caption>Nível de conhecimento em tecnologias (1-5 estrelas)</caption>
+        <thead>
+            <tr>
+                <th scope="col">Tecnologia</th>
+                <th scope="col">Nível</th>
+                <th scope="col">Experiência</th>
+                <th scope="col">Última Utilização</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">HTML5</th>
+                <td>
+                    <div class="stars" aria-label="5 de 5 estrelas">
+                        <span>★★★★★</span>
+                    </div>
+                </td>
+                <td>3 anos</td>
+                <td>Atual</td>
+            </tr>
+            <tr>
+                <th scope="row">CSS3</th>
+                <td>
+                    <div class="stars" aria-label="5 de 5 estrelas">
+                        <span>★★★★★</span>
+                    </div>
+                </td>
+                <td>3 anos</td>
+                <td>Atual</td>
+            </tr>
+            <tr>
+                <th scope="row">JavaScript</th>
+                <td>
+                    <div class="stars" aria-label="4 de 5 estrelas">
+                        <span>★★★★☆</span>
+                    </div>
+                </td>
+                <td>2 anos</td>
+                <td>Atual</td>
+            </tr>
+            <tr>
+                <th scope="row">CSS Grid</th>
+                <td>
+                    <div class="stars" aria-label="4 de 5 estrelas">
+                        <span>★★★★☆</span>
+                    </div>
+                </td>
+                <td>1 ano</td>
+                <td>Atual</td>
+            </tr>
+            <tr>
+                <th scope="row">Flexbox</th>
+                <td>
+                    <div class="stars" aria-label="5 de 5 estrelas">
+                        <span>★★★★★</span>
+                    </div>
+                </td>
+                <td>2 anos</td>
+                <td>Atual</td>
+            </tr>
+            <tr>
+                <th scope="row">Responsive Design</th>
+                <td>
+                    <div class="stars" aria-label="4 de 5 estrelas">
+                        <span>★★★★☆</span>
+                    </div>
+                </td>
+                <td>2 anos</td>
+                <td>Atual</td>
+            </tr>
+            <tr>
+                <th scope="row">Git/GitHub</th>
+                <td>
+                    <div class="stars" aria-label="3 de 5 estrelas">
+                        <span>★★★☆☆</span>
+                    </div>
+                </td>
+                <td>1 ano</td>
+                <td>Atual</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <small>Última atualização: <time datetime="2023-12-01">Dezembro 2023</time></small>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</section></code></pre>
+      </div>
+    </section>
+
+    <section class="bg-white p-6 rounded shadow mb-6">
+      <h3 class="text-lg font-semibold mb-4">5. Formulário de Contato</h3>
+      <div class="code-example p-4">
+        <pre><code class="language-html"><section id="contato">
+    <h2>Entre em Contato</h2>
+    
+    <div class="contato-container">
+        <div class="contato-info">
+            <h3>Vamos conversar!</h3>
+            <p>Estou sempre aberto a novas oportunidades e projetos interessantes. 
+               Entre em contato comigo através do formulário ou pelos canais abaixo:</p>
+            
+            <address>
+                <p><strong>Email:</strong> <a href="mailto:seu.email@exemplo.com">seu.email@exemplo.com</a></p>
+                <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/seuperfil" target="_blank" rel="noopener noreferrer">linkedin.com/in/seuperfil</a></p>
+                <p><strong>GitHub:</strong> <a href="https://github.com/seuusuario" target="_blank" rel="noopener noreferrer">github.com/seuusuario</a></p>
+                <p><strong>Localização:</strong> São Paulo, SP - Brasil</p>
+            </address>
+        </div>
+        
+        <form class="contato-form" action="#" method="post" novalidate>
+            <fieldset>
+                <legend>Informações de Contato</legend>
+                
+                <div class="form-group">
+                    <label for="nome">Nome Completo *</label>
+                    <input type="text" 
+                           id="nome" 
+                           name="nome" 
+                           required 
+                           minlength="2" 
+                           maxlength="100"
+                           aria-describedby="nome-help">
+                    <small id="nome-help">Digite seu nome completo</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" 
+                           id="email" 
+                           name="email" 
+                           required
+                           aria-describedby="email-help">
+                    <small id="email-help">Seu melhor email para contato</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" 
+                           id="telefone" 
+                           name="telefone"
+                           pattern="[0-9\s\-\(\)\+]+"
+                           aria-describedby="telefone-help">
+                    <small id="telefone-help">Opcional - formato: (11) 99999-9999</small>
+                </div>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Detalhes do Projeto</legend>
+                
+                <div class="form-group">
+                    <label for="assunto">Assunto *</label>
+                    <select id="assunto" name="assunto" required aria-describedby="assunto-help">
+                        <option value="">Selecione um assunto</option>
+                        <option value="projeto">Novo Projeto</option>
+                        <option value="freelance">Trabalho Freelance</option>
+                        <option value="emprego">Oportunidade de Emprego</option>
+                        <option value="consultoria">Consultoria</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                    <small id="assunto-help">Escolha o tipo de contato</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orcamento">Orçamento Estimado</label>
+                    <input type="range" 
+                           id="orcamento" 
+                           name="orcamento" 
+                           min="1000" 
+                           max="50000" 
+                           step="1000" 
+                           value="5000"
+                           aria-describedby="orcamento-help">
+                    <output for="orcamento" id="orcamento-value">R$ 5.000</output>
+                    <small id="orcamento-help">Valor aproximado do projeto</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="prazo">Prazo Desejado</label>
+                    <input type="date" 
+                           id="prazo" 
+                           name="prazo"
+                           min="2024-01-01"
+                           aria-describedby="prazo-help">
+                    <small id="prazo-help">Data limite para entrega</small>
+                </div>
+            </fieldset>
+            
+            <div class="form-group">
+                <label for="mensagem">Mensagem *</label>
+                <textarea id="mensagem" 
+                          name="mensagem" 
+                          required 
+                          minlength="10" 
+                          maxlength="1000" 
+                          rows="5"
+                          aria-describedby="mensagem-help"
+                          placeholder="Descreva seu projeto ou necessidade..."></textarea>
+                <small id="mensagem-help">Conte-me mais sobre seu projeto (mínimo 10 caracteres)</small>
+            </div>
+            
+            <div class="form-group checkbox-group">
+                <input type="checkbox" 
+                       id="newsletter" 
+                       name="newsletter" 
+                       value="sim">
+                <label for="newsletter">Quero receber novidades sobre tecnologia e desenvolvimento web</label>
+            </div>
+            
+            <div class="form-group checkbox-group">
+                <input type="checkbox" 
+                       id="termos" 
+                       name="termos" 
+                       required>
+                <label for="termos">Li e aceito os <a href="#termos-uso" target="_blank">termos de uso</a> e <a href="#privacidade" target="_blank">política de privacidade</a> *</label>
+            </div>
+            
+            <div class="form-actions">
+                <button type="reset" class="btn-secondary">Limpar Formulário</button>
+                <button type="submit" class="btn-primary">Enviar Mensagem</button>
+            </div>
+        </form>
+    </div>
+</section></code></pre>
+      </div>
+    </section>
+
+    <section class="bg-white p-6 rounded shadow mb-6">
+      <h3 class="text-lg font-semibold mb-4">6. Footer e Meta Tags SEO</h3>
+      <div class="code-example p-4">
+        <pre><code class="language-html"><!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Navegação</h3>
+            <nav aria-label="Links do rodapé">
+                <ul>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#habilidades">Habilidades</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Redes Sociais</h3>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/seuperfil" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="LinkedIn">LinkedIn</a>
+                <a href="https://github.com/seuusuario" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="GitHub">GitHub</a>
+                <a href="https://twitter.com/seuusuario" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="Twitter">Twitter</a>
+            </div>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Contato Rápido</h3>
+            <address>
+                <p>Email: <a href="mailto:seu.email@exemplo.com">seu.email@exemplo.com</a></p>
+                <p>São Paulo, SP - Brasil</p>
+            </address>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; <time datetime="2023">2023</time> [Seu Nome]. Todos os direitos reservados.</p>
+        <p>Desenvolvido com ❤️ usando HTML5, CSS3 e JavaScript</p>
+    </div>
+</footer>
+
+<!-- Meta tags adicionais no head -->
+<meta property="og:title" content="[Seu Nome] - Desenvolvedor Web">
+<meta property="og:description" content="Desenvolvedor Web Full Stack especializado em HTML, CSS e JavaScript">
+<meta property="og:image" content="https://seusite.com/perfil.jpg">
+<meta property="og:url" content="https://seusite.com">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="[Seu Nome] - Desenvolvedor Web">
+<meta name="twitter:description" content="Desenvolvedor Web Full Stack especializado em HTML, CSS e JavaScript">
+<meta name="twitter:image" content="https://seusite.com/perfil.jpg">
+
+<link rel="canonical" href="https://seusite.com">
+<link rel="icon" type="image/x-icon" href="/favicon.ico"></code></pre>
+      </div>
+    </section>
+
+    <section class="bg-white p-6 rounded shadow mb-6">
+      <h3 class="text-lg font-semibold mb-4">7. Critérios de Avaliação</h3>
+      <div class="bg-blue-50 p-4 rounded-lg">
+        <h4 class="font-semibold text-blue-800 mb-3">O projeto será avaliado com base em:</h4>
+        <ul class="list-disc pl-6 text-blue-700 space-y-2">
+          <li><strong>Estrutura Semântica (25%):</strong> Uso correto de tags HTML5 semânticas</li>
+          <li><strong>Formulário (20%):</strong> Validação, acessibilidade e usabilidade</li>
+          <li><strong>Galeria (15%):</strong> Uso adequado de figure/figcaption</li>
+          <li><strong>Tabela (15%):</strong> Estrutura correta com thead, tbody, caption</li>
+          <li><strong>SEO e Acessibilidade (15%):</strong> Meta tags, alt texts, ARIA labels</li>
+          <li><strong>Código Limpo (10%):</strong> Organização, indentação e comentários</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="bg-white p-6 rounded shadow">
+      <h3 class="text-lg font-semibold mb-4">8. Entrega e Apresentação</h3>
+      <div class="bg-green-50 p-4 rounded-lg">
+        <h4 class="font-semibold text-green-800 mb-2">Instruções para entrega:</h4>
+        <ol class="list-decimal pl-6 text-green-700 space-y-1">
+          <li>Crie uma pasta com seu nome</li>
+          <li>Inclua todos os arquivos HTML, CSS e imagens</li>
+          <li>Teste em diferentes navegadores</li>
+          <li>Valide o HTML no W3C Validator</li>
+          <li>Prepare uma apresentação de 3 minutos sobre seu projeto</li>
+        </ol>
+        
+        <div class="mt-4 p-3 bg-white rounded border-l-4 border-green-400">
+          <p class="text-sm text-gray-600"><strong>Dica:</strong> Use ferramentas como Lighthouse para verificar performance, acessibilidade e SEO do seu projeto!</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

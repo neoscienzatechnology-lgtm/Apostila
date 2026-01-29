@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 2.3 - Grid Layout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .code-example { background: #2d3748; border-radius: 8px; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-green-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <header class="text-center mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                <h1 class="text-4xl font-bold text-green-800 mb-4">Exercício 2.3: Layout de Blog com Grid</h1>
+                <p class="text-xl text-gray-600 mb-4">Módulo 2 - CSS</p>
+            </div>
+        </header>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Descrição</h2>
+            <p class="text-gray-700 mb-6">Desenvolva um layout completo de blog usando CSS Grid que inclua:</p>
+            
+            <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2">
+                <li>Header com logo e navegação</li>
+                <li>Hero section destacada</li>
+                <li>Grid de posts principais</li>
+                <li>Sidebar com widgets</li>
+                <li>Footer com múltiplas colunas</li>
+            </ul>
+
+            <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                <h3 class="font-semibold text-gray-800 mb-4">Requisitos</h3>
+                <ul class="list-decimal pl-6 text-gray-700 space-y-3">
+                    <li>Use grid-template-areas para definir o layout macro</li>
+                    <li>O grid de posts deve ser responsivo e automático</li>
+                    <li>A sidebar deve ter largura fixa em desktop</li>
+                    <li>O hero deve ocupar largura total</li>
+                    <li>Em mobile (&lt; 768px):
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Sidebar deve ir para baixo do conteúdo</li>
+                            <li>Posts devem ocupar largura total</li>
+                            <li>Footer deve reorganizar as colunas</li>
+                        </ul>
+                    </li>
+                    <li>Implement gap consistente entre elementos</li>
+                </ul>
+            </div>
+
+            <div class="bg-green-50 p-6 rounded-lg mb-6">
+                <h3 class="font-semibold text-green-800 mb-4">Desafios Extras</h3>
+                <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                    <li>Adicione um layout especial para posts destacados</li>
+                    <li>Implemente um grid de imagens na galeria com aspect-ratio</li>
+                    <li>Crie um layout alternativo para tablets (768px - 1024px)</li>
+                    <li>Adicione animações nas transições de layout</li>
+                </ul>
+            </div>
+            
+            <div class="bg-yellow-50 p-6 rounded-lg">
+                <h3 class="font-semibold text-yellow-800 mb-4">Dicas</h3>
+                <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                    <li>Use nomes semânticos para as áreas do grid</li>
+                    <li>Aproveite minmax() para células flexíveis</li>
+                    <li>Considere usar auto-fit para grids responsivos</li>
+                    <li>Teste diferentes resoluções e conteúdos</li>
+                    <li>Use grid dev tools do navegador para debug</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Estrutura Base</h2>
+            <p class="text-gray-700 mb-4">Comece com esta estrutura HTML:</p>
+            
+            <div class="code-example p-4">
+                <pre><code class="language-html">&lt;div class="blog-layout"&gt;
+    &lt;header class="header"&gt;
+        &lt;nav class="nav"&gt;
+            &lt;!-- Navegação aqui --&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;section class="hero"&gt;
+        &lt;!-- Hero content --&gt;
+    &lt;/section&gt;
+
+    &lt;main class="posts-grid"&gt;
+        &lt;article class="post"&gt;
+            &lt;!-- Post content --&gt;
+        &lt;/article&gt;
+        &lt;!-- Mais posts... --&gt;
+    &lt;/main&gt;
+
+    &lt;aside class="sidebar"&gt;
+        &lt;div class="widget"&gt;
+            &lt;!-- Widget content --&gt;
+        &lt;/div&gt;
+        &lt;!-- Mais widgets... --&gt;
+    &lt;/aside&gt;
+
+    &lt;footer class="footer"&gt;
+        &lt;div class="footer-grid"&gt;
+            &lt;!-- Footer columns --&gt;
+        &lt;/div&gt;
+    &lt;/footer&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

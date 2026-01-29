@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 2.4 - Animações</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .code-example { background: #2d3748; border-radius: 8px; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <header class="text-center mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                <h1 class="text-4xl font-bold text-blue-800 mb-4">Exercício 2.4: Portal de Conteúdo Animado</h1>
+                <p class="text-xl text-gray-600 mb-4">Módulo 2 - CSS</p>
+            </div>
+        </header>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Descrição</h2>
+            <p class="text-gray-700 mb-6">Desenvolva um portal de conteúdo interativo com várias animações e efeitos, incluindo:</p>
+            
+            <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2">
+                <li>Menu de navegação com efeitos hover</li>
+                <li>Cards de conteúdo com animações</li>
+                <li>Modal com transições suaves</li>
+                <li>Skeleton loading states</li>
+                <li>Scroll animations</li>
+            </ul>
+
+            <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                <h3 class="font-semibold text-gray-800 mb-4">Requisitos</h3>
+                <ul class="list-decimal pl-6 text-gray-700 space-y-3">
+                    <li>Menu de Navegação:
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Efeito hover com underline animado</li>
+                            <li>Indicador da página atual</li>
+                            <li>Dropdown menu com fade</li>
+                        </ul>
+                    </li>
+                    <li>Cards de Conteúdo:
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Efeito de elevação no hover</li>
+                            <li>Imagem com zoom suave</li>
+                            <li>Loading state com skeleton</li>
+                        </ul>
+                    </li>
+                    <li>Modal:
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Fade in/out com timing apropriado</li>
+                            <li>Escala e posicionamento animados</li>
+                            <li>Overlay com blur effect</li>
+                        </ul>
+                    </li>
+                    <li>Scroll Animations:
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li>Fade in de elementos ao rolar</li>
+                            <li>"Parallax" simples com CSS</li>
+                            <li>Progress bar no topo</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                <h3 class="font-semibold text-blue-800 mb-4">Desafios Extras</h3>
+                <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                    <li>Implemente dark mode com transição suave</li>
+                    <li>Adicione animações de página (route transitions)</li>
+                    <li>Crie um preloader animado</li>
+                    <li>Adicione micro-interações nos botões</li>
+                </ul>
+            </div>
+            
+            <div class="bg-yellow-50 p-6 rounded-lg">
+                <h3 class="font-semibold text-yellow-800 mb-4">Dicas</h3>
+                <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                    <li>Use transform e opacity para melhor performance</li>
+                    <li>Mantenha timing functions consistentes</li>
+                    <li>Teste em diferentes browsers</li>
+                    <li>Respeite prefers-reduced-motion</li>
+                    <li>Mantenha animações sutis e não intrusivas</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Estrutura Base</h2>
+            <p class="text-gray-700 mb-4">Comece com este CSS base:</p>
+            
+            <div class="code-example p-4">
+                <pre><code class="language-css">/* Variáveis */
+:root {
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-duration: 200ms;
+}
+
+/* Utilitários de Animação */
+.fade-enter {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 
+        opacity var(--transition-duration) var(--transition-timing),
+        transform var(--transition-duration) var(--transition-timing);
+}
+
+/* Skeleton Loading */
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        #f3f4f6 0%,
+        #e5e7eb 50%,
+        #f3f4f6 100%
+    );
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}</code></pre>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

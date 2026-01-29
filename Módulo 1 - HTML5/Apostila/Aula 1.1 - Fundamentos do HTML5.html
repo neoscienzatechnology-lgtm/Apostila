@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 1.1 - Fundamentos do HTML5</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .code-example { background: #2d3748; border-radius: 8px; }
+        .highlight { background: linear-gradient(120deg, #a78bfa 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Cabeçalho -->
+        <header class="text-center mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                <h1 class="text-4xl font-bold text-indigo-800 mb-4">Aula 1.1: Fundamentos do HTML5</h1>
+                <p class="text-xl text-gray-600 mb-4">Módulo 1 - HTML5 | Duração: 2 horas</p>
+                <div class="flex justify-center items-center space-x-6">
+                    <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">Conceitos Básicos</span>
+                    <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">HTML Semântico</span>
+                    <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-medium">Prática</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Objetivos da Aula -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-blue-100 text-blue-800 rounded-lg p-2 mr-3">🎯</span>
+                Objetivos da Aula
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-gray-700 mb-3">Ao final desta aula, você será capaz de:</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Compreender a estrutura básica de um documento HTML5
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Utilizar tags semânticas para estruturar conteúdo
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Criar cabeçalhos, parágrafos e listas organizadas
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Desenvolver sua primeira página HTML semântica
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg">
+                    <h3 class="font-semibold text-gray-700 mb-3">Pré-requisitos:</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Conhecimentos básicos de informática</li>
+                        <li>• Editor de código instalado (VS Code recomendado)</li>
+                        <li>• Navegador web atualizado</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conteúdo Teórico -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-purple-100 text-purple-800 rounded-lg p-2 mr-3">📚</span>
+                1. O que é HTML5?
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    <span class="highlight font-semibold">HTML5</span> (HyperText Markup Language 5) é a quinta versão da linguagem de marcação HTML, 
+                    usada para estruturar e apresentar conteúdo na web. É a base de toda página web moderna.
+                </p>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+                    <h3 class="font-semibold text-blue-800 mb-3">💡 Principais características do HTML5:</h3>
+                    <ul class="space-y-2 text-blue-700">
+                        <li>• <strong>Semântico:</strong> Tags que descrevem o significado do conteúdo</li>
+                        <li>• <strong>Acessível:</strong> Melhor suporte para tecnologias assistivas</li>
+                        <li>• <strong>Multimídia:</strong> Suporte nativo para áudio e vídeo</li>
+                        <li>• <strong>Formulários avançados:</strong> Novos tipos de input e validação</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estrutura Básica -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-green-100 text-green-800 rounded-lg p-2 mr-3">🏗️</span>
+                2. Estrutura Básica de um Documento HTML5
+            </h2>
+
+            <p class="text-gray-700 mb-6">Todo documento HTML5 segue uma estrutura padrão:</p>
+
+            <div class="code-example p-6 mb-6">
+                <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Minha Primeira Página&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Olá, Mundo!&lt;/h1&gt;
+    &lt;p&gt;Esta é minha primeira página HTML5.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="font-semibold text-gray-800 mb-4">Explicação dos elementos:</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">&lt;!DOCTYPE html&gt;</code> - Declara que é HTML5</li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">&lt;html&gt;</code> - Elemento raiz do documento</li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">&lt;head&gt;</code> - Metadados da página</li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">&lt;body&gt;</code> - Conteúdo visível da página</li>
+                    </ul>
+                </div>
+                <div class="bg-yellow-50 p-6 rounded-lg">
+                    <h3 class="font-semibold text-yellow-800 mb-4">⚠️ Importante:</h3>
+                    <ul class="space-y-2 text-yellow-700">
+                        <li>• Sempre use <code>lang="pt-BR"</code> para páginas em português</li>
+                        <li>• O <code>charset="UTF-8"</code> permite acentos e caracteres especiais</li>
+                        <li>• O viewport é essencial para responsividade</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- HTML Semântico -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-indigo-100 text-indigo-800 rounded-lg p-2 mr-3">🎨</span>
+                3. HTML Semântico
+            </h2>
+
+            <p class="text-gray-700 mb-6">
+                As tags semânticas do HTML5 descrevem o <strong>significado</strong> do conteúdo, não apenas sua aparência.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Principais tags semânticas:</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <code class="text-blue-600 font-semibold">&lt;header&gt;</code>
+                            <p class="text-gray-600 text-sm">Cabeçalho da página ou seção</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <code class="text-green-600 font-semibold">&lt;nav&gt;</code>
+                            <p class="text-gray-600 text-sm">Menu de navegação</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <code class="text-purple-600 font-semibold">&lt;main&gt;</code>
+                            <p class="text-gray-600 text-sm">Conteúdo principal da página</p>
+                        </div>
+                        <div class="border-l-4 border-yellow-500 pl-4">
+                            <code class="text-yellow-600 font-semibold">&lt;section&gt;</code>
+                            <p class="text-gray-600 text-sm">Seção temática do conteúdo</p>
+                        </div>
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <code class="text-red-600 font-semibold">&lt;article&gt;</code>
+                            <p class="text-gray-600 text-sm">Conteúdo independente</p>
+                        </div>
+                        <div class="border-l-4 border-gray-500 pl-4">
+                            <code class="text-gray-600 font-semibold">&lt;aside&gt;</code>
+                            <p class="text-gray-600 text-sm">Conteúdo lateral/complementar</p>
+                        </div>
+                        <div class="border-l-4 border-indigo-500 pl-4">
+                            <code class="text-indigo-600 font-semibold">&lt;footer&gt;</code>
+                            <p class="text-gray-600 text-sm">Rodapé da página ou seção</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Exemplo de estrutura semântica:</h3>
+                    <div class="code-example p-4">
+                        <pre><code class="language-html">&lt;header&gt;
+    &lt;h1&gt;Meu Blog&lt;/h1&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#sobre"&gt;Sobre&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+    &lt;article&gt;
+        &lt;h2&gt;Título do Post&lt;/h2&gt;
+        &lt;p&gt;Conteúdo do artigo...&lt;/p&gt;
+    &lt;/article&gt;
+&lt;/main&gt;
+
+&lt;aside&gt;
+    &lt;h3&gt;Posts Relacionados&lt;/h3&gt;
+&lt;/aside&gt;
+
+&lt;footer&gt;
+    &lt;p&gt;&copy; 2023 Meu Blog&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cabeçalhos e Textos -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-red-100 text-red-800 rounded-lg p-2 mr-3">📝</span>
+                4. Cabeçalhos e Formatação de Texto
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Hierarquia de Cabeçalhos:</h3>
+                    <div class="code-example p-4 mb-4">
+                        <pre><code class="language-html">&lt;h1&gt;Título Principal&lt;/h1&gt;
+&lt;h2&gt;Subtítulo&lt;/h2&gt;
+&lt;h3&gt;Seção&lt;/h3&gt;
+&lt;h4&gt;Subseção&lt;/h4&gt;
+&lt;h5&gt;Tópico&lt;/h5&gt;
+&lt;h6&gt;Subtópico&lt;/h6&gt;</code></pre>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-blue-800 mb-2">💡 Dica:</h4>
+                        <p class="text-blue-700 text-sm">Use apenas um &lt;h1&gt; por página e mantenha a hierarquia sequencial (h1 → h2 → h3).</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Formatação de Texto:</h3>
+                    <div class="code-example p-4 mb-4">
+                        <pre><code class="language-html">&lt;p&gt;Parágrafo normal&lt;/p&gt;
+&lt;p&gt;Texto com &lt;strong&gt;ênfase forte&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Texto com &lt;em&gt;ênfase&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Texto &lt;mark&gt;destacado&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span&gt;Texto genérico&lt;/span&gt;&lt;/p&gt;</code></pre>
+                    </div>
+
+                    <div class="space-y-2 text-sm">
+                        <div><code class="bg-gray-200 px-2 py-1 rounded">&lt;strong&gt;</code> - Importância forte (negrito)</div>
+                        <div><code class="bg-gray-200 px-2 py-1 rounded">&lt;em&gt;</code> - Ênfase (itálico)</div>
+                        <div><code class="bg-gray-200 px-2 py-1 rounded">&lt;mark&gt;</code> - Texto destacado</div>
+                        <div><code class="bg-gray-200 px-2 py-1 rounded">&lt;span&gt;</code> - Container genérico inline</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Listas -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-yellow-100 text-yellow-800 rounded-lg p-2 mr-3">📋</span>
+                5. Trabalhando com Listas
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Lista Não Ordenada (ul):</h3>
+                    <div class="code-example p-4 mb-4">
+                        <pre><code class="language-html">&lt;ul&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;Item 2&lt;/li&gt;
+    &lt;li&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded">
+                        <p class="text-sm text-gray-600">Resultado:</p>
+                        <ul class="list-disc list-inside mt-2">
+                            <li>Item 1</li>
+                            <li>Item 2</li>
+                            <li>Item 3</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Lista Ordenada (ol):</h3>
+                    <div class="code-example p-4 mb-4">
+                        <pre><code class="language-html">&lt;ol&gt;
+    &lt;li&gt;Primeiro&lt;/li&gt;
+    &lt;li&gt;Segundo&lt;/li&gt;
+    &lt;li&gt;Terceiro&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded">
+                        <p class="text-sm text-gray-600">Resultado:</p>
+                        <ol class="list-decimal list-inside mt-2">
+                            <li>Primeiro</li>
+                            <li>Segundo</li>
+                            <li>Terceiro</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">Lista de Definição (dl):</h3>
+                    <div class="code-example p-4 mb-4">
+                        <pre><code class="language-html">&lt;dl&gt;
+    &lt;dt&gt;HTML&lt;/dt&gt;
+    &lt;dd&gt;Linguagem de marcação&lt;/dd&gt;
+    &lt;dt&gt;CSS&lt;/dt&gt;
+    &lt;dd&gt;Folhas de estilo&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded">
+                        <p class="text-sm text-gray-600">Resultado:</p>
+                        <dl class="mt-2">
+                            <dt class="font-semibold">HTML</dt>
+                            <dd class="ml-4 text-gray-600">Linguagem de marcação</dd>
+                            <dt class="font-semibold">CSS</dt>
+                            <dd class="ml-4 text-gray-600">Folhas de estilo</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercício Prático -->
+        <section class="bg-gradient-to-r from-green-500 to-blue-600 rounded-2xl shadow-lg p-8 text-white mb-8">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <span class="bg-white bg-opacity-20 rounded-lg p-2 mr-3">💻</span>
+                Exercício Prático: Sua Primeira Página HTML
+            </h2>
+
+            <div class="bg-white bg-opacity-10 rounded-lg p-6 mb-6">
+                <h3 class="font-semibold mb-4">🎯 Objetivo:</h3>
+                <p class="mb-4">Criar uma página HTML semântica sobre você mesmo, aplicando todos os conceitos aprendidos.</p>
+                
+                <h3 class="font-semibold mb-4">📋 Requisitos:</h3>
+                <ul class="space-y-2">
+                    <li>• Estrutura HTML5 completa</li>
+                    <li>• Header com seu nome e navegação</li>
+                    <li>• Seção "Sobre mim" com parágrafos</li>
+                    <li>• Lista de hobbies ou habilidades</li>
+                    <li>• Footer com informações de contato</li>
+                    <li>• Uso correto de tags semânticas</li>
+                </ul>
+            </div>
+
+            <div class="bg-white bg-opacity-10 rounded-lg p-6">
+                <h3 class="font-semibold mb-4">⏱️ Tempo estimado: 30 minutos</h3>
+                <p class="text-sm opacity-90">
+                    Salve o arquivo como "meu-perfil.html" e abra no navegador para visualizar o resultado.
+                </p>
+            </div>
+        </section>
+
+        <!-- Resumo da Aula -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-purple-100 text-purple-800 rounded-lg p-2 mr-3">📚</span>
+                Resumo da Aula
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">✅ O que aprendemos:</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Estrutura básica do HTML5</li>
+                        <li>• Importância das tags semânticas</li>
+                        <li>• Hierarquia de cabeçalhos (h1-h6)</li>
+                        <li>• Formatação de texto com strong, em, mark</li>
+                        <li>• Criação de listas ordenadas e não ordenadas</li>
+                        <li>• Desenvolvimento de página HTML completa</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-4">🚀 Próximos passos:</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Pratique criando diferentes estruturas HTML</li>
+                        <li>• Experimente com todas as tags semânticas</li>
+                        <li>• Valide seu código no W3C Validator</li>
+                        <li>• Prepare-se para a próxima aula: Formulários HTML</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Links Úteis -->
+        <section class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-blue-100 text-blue-800 rounded-lg p-2 mr-3">🔗</span>
+                Links Úteis
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-blue-800 mb-3">📖 Documentação</h3>
+                    <ul class="space-y-2 text-blue-700 text-sm">
+                        <li>• <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML" class="hover:underline">MDN Web Docs - HTML</a></li>
+                        <li>• <a href="https://www.w3schools.com/html/" class="hover:underline">W3Schools HTML Tutorial</a></li>
+                    </ul>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-green-800 mb-3">🛠️ Ferramentas</h3>
+                    <ul class="space-y-2 text-green-700 text-sm">
+                        <li>• <a href="https://validator.w3.org/" class="hover:underline">W3C Markup Validator</a></li>
+                        <li>• <a href="https://code.visualstudio.com/" class="hover:underline">Visual Studio Code</a></li>
+                    </ul>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-purple-800 mb-3">🎮 Prática</h3>
+                    <ul class="space-y-2 text-purple-700 text-sm">
+                        <li>• <a href="https://codepen.io/" class="hover:underline">CodePen</a></li>
+                        <li>• <a href="https://jsfiddle.net/" class="hover:underline">JSFiddle</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

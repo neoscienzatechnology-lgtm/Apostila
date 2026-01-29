@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 1.3 - Multimídia e Tabelas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .code-example { background: #2d3748; border-radius: 8px; }
+        .highlight { background: linear-gradient(120deg, #a78bfa 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Cabeçalho -->
+        <header class="text-center mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                <h1 class="text-4xl font-bold text-indigo-800 mb-4">Aula 1.3: Multimídia e Tabelas</h1>
+                <p class="text-xl text-gray-600 mb-4">Módulo 1 - HTML5 | Duração: 2 horas</p>
+                <div class="flex justify-center items-center space-x-6">
+                    <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">Imagens</span>
+                    <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Áudio e Vídeo</span>
+                    <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-medium">Tabelas</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Objetivos da Aula -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-blue-100 text-blue-800 rounded-lg p-2 mr-3">🎯</span>
+                Objetivos da Aula
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-gray-700 mb-3">Ao final desta aula, você será capaz de:</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Trabalhar com imagens: tag img, atributos src, alt, width, height, picture e srcset
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Inserir áudio e vídeo nativos com as tags &lt;audio&gt; e &lt;video&gt;
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Criar tabelas semânticas: &lt;table&gt;, &lt;thead&gt;, &lt;tbody&gt;, &lt;tr&gt;, &lt;th&gt;, &lt;td&gt;
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            Utilizar elementos embutidos: iframe, object, embed
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg">
+                    <h3 class="font-semibold text-gray-700 mb-3">Pré-requisitos:</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Aula 1.1 - Fundamentos do HTML5</li>
+                        <li>• Aula 1.2 - Formulários HTML</li>
+                        <li>• Conhecimento de tags básicas</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. Imagens -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-purple-100 text-purple-800 rounded-lg p-2 mr-3">🖼️</span>
+                1. Trabalhando com Imagens
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    As <span class="highlight font-semibold">imagens</span> são elementos fundamentais na web. 
+                    Use sempre o atributo <code>alt</code> para acessibilidade e descrever o conteúdo visual.
+                </p>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+                    <h3 class="font-semibold text-blue-800 mb-3">💡 Principais atributos da tag &lt;img&gt;:</h3>
+                    <ul class="space-y-2 text-blue-700">
+                        <li>• <strong>src:</strong> Caminho da imagem (obrigatório)</li>
+                        <li>• <strong>alt:</strong> Texto alternativo para acessibilidade (obrigatório)</li>
+                        <li>• <strong>width/height:</strong> Dimensões da imagem</li>
+                        <li>• <strong>srcset:</strong> Imagens responsivas para diferentes resoluções</li>
+                        <li>• <strong>loading:</strong> lazy (carregamento tardio) para performance</li>
+                    </ul>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Exemplos Práticos:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-html">&lt;!-- Imagem básica --&gt;
+&lt;img src="imagem.jpg" alt="Descrição da imagem" width="300" height="200"&gt;
+
+&lt;!-- Imagem responsiva com srcset --&gt;
+&lt;img src="imagem-pequena.jpg" 
+     srcset="imagem-pequena.jpg 300w, 
+             imagem-media.jpg 600w, 
+             imagem-grande.jpg 1200w"
+     sizes="(max-width: 600px) 300px, 
+            (max-width: 1200px) 600px, 
+            1200px"
+     alt="Imagem responsiva"&gt;
+
+&lt;!-- Elemento picture para diferentes formatos --&gt;
+&lt;picture&gt;
+  &lt;source srcset="imagem.webp" type="image/webp"&gt;
+  &lt;source srcset="imagem.jpg" type="image/jpeg"&gt;
+  &lt;img src="imagem.jpg" alt="Imagem com fallback"&gt;
+&lt;/picture&gt;
+
+&lt;!-- Figura com legenda --&gt;
+&lt;figure&gt;
+  &lt;img src="grafico.png" alt="Gráfico de vendas 2023"&gt;
+  &lt;figcaption&gt;Gráfico mostrando o crescimento das vendas em 2023&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Áudio e Vídeo -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-green-100 text-green-800 rounded-lg p-2 mr-3">🎵</span>
+                2. Áudio e Vídeo HTML5
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    HTML5 permite incorporar <span class="highlight font-semibold">mídia nativa</span> sem plugins externos, 
+                    fornecendo controles nativos e suporte multiplataforma.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-purple-50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-purple-800 mb-3">Atributos de &lt;audio&gt; e &lt;video&gt;:</h3>
+                        <ul class="space-y-2 text-purple-700 text-sm">
+                            <li>• <strong>controls:</strong> Exibe controles de reprodução</li>
+                            <li>• <strong>autoplay:</strong> Inicia automaticamente</li>
+                            <li>• <strong>loop:</strong> Reproduz em loop</li>
+                            <li>• <strong>muted:</strong> Inicia sem som</li>
+                            <li>• <strong>preload:</strong> none, metadata, auto</li>
+                            <li>• <strong>poster:</strong> Imagem de capa (vídeo)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-green-800 mb-3">Formatos Recomendados:</h3>
+                        <ul class="space-y-2 text-green-700 text-sm">
+                            <li>• <strong>Áudio:</strong> MP3, OGG, WAV</li>
+                            <li>• <strong>Vídeo:</strong> MP4, WebM, OGG</li>
+                            <li>• <strong>Legendas:</strong> WebVTT (.vtt)</li>
+                            <li>• Sempre forneça múltiplos formatos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Exemplos de Uso:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-html">&lt;!-- Áudio com controles --&gt;
+&lt;audio controls&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+  &lt;source src="audio.ogg" type="audio/ogg"&gt;
+  Seu navegador não suporta áudio HTML5.
+&lt;/audio&gt;
+
+&lt;!-- Áudio com autoplay e loop --&gt;
+&lt;audio controls autoplay loop muted&gt;
+  &lt;source src="musica-fundo.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;
+
+&lt;!-- Vídeo básico --&gt;
+&lt;video controls width="640" height="360"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  &lt;source src="video.webm" type="video/webm"&gt;
+  &lt;track src="legendas.vtt" kind="subtitles" srclang="pt" label="Português"&gt;
+  Seu navegador não suporta vídeo HTML5.
+&lt;/video&gt;
+
+&lt;!-- Vídeo com poster e preload --&gt;
+&lt;video controls poster="thumbnail.jpg" preload="metadata"&gt;
+  &lt;source src="apresentacao.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre>
+                </div>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6">
+                    <h3 class="font-semibold text-yellow-800 mb-3">⚠️ Importante - Boas Práticas:</h3>
+                    <ul class="space-y-2 text-yellow-700">
+                        <li>• Evite <code>autoplay</code> com som ativado - é uma prática ruim de UX</li>
+                        <li>• Use <code>preload="metadata"</code> para vídeos grandes</li>
+                        <li>• Sempre inclua legendas para acessibilidade</li>
+                        <li>• Forneça múltiplos formatos para compatibilidade entre navegadores</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Tabelas -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-blue-100 text-blue-800 rounded-lg p-2 mr-3">📊</span>
+                3. Criando Tabelas Semânticas
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    Use <span class="highlight font-semibold">tabelas</span> para dados tabulares. 
+                    Evite usá-las para layout - use CSS Grid ou Flexbox para isso. Sempre inclua cabeçalhos para acessibilidade.
+                </p>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+                    <h3 class="font-semibold text-blue-800 mb-3">💡 Estrutura de uma tabela HTML:</h3>
+                    <ul class="space-y-2 text-blue-700">
+                        <li>• <strong>&lt;table&gt;:</strong> Container principal da tabela</li>
+                        <li>• <strong>&lt;caption&gt;:</strong> Título/descrição da tabela</li>
+                        <li>• <strong>&lt;thead&gt;:</strong> Agrupa cabeçalhos da tabela</li>
+                        <li>• <strong>&lt;tbody&gt;:</strong> Agrupa o corpo de dados</li>
+                        <li>• <strong>&lt;tfoot&gt;:</strong> Agrupa rodapé (totais, resumos)</li>
+                        <li>• <strong>&lt;tr&gt;:</strong> Define uma linha (table row)</li>
+                        <li>• <strong>&lt;th&gt;:</strong> Célula de cabeçalho (table header)</li>
+                        <li>• <strong>&lt;td&gt;:</strong> Célula de dados (table data)</li>
+                    </ul>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Exemplo - Tabela Básica:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-html">&lt;!-- Tabela básica --&gt;
+&lt;table&gt;
+  &lt;caption&gt;Vendas por Trimestre 2023&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Produto&lt;/th&gt;
+      &lt;th scope="col"&gt;Q1&lt;/th&gt;
+      &lt;th scope="col"&gt;Q2&lt;/th&gt;
+      &lt;th scope="col"&gt;Q3&lt;/th&gt;
+      &lt;th scope="col"&gt;Q4&lt;/th&gt;
+      &lt;th scope="col"&gt;Total&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Notebook&lt;/th&gt;
+      &lt;td&gt;150&lt;/td&gt;
+      &lt;td&gt;200&lt;/td&gt;
+      &lt;td&gt;180&lt;/td&gt;
+      &lt;td&gt;220&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;750&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Smartphone&lt;/th&gt;
+      &lt;td&gt;300&lt;/td&gt;
+      &lt;td&gt;350&lt;/td&gt;
+      &lt;td&gt;400&lt;/td&gt;
+      &lt;td&gt;450&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;1500&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Total Geral&lt;/th&gt;
+      &lt;td&gt;&lt;strong&gt;450&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;550&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;580&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;670&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;2250&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Tabela com colspan e rowspan:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-html">&lt;!-- Tabela com colspan e rowspan --&gt;
+&lt;table&gt;
+  &lt;caption&gt;Horário de Aulas&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Horário&lt;/th&gt;
+      &lt;th&gt;Segunda&lt;/th&gt;
+      &lt;th&gt;Terça&lt;/th&gt;
+      &lt;th&gt;Quarta&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;08:00-09:00&lt;/th&gt;
+      &lt;td&gt;Matemática&lt;/td&gt;
+      &lt;td rowspan="2"&gt;Educação Física&lt;/td&gt;
+      &lt;td&gt;História&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;09:00-10:00&lt;/th&gt;
+      &lt;td&gt;Português&lt;/td&gt;
+      &lt;td&gt;Geografia&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;10:00-11:00&lt;/th&gt;
+      &lt;td colspan="3"&gt;Intervalo&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-gray-800 mb-4">Atributos importantes:</h3>
+                        <ul class="space-y-2 text-gray-700 text-sm">
+                            <li>• <strong>scope:</strong> "col" ou "row" - define o escopo do cabeçalho</li>
+                            <li>• <strong>colspan:</strong> Mescla colunas horizontalmente</li>
+                            <li>• <strong>rowspan:</strong> Mescla linhas verticalmente</li>
+                            <li>• <strong>headers:</strong> Associa células a cabeçalhos específicos</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-green-800 mb-4">Boas práticas:</h3>
+                        <ul class="space-y-2 text-green-700 text-sm">
+                            <li>• Use &lt;caption&gt; para descrever a tabela</li>
+                            <li>• Utilize scope nos &lt;th&gt; para acessibilidade</li>
+                            <li>• Agrupe com thead, tbody, tfoot</li>
+                            <li>• Não use tabelas para layout de página</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Elementos Embutidos -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-indigo-100 text-indigo-800 rounded-lg p-2 mr-3">🌐</span>
+                4. Elementos Embutidos (iframe, object, embed)
+            </h2>
+            
+            <div class="prose max-w-none">
+                <p class="text-gray-700 text-lg mb-6">
+                    Para incorporar <span class="highlight font-semibold">conteúdo externo</span> como mapas, 
+                    vídeos do YouTube, documentos PDF e outras aplicações web.
+                </p>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Usando &lt;iframe&gt;:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-html">&lt;!-- Iframe para incorporar páginas externas --&gt;
+&lt;iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12..." 
+        width="600" 
+        height="450" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade"&gt;
+&lt;/iframe&gt;
+
+&lt;!-- Iframe para vídeo do YouTube --&gt;
+&lt;iframe width="560" 
+        height="315" 
+        src="https://www.youtube.com/embed/VIDEO_ID" 
+        title="Título do vídeo"
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen&gt;
+&lt;/iframe&gt;</code></pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">Usando &lt;object&gt; e &lt;embed&gt;:</h3>
+                <div class="code-example p-4 mb-6">
+                    <pre><code class="language-html">&lt;!-- Object para PDFs ou Flash (legado) --&gt;
+&lt;object data="documento.pdf" 
+        type="application/pdf" 
+        width="100%" 
+        height="600px"&gt;
+  &lt;p&gt;Seu navegador não suporta PDFs. 
+     &lt;a href="documento.pdf"&gt;Baixe o arquivo&lt;/a&gt;.
+  &lt;/p&gt;
+&lt;/object&gt;
+
+&lt;!-- Embed para conteúdo multimídia --&gt;
+&lt;embed src="animacao.swf" 
+       type="application/x-shockwave-flash" 
+       width="400" 
+       height="300"&gt;</code></pre>
+                </div>
+
+                <div class="bg-red-50 border-l-4 border-red-500 p-6">
+                    <h3 class="font-semibold text-red-800 mb-3">⚠️ Atenção - Segurança:</h3>
+                    <ul class="space-y-2 text-red-700">
+                        <li>• Iframes podem representar riscos de segurança</li>
+                        <li>• Use apenas fontes confiáveis e HTTPS</li>
+                        <li>• Considere usar <code>sandbox</code> para restringir permissões</li>
+                        <li>• Cuidado com clickjacking - use X-Frame-Options</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Boas Práticas -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span class="bg-green-100 text-green-800 rounded-lg p-2 mr-3">✅</span>
+                5. Boas Práticas e Resumo
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <h3 class="font-semibold text-blue-800 mb-4">📸 Imagens:</h3>
+                    <ul class="space-y-2 text-blue-700 text-sm">
+                        <li>✓ Sempre use o atributo <code>alt</code></li>
+                        <li>✓ Otimize tamanho para web</li>
+                        <li>✓ Use WebP quando possível</li>
+                        <li>✓ Implemente lazy loading</li>
+                        <li>✓ Use srcset para responsividade</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-purple-50 p-6 rounded-lg">
+                    <h3 class="font-semibold text-purple-800 mb-4">🎥 Mídia:</h3>
+                    <ul class="space-y-2 text-purple-700 text-sm">
+                        <li>✓ Forneça múltiplos formatos</li>
+                        <li>✓ Use <code>preload="metadata"</code></li>
+                        <li>✓ Inclua legendas (WebVTT)</li>
+                        <li>✓ Evite autoplay com som</li>
+                        <li>✓ Sempre use controls</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-green-50 p-6 rounded-lg">
+                    <h3 class="font-semibold text-green-800 mb-4">📊 Tabelas:</h3>
+                    <ul class="space-y-2 text-green-700 text-sm">
+                        <li>✓ Use &lt;caption&gt; para descrição</li>
+                        <li>✓ Utilize <code>scope</code> nos &lt;th&gt;</li>
+                        <li>✓ Agrupe com thead/tbody/tfoot</li>
+                        <li>✓ Não use para layout</li>
+                        <li>✓ Mantenha estrutura simples</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercício Prático -->
+        <section class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl shadow-lg p-8 mb-8 text-white">
+            <h2 class="text-3xl font-bold mb-6 flex items-center">
+                <span class="bg-white text-indigo-600 rounded-lg p-3 mr-4">💪</span>
+                Exercício Prático
+            </h2>
+            
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-6">
+                <h3 class="text-2xl font-semibold mb-4">🎯 Desafio: Página de Portfólio</h3>
+                <p class="text-lg mb-4">Crie uma página HTML completa que contenha:</p>
+                
+                <div class="space-y-3 ml-4">
+                    <div class="flex items-start">
+                        <span class="bg-yellow-400 text-gray-900 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-xl">Galeria de Imagens:</strong>
+                            <p class="text-white/90 mt-1">Use &lt;figure&gt; e &lt;figcaption&gt; para mostrar 4 projetos com legendas descritivas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <span class="bg-yellow-400 text-gray-900 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-xl">Tabela de Habilidades:</strong>
+                            <p class="text-white/90 mt-1">Crie uma tabela com suas habilidades técnicas, nível (1-5) e tempo de experiência</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <span class="bg-yellow-400 text-gray-900 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-xl">Seção Multimídia:</strong>
+                            <p class="text-white/90 mt-1">Incorpore um vídeo de apresentação (pode usar iframe do YouTube)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <span class="bg-yellow-400 text-gray-900 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-xl">Mapa de Localização:</strong>
+                            <p class="text-white/90 mt-1">Use iframe para mostrar sua localização no Google Maps</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-yellow-400 text-gray-900 rounded-xl p-4">
+                <p class="font-semibold">💡 Dica:</p>
+                <p>Use CSS básico para estilizar a tabela e organizar a galeria em grid. Lembre-se de sempre incluir textos alternativos nas imagens e atributos de acessibilidade!</p>
+            </div>
+        </section>
+
+        <!-- Rodapé -->
+        <footer class="text-center mt-12 pb-8">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <p class="text-gray-600 mb-2">📚 Aula 1.3 - Multimídia e Tabelas</p>
+                <p class="text-gray-500 text-sm">Próxima aula: <strong>Aula 1.4 - Projeto Prático HTML</strong></p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>
