@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostila Completa - Desenvolvimento Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .card-shadow { box-shadow: 0 20px 45px -30px rgba(15, 23, 42, 0.35); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <header class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+            <p class="uppercase tracking-[0.3em] text-sm text-indigo-100">Apostila Completa</p>
+            <h1 class="text-4xl md:text-5xl font-bold mt-3">Trilha de Desenvolvimento Web</h1>
+            <p class="mt-4 text-lg text-indigo-100 max-w-3xl">
+                Navegue por todos os módulos, aulas, exercícios e projetos integrados para acompanhar a evolução da
+                trilha. Cada seção está organizada por módulo para facilitar o estudo sequencial.
+            </p>
+        </div>
+    </header>
+
+    <nav class="sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div class="flex flex-wrap gap-2 text-sm">
+                <a class="px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 hover:bg-indigo-100" href="#modulo-1">HTML5</a>
+                <a class="px-3 py-1 rounded-full bg-sky-50 text-sky-700 hover:bg-sky-100" href="#modulo-2">CSS</a>
+                <a class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 hover:bg-emerald-100" href="#modulo-3">JavaScript</a>
+                <a class="px-3 py-1 rounded-full bg-amber-50 text-amber-700 hover:bg-amber-100" href="#modulo-4">Banco de Dados</a>
+                <a class="px-3 py-1 rounded-full bg-rose-50 text-rose-700 hover:bg-rose-100" href="#modulo-5">Projeto Integrador</a>
+            </div>
+            <div class="flex-1 max-w-md">
+                <label class="sr-only" for="search-content">Buscar conteúdo</label>
+                <div class="relative">
+                    <input id="search-content" type="search" placeholder="Buscar aulas, exercícios ou projetos..." class="w-full rounded-full border border-slate-300 bg-white px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm">⌘K</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-2">Dica: digite palavras-chave como “grid”, “API” ou “SQL”.</p>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-12 space-y-10">
+        <nav aria-label="Breadcrumb" class="text-sm text-slate-500">
+            <ol class="flex flex-wrap items-center gap-2">
+                <li><a class="hover:text-indigo-600" href="#">Início</a></li>
+                <li>/</li>
+                <li class="text-slate-700 font-medium">Apostila completa</li>
+            </ol>
+        </nav>
+
+        <section class="bg-white rounded-3xl p-8 card-shadow">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div>
+                    <h2 class="text-2xl font-semibold text-slate-800">Como estudar esta apostila</h2>
+                    <p class="text-slate-600 mt-2 max-w-2xl">
+                        Siga a trilha na ordem sugerida, pratique com os exercícios e valide sua evolução nos projetos.
+                        Reserve tempo para revisar conceitos antes de avançar para o próximo módulo.
+                    </p>
+                </div>
+                <div class="bg-indigo-50 text-indigo-700 rounded-2xl p-6">
+                    <h3 class="font-semibold mb-3">Ritmo sugerido</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>✅ 2 a 3 aulas por semana</li>
+                        <li>✅ 1 exercício por dia de estudo</li>
+                        <li>✅ 1 projeto por módulo</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-slate-50 rounded-2xl p-6">
+                    <h3 class="font-semibold text-slate-700 mb-3">Checklist geral</h3>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Assistir às aulas do módulo</label></li>
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Resolver exercícios propostos</label></li>
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Revisar dúvidas e anotações</label></li>
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Entregar o projeto do módulo</label></li>
+                    </ul>
+                </div>
+                <div class="bg-slate-50 rounded-2xl p-6">
+                    <h3 class="font-semibold text-slate-700 mb-3">Pré-requisitos gerais</h3>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li>• Computador com navegador atualizado</li>
+                        <li>• Editor de código (VS Code recomendado)</li>
+                        <li>• Disciplina para praticar diariamente</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="modulo-1" class="bg-white rounded-3xl p-8 card-shadow">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-semibold text-indigo-700">Módulo 1 - HTML5</h2>
+                    <p class="text-slate-600">Fundamentos para estruturar páginas e conteúdos semânticos.</p>
+                </div>
+                <span class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm">
+                    🎯 4 aulas • 4 exercícios • 1 projeto
+                </span>
+            </div>
+            <div class="mt-6 grid md:grid-cols-2 gap-6">
+                <div class="rounded-2xl overflow-hidden border border-indigo-100 bg-indigo-50">
+                    <div class="h-40 bg-gradient-to-r from-indigo-200 via-indigo-100 to-white flex items-center justify-center">
+                        <span class="text-indigo-700 font-semibold">Ilustração: Estrutura HTML</span>
+                    </div>
+                    <div class="p-4 text-sm text-slate-600">
+                        Visualize a base de um documento HTML5 e a hierarquia de tags semânticas.
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-indigo-100 bg-white">
+                    <div class="p-4 text-sm text-slate-600">
+                        Dica visual: monte um esqueleto de página com <code class="bg-indigo-50 px-1 rounded">header</code>,
+                        <code class="bg-indigo-50 px-1 rounded">main</code> e <code class="bg-indigo-50 px-1 rounded">footer</code>.
+                    </div>
+                    <div class="h-40 bg-indigo-50 flex items-center justify-center">
+                        <svg class="w-32 h-32 text-indigo-400" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="14" y="18" width="92" height="84" rx="12" fill="currentColor" opacity="0.2"/>
+                            <rect x="24" y="30" width="72" height="10" rx="5" fill="currentColor"/>
+                            <rect x="24" y="48" width="72" height="8" rx="4" fill="currentColor" opacity="0.7"/>
+                            <rect x="24" y="64" width="48" height="8" rx="4" fill="currentColor" opacity="0.5"/>
+                            <rect x="24" y="80" width="72" height="8" rx="4" fill="currentColor" opacity="0.4"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 mt-6">
+                <div class="bg-indigo-50/50 rounded-2xl p-4">
+                    <h3 class="font-semibold text-indigo-700 mb-2">Resumo</h3>
+                    <p class="text-sm text-slate-600">
+                        Estruture páginas com HTML semântico, criando base sólida para acessibilidade e SEO.
+                    </p>
+                    <ul class="mt-3 text-xs text-slate-600 space-y-1">
+                        <li>• Hierarquia com headings e seções</li>
+                        <li>• Semântica para leitores de tela</li>
+                        <li>• Boas práticas de organização</li>
+                    </ul>
+                </div>
+                <div class="bg-indigo-50/50 rounded-2xl p-4">
+                    <h3 class="font-semibold text-indigo-700 mb-2">Pré-requisitos</h3>
+                    <p class="text-sm text-slate-600">Nenhum. Este é o ponto de partida da trilha.</p>
+                    <p class="text-xs text-slate-600 mt-2">Traga curiosidade e vontade de praticar.</p>
+                </div>
+                <div class="bg-indigo-50/50 rounded-2xl p-4">
+                    <h3 class="font-semibold text-indigo-700 mb-2">Checklist do módulo</h3>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Aulas concluídas</label></li>
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Exercícios resolvidos</label></li>
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Projeto publicado</label></li>
+                    </ul>
+                    <p class="text-xs text-slate-600 mt-3">Meta: publicar uma página simples e organizada.</p>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 mt-6">
+                <div>
+                    <h3 class="font-semibold text-slate-700 mb-3">Aulas</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li data-filter-item><a class="text-indigo-600 hover:underline" href="Módulo%201%20-%20HTML5/Apostila/Aula%201.1%20-%20Fundamentos%20do%20HTML5.html">Aula 1.1 - Fundamentos do HTML5</a></li>
+                        <li data-filter-item><a class="text-indigo-600 hover:underline" href="Módulo%201%20-%20HTML5/Apostila/Aula%201.2%20-%20Formulários%20HTML.html">Aula 1.2 - Formulários HTML</a></li>
+                        <li data-filter-item><a class="text-indigo-600 hover:underline" href="Módulo%201%20-%20HTML5/Apostila/Aula%201.3%20-%20Multimídia%20e%20Tabelas.html">Aula 1.3 - Multimídia e Tabelas</a></li>
+                        <li data-filter-item><a class="text-indigo-600 hover:underline" href="Módulo%201%20-%20HTML5/Apostila/Aula%201.4%20-%20Projeto%20Prático%20HTML.html">Aula 1.4 - Projeto Prático HTML</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-slate-700 mb-3">Exercícios</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li data-filter-item><a class="text-indigo-600 hover:underline" href="Módulo%201%20-%20HTML5/Exercícios/Exercício%201.1%20-%20Meu%20Perfil.html">Exercício 1.1 - Meu Perfil</a></li>
+                        <li data-filter-item><a class="text-indigo-600 hover:underline" href="Módulo%201%20-%20HTML5/Exercícios/Exercício%201.2%20-%20Formulário%20de%20Cadastro.html">Exercício 1.2 - Formulário de Cadastro</a></li>
+                        <li data-filter-item><a class="text-indigo-600 hover:underline" href="Módulo%201%20-%20HTML5/Exercícios/Exercício%201.3%20-%20Galeria%20de%20Imagens.html">Exercício 1.3 - Galeria de Imagens</a></li>
+                        <li data-filter-item><a class="text-indigo-600 hover:underline" href="Módulo%201%20-%20HTML5/Exercícios/Exercício%201.4%20-%20Tabela%20de%20Dados.html">Exercício 1.4 - Tabela de Dados</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-slate-700 mb-3">Projeto</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li data-filter-item><a class="text-indigo-600 hover:underline" href="Módulo%201%20-%20HTML5/Projetos/Projeto%20Final%20-%20Site%20Pessoal.html">Projeto Final - Site Pessoal</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="modulo-2" class="bg-white rounded-3xl p-8 card-shadow">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-semibold text-sky-700">Módulo 2 - CSS</h2>
+                    <p class="text-slate-600">Estilização, layouts modernos e responsividade.</p>
+                </div>
+                <span class="inline-flex items-center gap-2 bg-sky-50 text-sky-700 px-4 py-2 rounded-full text-sm">
+                    🎨 5 aulas • 5 exercícios • 2 projetos
+                </span>
+            </div>
+            <div class="mt-6 grid lg:grid-cols-3 gap-6">
+                <div class="rounded-2xl overflow-hidden border border-sky-100 bg-white">
+                    <div class="h-44 bg-gradient-to-br from-sky-100 via-white to-sky-50 flex items-center justify-center">
+                        <svg class="w-36 h-36 text-sky-400" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="20" y="24" width="120" height="112" rx="16" fill="currentColor" opacity="0.15"/>
+                            <rect x="32" y="40" width="96" height="16" rx="8" fill="currentColor"/>
+                            <rect x="32" y="66" width="52" height="12" rx="6" fill="currentColor" opacity="0.7"/>
+                            <rect x="32" y="86" width="96" height="12" rx="6" fill="currentColor" opacity="0.5"/>
+                            <rect x="32" y="106" width="72" height="12" rx="6" fill="currentColor" opacity="0.4"/>
+                        </svg>
+                    </div>
+                    <div class="p-4 text-sm text-slate-600">
+                        Layouts com hierarquia visual clara: tipografia, espaçamento e alinhamento.
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-sky-100 bg-white">
+                    <div class="h-44 bg-gradient-to-br from-sky-50 via-white to-indigo-50 flex items-center justify-center">
+                        <svg class="w-36 h-36 text-sky-500" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="28" y="28" width="48" height="48" rx="12" fill="currentColor" opacity="0.35"/>
+                            <rect x="84" y="28" width="48" height="48" rx="12" fill="currentColor" opacity="0.6"/>
+                            <rect x="28" y="84" width="48" height="48" rx="12" fill="currentColor" opacity="0.5"/>
+                            <rect x="84" y="84" width="48" height="48" rx="12" fill="currentColor" opacity="0.2"/>
+                        </svg>
+                    </div>
+                    <div class="p-4 text-sm text-slate-600">
+                        Grid e Flexbox organizam layouts responsivos com consistência.
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-sky-100 bg-white">
+                    <div class="h-44 bg-gradient-to-br from-sky-200 via-sky-100 to-white flex items-center justify-center">
+                        <div class="flex gap-3">
+                            <div class="w-10 h-10 rounded-full bg-sky-500/70"></div>
+                            <div class="w-10 h-10 rounded-full bg-indigo-400/70"></div>
+                            <div class="w-10 h-10 rounded-full bg-rose-400/70"></div>
+                        </div>
+                    </div>
+                    <div class="p-4 text-sm text-slate-600">
+                        Paletas de cores e contrastes fortes reforçam identidade visual.
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 grid lg:grid-cols-2 gap-6">
+                <div class="rounded-2xl overflow-hidden border border-sky-100 bg-white">
+                    <div class="p-4">
+                        <h4 class="text-sm font-semibold text-sky-700 mb-3">Mini paleta com hex</h4>
+                        <div class="grid grid-cols-4 gap-3 text-xs text-slate-600">
+                            <div class="rounded-xl overflow-hidden border border-slate-200">
+                                <div class="h-12 bg-[#0EA5E9]"></div>
+                                <div class="px-2 py-1">#0EA5E9</div>
+                            </div>
+                            <div class="rounded-xl overflow-hidden border border-slate-200">
+                                <div class="h-12 bg-[#6366F1]"></div>
+                                <div class="px-2 py-1">#6366F1</div>
+                            </div>
+                            <div class="rounded-xl overflow-hidden border border-slate-200">
+                                <div class="h-12 bg-[#F97316]"></div>
+                                <div class="px-2 py-1">#F97316</div>
+                            </div>
+                            <div class="rounded-xl overflow-hidden border border-slate-200">
+                                <div class="h-12 bg-[#0F172A]"></div>
+                                <div class="px-2 py-1">#0F172A</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-4 pb-4 text-sm text-slate-600">
+                        Combine cores principais, de apoio e contraste para guiar a atenção do usuário.
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-sky-100 bg-white">
+                    <div class="p-4">
+                        <h4 class="text-sm font-semibold text-sky-700 mb-3">Layout responsivo (exemplo)</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                                <div class="h-3 w-12 bg-slate-300 rounded"></div>
+                                <div class="mt-3 space-y-2">
+                                    <div class="h-2 w-full bg-slate-200 rounded"></div>
+                                    <div class="h-2 w-10/12 bg-slate-200 rounded"></div>
+                                    <div class="h-2 w-8/12 bg-slate-200 rounded"></div>
+                                </div>
+                            </div>
+                            <div class="rounded-xl border border-slate-200 bg-slate-900 p-3">
+                                <div class="h-3 w-10 bg-slate-700 rounded"></div>
+                                <div class="mt-3 space-y-2">
+                                    <div class="h-2 w-full bg-slate-700 rounded"></div>
+                                    <div class="h-2 w-9/12 bg-slate-700 rounded"></div>
+                                    <div class="h-2 w-7/12 bg-slate-700 rounded"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-4 pb-4 text-sm text-slate-600">
+                        Compare variações de layout e contraste para mobile e desktop.
+                    </div>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 mt-6">
+                <div class="bg-sky-50/60 rounded-2xl p-4">
+                    <h3 class="font-semibold text-sky-700 mb-2">Resumo</h3>
+                    <p class="text-sm text-slate-600">
+                        Transforme páginas simples em experiências visuais consistentes e responsivas.
+                    </p>
+                    <ul class="mt-3 text-xs text-slate-600 space-y-1">
+                        <li>• Tipografia, cores e contrastes</li>
+                        <li>• Flexbox e Grid para layout</li>
+                        <li>• Animações sutis e responsivas</li>
+                    </ul>
+                </div>
+                <div class="bg-sky-50/60 rounded-2xl p-4">
+                    <h3 class="font-semibold text-sky-700 mb-2">Pré-requisitos</h3>
+                    <p class="text-sm text-slate-600">Conhecer tags HTML e estrutura de páginas.</p>
+                    <p class="text-xs text-slate-600 mt-2">Recomendado: revisar semântica e headings.</p>
+                </div>
+                <div class="bg-sky-50/60 rounded-2xl p-4">
+                    <h3 class="font-semibold text-sky-700 mb-2">Checklist do módulo</h3>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Aulas concluídas</label></li>
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Exercícios resolvidos</label></li>
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Projeto entregue</label></li>
+                    </ul>
+                    <p class="text-xs text-slate-600 mt-3">Meta: montar uma interface com identidade visual.</p>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 mt-6">
+                <div>
+                    <h3 class="font-semibold text-slate-700 mb-3">Aulas</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li data-filter-item><a class="text-sky-600 hover:underline" href="Módulo%202%20-%20CSS/Apostila/Aula%202.1%20-%20Fundamentos%20do%20CSS.html">Aula 2.1 - Fundamentos do CSS</a></li>
+                        <li data-filter-item><a class="text-sky-600 hover:underline" href="Módulo%202%20-%20CSS/Apostila/Aula%202.2%20-%20Layout%20com%20Flexbox.html">Aula 2.2 - Layout com Flexbox</a></li>
+                        <li data-filter-item><a class="text-sky-600 hover:underline" href="Módulo%202%20-%20CSS/Apostila/Aula%202.3%20-%20CSS%20Grid%20Layout.html">Aula 2.3 - CSS Grid Layout</a></li>
+                        <li data-filter-item><a class="text-sky-600 hover:underline" href="Módulo%202%20-%20CSS/Apostila/Aula%202.4%20-%20Animações%20e%20Design%20Responsivo.html">Aula 2.4 - Animações e Design Responsivo</a></li>
+                        <li data-filter-item><a class="text-sky-600 hover:underline" href="Módulo%202%20-%20CSS/Apostila/Aula%202.5%20-%20CSS%20Avançado%20e%20Frameworks.html">Aula 2.5 - CSS Avançado e Frameworks</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-slate-700 mb-3">Exercícios</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li data-filter-item><a class="text-sky-600 hover:underline" href="Módulo%202%20-%20CSS/Exercícios/Exercício%202.1%20-%20Estilos%20Básicos.html">Exercício 2.1 - Estilos Básicos</a></li>
+                        <li data-filter-item><a class="text-sky-600 hover:underline" href="Módulo%202%20-%20CSS/Exercícios/Exercício%202.2%20-%20Header%20com%20Flexbox.html">Exercício 2.2 - Header com Flexbox</a></li>
+                        <li data-filter-item><a class="text-sky-600 hover:underline" href="Módulo%202%20-%20CSS/Exercícios/Exercício%202.3%20-%20Grid%20Layout.html">Exercício 2.3 - Grid Layout</a></li>
+                        <li data-filter-item><a class="text-sky-600 hover:underline" href="Módulo%202%20-%20CSS/Exercícios/Exercício%202.4%20-%20Animações.html">Exercício 2.4 - Animações</a></li>
+                        <li data-filter-item><a class="text-sky-600 hover:underline" href="Módulo%202%20-%20CSS/Exercícios/Exercício%202.5%20-%20CSS%20Frameworks.html">Exercício 2.5 - CSS Frameworks</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-slate-700 mb-3">Projetos</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li data-filter-item><a class="text-sky-600 hover:underline" href="Módulo%202%20-%20CSS/Projetos/Projeto%202%20-%20Página%20Responsiva.html">Projeto 2 - Página Responsiva</a></li>
+                        <li data-filter-item><a class="text-sky-600 hover:underline" href="Módulo%202%20-%20CSS/Projetos/Projeto%20Final%20-%20Landing%20Page%20Moderna.html">Projeto Final - Landing Page Moderna</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="modulo-3" class="bg-white rounded-3xl p-8 card-shadow">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-semibold text-emerald-700">Módulo 3 - JavaScript</h2>
+                    <p class="text-slate-600">Programação, interatividade e consumo de APIs.</p>
+                </div>
+                <span class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full text-sm">
+                    ⚡ 6 aulas • 3 exercícios • 1 projeto
+                </span>
+            </div>
+            <div class="mt-6 grid md:grid-cols-2 gap-6">
+                <div class="rounded-2xl overflow-hidden border border-emerald-100 bg-emerald-50">
+                    <div class="h-40 bg-gradient-to-r from-emerald-100 via-emerald-50 to-white flex items-center justify-center">
+                        <span class="text-emerald-700 font-semibold">Fluxo de eventos</span>
+                    </div>
+                    <div class="p-4 text-sm text-slate-600">
+                        Veja como eventos, DOM e funções trabalham juntos para criar interatividade.
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-emerald-100 bg-white">
+                    <div class="h-40 bg-emerald-50 flex items-center justify-center">
+                        <svg class="w-32 h-32 text-emerald-400" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="60" cy="60" r="42" fill="currentColor" opacity="0.2"/>
+                            <path d="M40 60h40" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M60 40v40" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="p-4 text-sm text-slate-600">
+                        Diagramas simples ajudam a memorizar loops, funções e objetos.
+                    </div>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 mt-6">
+                <div class="bg-emerald-50/60 rounded-2xl p-4">
+                    <h3 class="font-semibold text-emerald-700 mb-2">Resumo</h3>
+                    <p class="text-sm text-slate-600">
+                        Programe a lógica da interface, manipule o DOM e consuma dados externos.
+                    </p>
+                    <ul class="mt-3 text-xs text-slate-600 space-y-1">
+                        <li>• Funções, eventos e arrays</li>
+                        <li>• APIs, Promises e async/await</li>
+                        <li>• Formulários interativos</li>
+                    </ul>
+                </div>
+                <div class="bg-emerald-50/60 rounded-2xl p-4">
+                    <h3 class="font-semibold text-emerald-700 mb-2">Pré-requisitos</h3>
+                    <p class="text-sm text-slate-600">HTML e CSS consolidados para aplicar scripts.</p>
+                    <p class="text-xs text-slate-600 mt-2">Dica: revise seletores e classes.</p>
+                </div>
+                <div class="bg-emerald-50/60 rounded-2xl p-4">
+                    <h3 class="font-semibold text-emerald-700 mb-2">Checklist do módulo</h3>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Aulas concluídas</label></li>
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Exercícios resolvidos</label></li>
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Projeto finalizado</label></li>
+                    </ul>
+                    <p class="text-xs text-slate-600 mt-3">Meta: construir uma interface interativa completa.</p>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 mt-6">
+                <div>
+                    <h3 class="font-semibold text-slate-700 mb-3">Aulas</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li data-filter-item><a class="text-emerald-600 hover:underline" href="Módulo%203%20-%20JavaScript/Apostila/Aula%203.1%20-%20Fundamentos%20do%20JavaScript.html">Aula 3.1 - Fundamentos do JavaScript</a></li>
+                        <li data-filter-item><a class="text-emerald-600 hover:underline" href="Módulo%203%20-%20JavaScript/Apostila/Aula%203.2%20-%20Trabalhando%20com%20Arrays%20e%20Objetos.html">Aula 3.2 - Trabalhando com Arrays e Objetos</a></li>
+                        <li data-filter-item><a class="text-emerald-600 hover:underline" href="Módulo%203%20-%20JavaScript/Apostila/Aula%203.3%20-%20Fetch%20API,%20Promises%20e%20Async_Await.html">Aula 3.3 - Fetch API, Promises e Async/Await</a></li>
+                        <li data-filter-item><a class="text-emerald-600 hover:underline" href="Módulo%203%20-%20JavaScript/Apostila/Aula%203.4%20-%20Eventos%20e%20Formulários.html">Aula 3.4 - Eventos e Formulários</a></li>
+                        <li data-filter-item><a class="text-emerald-600 hover:underline" href="Módulo%203%20-%20JavaScript/Apostila/Aula%203.5%20-%20JavaScript%20Assíncrono.html">Aula 3.5 - JavaScript Assíncrono</a></li>
+                        <li data-filter-item><a class="text-emerald-600 hover:underline" href="Módulo%203%20-%20JavaScript/Apostila/Aula%203.6%20-%20ES6+%20Features%20e%20Projeto%20Final.html">Aula 3.6 - ES6+ Features e Projeto Final</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-slate-700 mb-3">Exercícios</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li data-filter-item><a class="text-emerald-600 hover:underline" href="Módulo%203%20-%20JavaScript/Exercícios/Exercício%203.1%20-%20Manipulação%20do%20DOM.html">Exercício 3.1 - Manipulação do DOM</a></li>
+                        <li data-filter-item><a class="text-emerald-600 hover:underline" href="Módulo%203%20-%20JavaScript/Exercícios/Exercício%203.2%20-%20Eventos%20e%20Formulários.html">Exercício 3.2 - Eventos e Formulários</a></li>
+                        <li data-filter-item><a class="text-emerald-600 hover:underline" href="Módulo%203%20-%20JavaScript/Exercícios/Exercício%203.3%20-%20Consumo%20de%20API.html">Exercício 3.3 - Consumo de API</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-slate-700 mb-3">Projeto</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li data-filter-item><a class="text-emerald-600 hover:underline" href="Módulo%203%20-%20JavaScript/Projetos/Projeto%20Final%20-%20Dashboard%20Interativo.html">Projeto Final - Dashboard Interativo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="modulo-4" class="bg-white rounded-3xl p-8 card-shadow">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-semibold text-amber-700">Módulo 4 - Banco de Dados</h2>
+                    <p class="text-slate-600">Modelagem, SQL e integração com aplicações.</p>
+                </div>
+                <span class="inline-flex items-center gap-2 bg-amber-50 text-amber-700 px-4 py-2 rounded-full text-sm">
+                    🗄️ 3 aulas • 2 exercícios • 1 projeto
+                </span>
+            </div>
+            <div class="mt-6 grid md:grid-cols-2 gap-6">
+                <div class="rounded-2xl overflow-hidden border border-amber-100 bg-amber-50">
+                    <div class="h-40 bg-gradient-to-r from-amber-100 via-amber-50 to-white flex items-center justify-center">
+                        <span class="text-amber-700 font-semibold">Mapa relacional</span>
+                    </div>
+                    <div class="p-4 text-sm text-slate-600">
+                        Entenda tabelas, chaves e relacionamentos com exemplos visuais.
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-amber-100 bg-white">
+                    <div class="h-40 bg-amber-50 flex items-center justify-center">
+                        <svg class="w-32 h-32 text-amber-400" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="22" y="30" width="76" height="16" rx="8" fill="currentColor"/>
+                            <rect x="22" y="52" width="76" height="12" rx="6" fill="currentColor" opacity="0.7"/>
+                            <rect x="22" y="70" width="48" height="12" rx="6" fill="currentColor" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <div class="p-4 text-sm text-slate-600">
+                        Use consultas SQL como blocos para explorar dados rapidamente.
+                    </div>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 mt-6">
+                <div class="bg-amber-50/60 rounded-2xl p-4">
+                    <h3 class="font-semibold text-amber-700 mb-2">Resumo</h3>
+                    <p class="text-sm text-slate-600">
+                        Modele dados, crie consultas eficientes e conecte bancos a aplicações.
+                    </p>
+                    <ul class="mt-3 text-xs text-slate-600 space-y-1">
+                        <li>• Tabelas, chaves e relacionamentos</li>
+                        <li>• SQL para leitura e escrita</li>
+                        <li>• Integração com JavaScript</li>
+                    </ul>
+                </div>
+                <div class="bg-amber-50/60 rounded-2xl p-4">
+                    <h3 class="font-semibold text-amber-700 mb-2">Pré-requisitos</h3>
+                    <p class="text-sm text-slate-600">Noções básicas de lógica e JavaScript.</p>
+                    <p class="text-xs text-slate-600 mt-2">Bônus: conhecer REST e JSON.</p>
+                </div>
+                <div class="bg-amber-50/60 rounded-2xl p-4">
+                    <h3 class="font-semibold text-amber-700 mb-2">Checklist do módulo</h3>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Aulas concluídas</label></li>
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Exercícios resolvidos</label></li>
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Projeto entregue</label></li>
+                    </ul>
+                    <p class="text-xs text-slate-600 mt-3">Meta: criar queries claras e consistentes.</p>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 mt-6">
+                <div>
+                    <h3 class="font-semibold text-slate-700 mb-3">Aulas</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li data-filter-item><a class="text-amber-600 hover:underline" href="Módulo%204%20-%20Banco%20de%20Dados/Apostila/Aula%204.1%20-%20Fundamentos%20de%20Banco%20de%20Dados.html">Aula 4.1 - Fundamentos de Banco de Dados</a></li>
+                        <li data-filter-item><a class="text-amber-600 hover:underline" href="Módulo%204%20-%20Banco%20de%20Dados/Apostila/Aula%204.2%20-%20SQL%20Intermediário.html">Aula 4.2 - SQL Intermediário</a></li>
+                        <li data-filter-item><a class="text-amber-600 hover:underline" href="Módulo%204%20-%20Banco%20de%20Dados/Apostila/Aula%204.3%20-%20Integração%20com%20JavaScript.html">Aula 4.3 - Integração com JavaScript</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-slate-700 mb-3">Exercícios</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li data-filter-item><a class="text-amber-600 hover:underline" href="Módulo%204%20-%20Banco%20de%20Dados/Exercícios/Exercício%204.1%20-%20Criar%20Tabela%20Produtos.html">Exercício 4.1 - Criar Tabela Produtos</a></li>
+                        <li data-filter-item><a class="text-amber-600 hover:underline" href="Módulo%204%20-%20Banco%20de%20Dados/Exercícios/Exercício%204.2%20-%20Consultas%20SQL.html">Exercício 4.2 - Consultas SQL</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-slate-700 mb-3">Projeto</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li data-filter-item><a class="text-amber-600 hover:underline" href="Módulo%204%20-%20Banco%20de%20Dados/Projetos/Projeto%204%20-%20Mini-API.html">Projeto 4 - Mini-API</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="modulo-5" class="bg-white rounded-3xl p-8 card-shadow">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-semibold text-rose-700">Módulo 5 - Projeto Integrador</h2>
+                    <p class="text-slate-600">Planejamento, desenvolvimento e entrega final.</p>
+                </div>
+                <span class="inline-flex items-center gap-2 bg-rose-50 text-rose-700 px-4 py-2 rounded-full text-sm">
+                    🚀 2 aulas
+                </span>
+            </div>
+            <div class="mt-6 grid md:grid-cols-2 gap-6">
+                <div class="rounded-2xl overflow-hidden border border-rose-100 bg-rose-50">
+                    <div class="h-40 bg-gradient-to-r from-rose-100 via-rose-50 to-white flex items-center justify-center">
+                        <span class="text-rose-700 font-semibold">Linha do tempo do projeto</span>
+                    </div>
+                    <div class="p-4 text-sm text-slate-600">
+                        Planeje etapas, entregas e validações antes do deploy final.
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-rose-100 bg-white">
+                    <div class="h-40 bg-rose-50 flex items-center justify-center">
+                        <svg class="w-32 h-32 text-rose-400" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M30 74l12 12 28-32" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="60" cy="60" r="38" stroke="currentColor" stroke-width="8" opacity="0.3"/>
+                        </svg>
+                    </div>
+                    <div class="p-4 text-sm text-slate-600">
+                        Celebre cada checkpoint com metas claras e mensuráveis.
+                    </div>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 mt-6">
+                <div class="bg-rose-50/60 rounded-2xl p-4">
+                    <h3 class="font-semibold text-rose-700 mb-2">Resumo</h3>
+                    <p class="text-sm text-slate-600">
+                        Consolide tudo o que aprendeu em um produto final pronto para apresentação.
+                    </p>
+                    <ul class="mt-3 text-xs text-slate-600 space-y-1">
+                        <li>• Planejamento e escopo</li>
+                        <li>• Protótipo e ajustes</li>
+                        <li>• Deploy e documentação</li>
+                    </ul>
+                </div>
+                <div class="bg-rose-50/60 rounded-2xl p-4">
+                    <h3 class="font-semibold text-rose-700 mb-2">Pré-requisitos</h3>
+                    <p class="text-sm text-slate-600">Ter concluído os módulos anteriores.</p>
+                    <p class="text-xs text-slate-600 mt-2">Organize referências e links úteis.</p>
+                </div>
+                <div class="bg-rose-50/60 rounded-2xl p-4">
+                    <h3 class="font-semibold text-rose-700 mb-2">Checklist do módulo</h3>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Planejamento concluído</label></li>
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Implementação finalizada</label></li>
+                        <li><label class="flex items-center gap-2"><input type="checkbox" class="rounded border-slate-300"> Deploy realizado</label></li>
+                    </ul>
+                    <p class="text-xs text-slate-600 mt-3">Meta: apresentar o projeto com confiança.</p>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+                <div>
+                    <h3 class="font-semibold text-slate-700 mb-3">Aulas</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li data-filter-item><a class="text-rose-600 hover:underline" href="Módulo%205%20-%20Projeto%20Integrador/Apostila/Aula%205.1%20-%20Planejamento%20e%20Desenvolvimento.html">Aula 5.1 - Planejamento e Desenvolvimento</a></li>
+                        <li data-filter-item><a class="text-rose-600 hover:underline" href="Módulo%205%20-%20Projeto%20Integrador/Apostila/Aula%205.2%20-%20Finalização%20e%20Deploy.html">Aula 5.2 - Finalização e Deploy</a></li>
+                    </ul>
+                </div>
+                <div class="bg-rose-50 rounded-2xl p-6 text-rose-700">
+                    <h3 class="font-semibold mb-2">Sugestão de estudo</h3>
+                    <p class="text-sm">
+                        Reserve um espaço para documentar decisões, links de referência e checkpoints do projeto final.
+                        Isso ajuda a consolidar a aprendizagem e preparar a apresentação.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-200">
+        <div class="max-w-6xl mx-auto px-6 py-8 text-sm flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <p>📘 Apostila organizada para apoiar o estudo contínuo.</p>
+            <p>Atualize este índice sempre que novos conteúdos forem adicionados.</p>
+        </div>
+    </footer>
+    <script>
+        const searchInput = document.getElementById('search-content');
+        const filterItems = Array.from(document.querySelectorAll('[data-filter-item]'));
+
+        const filterContent = (query) => {
+            const normalized = query.trim().toLowerCase();
+            filterItems.forEach((item) => {
+                const text = item.textContent.toLowerCase();
+                item.classList.toggle('hidden', normalized && !text.includes(normalized));
+            });
+        };
+
+        searchInput?.addEventListener('input', (event) => {
+            filterContent(event.target.value);
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+                event.preventDefault();
+                searchInput?.focus();
+            }
+        });
+    </script>
+</body>
+</html>
